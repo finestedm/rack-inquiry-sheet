@@ -3,14 +3,11 @@ import { IFormData, ILoad, ILoadsTypes, IFlow, LoadFieldValue, ISystems, IMilest
 import { loadsToAdd } from '../../../data/typicalLoadSizes';
 import { emptyFlow } from '../../../data/flowStations';
 import generateRandomId from '../../variousMethods/generateRandomId';
-import { format, addMonths, differenceInMonths, isBefore } from 'date-fns';
-import dayjs from 'dayjs';
 
 const initialFormDataState: IFormData = {
 
-    version: '240102beta',
+    version: 'racks-240207alpha',
     sales: {
-        salesUnit: 'S1-PL',
         contactPerson: '',
         contactPersonRole: '',
     },

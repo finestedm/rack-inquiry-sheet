@@ -3,7 +3,6 @@ import { Task } from "gantt-task-react";
 import availableEquipment from "../data/availableEquipment";
 
 export interface ISales {
-    salesUnit: string;
     contactPerson: string;
     contactPersonRole: string;
 }

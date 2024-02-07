@@ -40,9 +40,6 @@ export default function FormSummaryStep() {
             <Stack spacing={2} className='summary-sales'>
                 <CustomHeaderWithDivider headerText='sales.header' />
                 <Typography>
-                    <Typography fontWeight={700}>
-                        {formData.sales.salesUnit}
-                    </Typography>
                     {formData.sales.contactPerson}
                     <Typography color='text.secondary' component='span'>
                         {(formData.sales.contactPerson && formData.sales.contactPersonRole) && `, `}
