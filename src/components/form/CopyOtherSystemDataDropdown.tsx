@@ -40,7 +40,7 @@ import tinycolor from "tinycolor2";
 export default function CopyOtherSystemDataButton({ selectedSystem }: { selectedSystem: keyof ISystems }): JSX.Element {
     const [copyOtherSystemDataDialogOpen, setCopyOtherSystemDataDialogOpen] = useState<boolean>(false);
     const currentStep = useSelector((state: RootState) => state.steps.currentStep);
-    const editMode = useSelector((state: RootState) => state.editMode) && currentStep !== 'summary' ;
+    const editMode = useSelector((state: RootState) => state.editMode) && currentStep !== 'summary';
 
     const { t } = useTranslation();
 
@@ -86,7 +86,7 @@ function CopyOtherSystemDataDialog({ isOpen, handleClose, selectedSystem }: Copy
         upc: [],
         flow: [],
         mobile: [],
-        driveIn: [],
+        drivein: [],
     });
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>, system: keyof ISystems) {
@@ -171,10 +171,10 @@ function CopyOtherSystemDataDialog({ isOpen, handleClose, selectedSystem }: Copy
                     {t("ui.dialog.copyDialog.title")}
                 </Typography>
             </DialogTitle>
-            <DialogContent sx={{px: 2}}>
+            <DialogContent sx={{ px: 2 }}>
                 <TableContainer>
                     <Box mt={2} >
-                        <Table  sx={{ backgroundColor: theme.palette.background.default }}>
+                        <Table sx={{ backgroundColor: theme.palette.background.default }}>
                             <TableHead>
                                 <TableRow>
                                     <TableCell><Typography fontWeight={600} variant="body2">{t("ui.table.head.part")}</Typography></TableCell>
@@ -191,7 +191,7 @@ function CopyOtherSystemDataDialog({ isOpen, handleClose, selectedSystem }: Copy
                     </Box>
                 </TableContainer>
             </DialogContent>
-            <DialogActions sx={{px: 2}}>
+            <DialogActions sx={{ px: 2 }}>
                 <Button
                     color="primary"
                     variant="contained"

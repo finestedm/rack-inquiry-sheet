@@ -2,7 +2,6 @@ import { Alert, Box, Checkbox, CircularProgress, Container, FormControl, FormCon
 import { useTranslation } from "react-i18next";
 import { ISystems } from "../../../features/interfaces";
 import CopyOtherSystemDataButton from "../CopyOtherSystemDataDropdown";
-import WorkTime from "./subcomponents/WorkTime";
 import WorkConditions from "./subcomponents/WorkConditions";
 import Building from "./subcomponents/Building";
 import Loads from "./subcomponents/Loads";
@@ -24,7 +23,6 @@ export default function FormSystemStep({ selectedSystem }: { selectedSystem: key
                     <CopyOtherSystemDataButton selectedSystem={selectedSystem} />
                 </Stack>
             }
-            <WorkTime selectedSystem={selectedSystem} />
             <WorkConditions selectedSystem={selectedSystem} />
             <Building selectedSystem={selectedSystem} />
             <Loads selectedSystem={selectedSystem} />

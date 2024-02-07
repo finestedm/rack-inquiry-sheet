@@ -7,17 +7,6 @@ export interface ISales {
     contactPersonRole: string;
 }
 
-export interface IIt {
-    processesDescription: string;
-    existingSystem: {
-        present: boolean;
-        name: number;
-        existingOther: string;
-    };
-    wmsNeeded: boolean;
-    additionalInformation: string;
-}
-
 export type TIndustry = 'production' | 'trade' | 'logistics' | 'pharmaceutical' | 'beverage' | 'clothing' | 'chemical' | 'food' | 'automotive' | 'other'
 
 export interface ICustomer {
@@ -102,16 +91,9 @@ export interface IEquipment {
 
 export interface ISystemData {
     selected: boolean;
-    workTime: {
-        workDays: number;
-        shiftsPerDay: number;
-        hoursPerShift: number;
-    }
     workConditions: {
         temperature: number[];
-        humidity: number[];
         freezer: boolean;
-        EX: boolean;
         dangerousMaterials: boolean;
         other: string;
     },
@@ -138,7 +120,7 @@ export interface ISystems {
     flow: ISystemData;
     mobile: ISystemData;
     upc: ISystemData;
-    driveIn: ISystemData;
+    drivein: ISystemData;
 }
 
 export interface IFormData {

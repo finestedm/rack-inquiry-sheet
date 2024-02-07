@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/rack-inquiry-sheet/static/css/main.02c233d7.css",
-    "main.js": "/rack-inquiry-sheet/static/js/main.bc8962d5.js",
+    "main.js": "/rack-inquiry-sheet/static/js/main.ed451966.js",
     "static/media/loadDimensionsPicture.png": "/rack-inquiry-sheet/static/media/loadDimensionsPicture.cfa0d91392f12dca884e.png",
     "static/media/JH_logo.png": "/rack-inquiry-sheet/static/media/JH_logo.7ecf36beead9d3783c6b.png",
     "static/media/stage-mobile-racking.jpg": "/rack-inquiry-sheet/static/media/stage-mobile-racking.671eda47e3457dcd9c06.jpg",
@@ -17,6 +17,6 @@
   },
   "entrypoints": [
     "static/css/main.02c233d7.css",
-    "static/js/main.bc8962d5.js"
+    "static/js/main.ed451966.js"
   ]
 }

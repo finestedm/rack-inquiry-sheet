@@ -98,11 +98,11 @@ export default function Form(): JSX.Element {
       });
     }
 
-    if (formData.system.driveIn.selected) {
+    if (formData.system.drivein.selected) {
       newSteps.push({
-        label: t("steps.systems.driveIn"),
-        untranslated: "driveIn",
-        component: <FormASRSStep key="driveIn" selectedSystem='driveIn' />,
+        label: t("steps.systems.drivein"),
+        untranslated: "drivein",
+        component: <FormASRSStep key="drivein" selectedSystem='drivein' />,
       });
     }
 

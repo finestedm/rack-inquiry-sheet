@@ -44,10 +44,10 @@ const availableSystems: ISystem[] = [
     },
     {
         url: driveIn,
-        alt: 'driveIn',
-        label: ('system.driveIn.label'),
-        labelShort: 'system.driveIn.labelshort',
-        description: 'system.driveIn.description'
+        alt: 'drivein',
+        label: ('system.drivein.label'),
+        labelShort: 'system.drivein.labelshort',
+        description: 'system.drivein.description'
     }
 ]
 

@@ -67,16 +67,9 @@ const initialFormDataState: IFormData = {
     system: {
         mpb: {
             selected: true,
-            workTime: {
-                workDays: 0,
-                shiftsPerDay: 0,
-                hoursPerShift: 0,
-            },
             workConditions: {
                 temperature: [20, 30],
-                humidity: [0, 5],
                 freezer: false,
-                EX: false,
                 dangerousMaterials: false,
                 other: '',
             },
@@ -97,16 +90,9 @@ const initialFormDataState: IFormData = {
         },
         shelf: {
             selected: false,
-            workTime: {
-                workDays: 0,
-                shiftsPerDay: 0,
-                hoursPerShift: 0,
-            },
             workConditions: {
                 temperature: [20, 30],
-                humidity: [0, 5],
                 freezer: false,
-                EX: false,
                 dangerousMaterials: false,
                 other: '',
             },
@@ -127,16 +113,9 @@ const initialFormDataState: IFormData = {
         },
         upc: {
             selected: false,
-            workTime: {
-                workDays: 0,
-                shiftsPerDay: 0,
-                hoursPerShift: 0,
-            },
             workConditions: {
                 temperature: [20, 30],
-                humidity: [0, 5],
                 freezer: false,
-                EX: false,
                 dangerousMaterials: false,
                 other: '',
             },
@@ -157,16 +136,9 @@ const initialFormDataState: IFormData = {
         },
         flow: {
             selected: false,
-            workTime: {
-                workDays: 0,
-                shiftsPerDay: 0,
-                hoursPerShift: 0,
-            },
             workConditions: {
                 temperature: [20, 30],
-                humidity: [0, 5],
                 freezer: false,
-                EX: false,
                 dangerousMaterials: false,
                 other: '',
             },
@@ -187,16 +159,9 @@ const initialFormDataState: IFormData = {
         },
         mobile: {
             selected: false,
-            workTime: {
-                workDays: 0,
-                shiftsPerDay: 0,
-                hoursPerShift: 0,
-            },
             workConditions: {
                 temperature: [20, 30],
-                humidity: [0, 5],
                 freezer: false,
-                EX: false,
                 dangerousMaterials: false,
                 other: '',
             },
@@ -215,18 +180,11 @@ const initialFormDataState: IFormData = {
             flow: [emptyFlow],
             additionalRemarks: '',
         },
-        driveIn: {
+        drivein: {
             selected: false,
-            workTime: {
-                workDays: 0,
-                shiftsPerDay: 0,
-                hoursPerShift: 0,
-            },
             workConditions: {
                 temperature: [20, 30],
-                humidity: [0, 5],
                 freezer: false,
-                EX: false,
                 dangerousMaterials: false,
                 other: '',
             },

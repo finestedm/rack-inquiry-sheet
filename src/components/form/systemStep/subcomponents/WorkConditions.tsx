@@ -46,28 +46,9 @@ export default function WorkConditions({ selectedSystem }: { selectedSystem: key
                                 </Box>
                             </Stack>
                         </Grid>
-                        <Grid item xs={12} md={6}>
-                            <Stack spacing={1} textAlign='center'>
-                                <InputLabel>{t(`system.workConditions.humidity`)}</InputLabel>
-                                <Box>
-                                    <Slider
-                                        disabled={!editMode}
-                                        sx={{ width: '90%' }}
-                                        getAriaLabel={() => 'Humidity range'}
-                                        value={formData.system[selectedSystem].workConditions.humidity}
-                                        onChange={(e, v) => dispatch(handleInputMethod({ path: `system.${selectedSystem}.workConditions.humidity`, value: v }))}
-                                        valueLabelDisplay="auto"
-                                        min={0}
-                                        max={100}
-                                        marks={[{ value: 0, label: '0%' }, { value: 25, label: '25%' }, { value: 50, label: '50%' }, { value: 75, label: '75%' }, { value: 100, label: '100%' }]}
-                                    />
-                                </Box>
-                            </Stack>
-                        </Grid>
                         <Grid item xs={12}>
                             <Stack spacing={2}>
                                 <CustomAlert collapseTrigger={(formData.system[selectedSystem].workConditions.temperature[0] <= 5)} severity="error" title={t('system.lrkprk.temperatureWarningTitle')} text={t(`system.lrkprk.temperatureWarning`)} />
-                                <CustomAlert collapseTrigger={((formData.system[selectedSystem].workConditions.humidity[1] > 15 && calculateDewPoint(formData.system[selectedSystem].workConditions.temperature[0], formData.system[selectedSystem].workConditions.humidity[0]) <= criticalElectronicsTemperature))} severity="warning" title={t(`system.condensationWarningTitle`)} text={t(`system.condensationWarning`)} />
                             </Stack>
                         </Grid>
                         <Grid item xs={12} md={6}>
@@ -85,19 +66,6 @@ export default function WorkConditions({ selectedSystem }: { selectedSystem: key
                                         }
                                         labelPlacement="end"
                                         label={<>{t(`system.workConditions.freezer`)} <AcUnit fontSize="small" /></>}
-                                    />
-                                    <FormControlLabel
-                                        disabled={!editMode}
-                                        id="system-asrs-workConditions-EX"
-                                        control={
-                                            <Checkbox
-                                                checked={formData.system[selectedSystem].workConditions.EX}
-                                                onChange={(e) => dispatch(handleInputMethod({ path: `system.${selectedSystem}.workConditions.EX`, value: e.target.checked }))}
-                                                inputProps={{ 'aria-label': 'controlled' }}
-                                            />
-                                        }
-                                        labelPlacement="end"
-                                        label={<>{t(`system.workConditions.EX`)} <Warning fontSize="small" /></>}
                                     />
                                     <FormControlLabel
                                         disabled={!editMode}

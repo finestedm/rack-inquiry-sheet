@@ -6,7 +6,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../features/redux/store';
 import { handleSystemChange } from '../../../../features/redux/reducers/formDataSlice';
-import tinycolor from 'tinycolor2';
 
 export default function SystemCard({ system }: { system: ISystem }): JSX.Element {
 
