@@ -68,7 +68,7 @@ const initialFormDataState: IFormData = {
         }
     },
     system: {
-        asrs: {
+        mpb: {
             selected: true,
             workTime: {
                 workDays: 0,
@@ -98,7 +98,7 @@ const initialFormDataState: IFormData = {
             flow: [emptyFlow],
             additionalRemarks: '',
         },
-        lrkprk: {
+        shelf: {
             selected: false,
             workTime: {
                 workDays: 0,
@@ -128,7 +128,7 @@ const initialFormDataState: IFormData = {
             flow: [emptyFlow],
             additionalRemarks: '',
         },
-        agv: {
+        upc: {
             selected: false,
             workTime: {
                 workDays: 0,
@@ -158,7 +158,67 @@ const initialFormDataState: IFormData = {
             flow: [emptyFlow],
             additionalRemarks: '',
         },
-        autovna: {
+        flow: {
+            selected: false,
+            workTime: {
+                workDays: 0,
+                shiftsPerDay: 0,
+                hoursPerShift: 0,
+            },
+            workConditions: {
+                temperature: [20, 30],
+                humidity: [0, 5],
+                freezer: false,
+                EX: false,
+                dangerousMaterials: false,
+                other: '',
+            },
+            building: {
+                new: false,
+                silo: false,
+                existingBuilding: {
+                    height: 0,
+                    width: 0,
+                    length: 0,
+                    equipment: []
+                },
+                incline: 0
+            },
+            loads: [],
+            flow: [emptyFlow],
+            additionalRemarks: '',
+        },
+        mobile: {
+            selected: false,
+            workTime: {
+                workDays: 0,
+                shiftsPerDay: 0,
+                hoursPerShift: 0,
+            },
+            workConditions: {
+                temperature: [20, 30],
+                humidity: [0, 5],
+                freezer: false,
+                EX: false,
+                dangerousMaterials: false,
+                other: '',
+            },
+            building: {
+                new: false,
+                silo: false,
+                existingBuilding: {
+                    height: 0,
+                    width: 0,
+                    length: 0,
+                    equipment: []
+                },
+                incline: 0
+            },
+            loads: [],
+            flow: [emptyFlow],
+            additionalRemarks: '',
+        },
+        driveIn: {
             selected: false,
             workTime: {
                 workDays: 0,

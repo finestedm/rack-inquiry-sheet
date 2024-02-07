@@ -1,34 +1,53 @@
 import { ISystem } from "../features/interfaces";
-
+import mpb from "../images/rack-types/302BAE8A3789B20FFBECF7F6B7E2EFDD.webp";
+import shelf from "../images/rack-types/39308baa-6813-4b64-a276-fdaa10980072.webp";
+import upc from "../images/rack-types/stage-shuttle-channel-racking.jpg";
+import flow from "../images/rack-types/E6CB4541182C215F85873AF18CF9A206.webp";
+import mobile from "../images/rack-types/stage-mobile-racking.jpg";
+import driveIn from "../images/rack-types/5DCB89705242D2E7B79E0B2855A43C4A.webp";
 
 const availableSystems: ISystem[] = [
     {
-        url: 'https://www.jungheinrich.cn/resource/image/540796/landscape_ratio16x10/750/469/4de74d221121a65bc7e0c08b6d4285da/1FA625729DA78A1AD6585E27F629F67B/stage-automatic-small-parts-storage.jpg',
-        alt: 'asrs',
-        label: 'system.asrs.label',
-        labelShort: 'system.asrs.labelshort',
-        description: 'system.asrs.description'
+        url: mpb,
+        alt: 'mpb',
+        label: 'system.mpb.label',
+        labelShort: 'system.mpb.labelshort',
+        description: 'system.mpb.description'
     },
     {
-        url: 'https://www.jungheinrich.cn/resource/image/540918/landscape_ratio16x10/750/469/40bd0c110ea57c96e6b5a51e6d6728ed/1F26C0C524BFC81ADDA1253482D95F1A/stage-small-parts-storage-dynamic.jpg',
-        alt: 'lrkprk',
-        label: 'system.lrkprk.label',
-        labelShort: 'system.lrkprk.labelshort',
-        description: 'system.lrkprk.description'
+        url: shelf,
+        alt: 'shelf',
+        label: 'system.shelf.label',
+        labelShort: 'system.shelf.labelshort',
+        description: 'system.shelf.description'
     },
     {
-        url: 'https://www.jungheinrich.cn/resource/image/540798/landscape_ratio16x10/750/469/5207e5fdaf2ac8a1858bcdae07a44ab2/FE5BFAE61CB18BBD620473590B9B437E/stage-agv-system.jpg',
-        alt: 'agv',
-        label: ('system.agv.label'),
-        labelShort: 'system.agv.labelshort',
-        description: 'system.agv.description'
+        url: upc,
+        alt: 'upc',
+        label: ('system.upc.label'),
+        labelShort: 'system.upc.labelshort',
+        description: 'system.upc.description'
     },
     {
-        url: 'https://www.jungheinrich.cn/resource/image/541672/landscape_ratio16x10/750/469/c7d514ecb2cce052105a89c86396a92b/2F274C04399B4D9A89056F7A564042BA/stage-automated-high-rack-stacker.jpg',
-        alt: 'autovna',
-        label: ('system.autovna.label'),
-        labelShort: 'system.autovna.labelshort',
-        description: 'system.autovna.description'
+        url: flow,
+        alt: 'flow',
+        label: ('system.flow.label'),
+        labelShort: 'system.flow.labelshort',
+        description: 'system.flow.description'
+    },
+    {
+        url: mobile,
+        alt: 'mobile',
+        label: ('system.mobile.label'),
+        labelShort: 'system.mobile.labelshort',
+        description: 'system.mobile.description'
+    },
+    {
+        url: driveIn,
+        alt: 'driveIn',
+        label: ('system.driveIn.label'),
+        labelShort: 'system.driveIn.labelshort',
+        description: 'system.driveIn.description'
     }
 ]
 

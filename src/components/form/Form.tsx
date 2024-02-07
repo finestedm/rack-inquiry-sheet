@@ -58,35 +58,51 @@ export default function Form(): JSX.Element {
       }
     ];
 
-    if (formData.system.asrs.selected) {
+    if (formData.system.mpb.selected) {
       newSteps.push({
-        label: t("steps.systems.asrs"),
-        untranslated: "asrs",
-        component: <FormASRSStep key="asrs" selectedSystem='asrs' />,
+        label: t("steps.systems.mpb"),
+        untranslated: "mpb",
+        component: <FormASRSStep key="mpb" selectedSystem='mpb' />,
       });
     }
 
-    if (formData.system.lrkprk.selected) {
+    if (formData.system.shelf.selected) {
       newSteps.push({
-        label: t("steps.systems.lrkprk"),
-        untranslated: "lrkprk",
-        component: <FormASRSStep key="lrkprk" selectedSystem='lrkprk' />,
+        label: t("steps.systems.shelf"),
+        untranslated: "shelf",
+        component: <FormASRSStep key="shelf" selectedSystem='shelf' />,
       });
     }
 
-    if (formData.system.agv.selected) {
+    if (formData.system.upc.selected) {
       newSteps.push({
-        label: t("steps.systems.agv"),
-        untranslated: "agv",
-        component: <FormASRSStep key="agv" selectedSystem='agv' />,
+        label: t("steps.systems.upc"),
+        untranslated: "upc",
+        component: <FormASRSStep key="upc" selectedSystem='upc' />,
       });
     }
 
-    if (formData.system.autovna.selected) {
+    if (formData.system.flow.selected) {
       newSteps.push({
-        label: t("steps.systems.autovna"),
-        untranslated: "autovna",
-        component: <FormASRSStep key="autovna" selectedSystem='autovna' />,
+        label: t("steps.systems.flow"),
+        untranslated: "flow",
+        component: <FormASRSStep key="flow" selectedSystem='flow' />,
+      });
+    }
+
+    if (formData.system.mobile.selected) {
+      newSteps.push({
+        label: t("steps.systems.mobile"),
+        untranslated: "mobile",
+        component: <FormASRSStep key="mobile" selectedSystem='mobile' />,
+      });
+    }
+
+    if (formData.system.driveIn.selected) {
+      newSteps.push({
+        label: t("steps.systems.driveIn"),
+        untranslated: "driveIn",
+        component: <FormASRSStep key="driveIn" selectedSystem='driveIn' />,
       });
     }
 

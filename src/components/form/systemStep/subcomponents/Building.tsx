@@ -72,27 +72,6 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
                         />
                         <Typography color={!editMode ? 'text.disabled' : 'text.primary'} variant='body1'>{t(`system.building.new`)}</Typography>
                     </Stack>
-                    {(selectedSystem === 'agv') &&
-                        <Incline selectedSystem={selectedSystem} />
-                    }
-                    {(selectedSystem === 'asrs') &&
-                        <Stack>
-                            <FormControlLabel
-                                id="system-asrs-building-silo"
-                                disabled={!editMode}
-                                control={
-                                    <Checkbox
-                                        readOnly={!editMode}
-                                        checked={formData.system[selectedSystem].building.silo}
-                                        onChange={(e) => dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.silo`, value: e.target.checked }))}
-                                        inputProps={{ 'aria-label': 'controlled' }}
-                                    />
-                                }
-                                labelPlacement="end"
-                                label={t(`system.building.silo`)}
-                            />
-                        </Stack>
-                    }
                     {!formData.system[selectedSystem].building.silo &&
                         <Stack spacing={2}>
                             <Box>

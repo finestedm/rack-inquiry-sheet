@@ -81,11 +81,12 @@ function CopyOtherSystemDataDialog({ isOpen, handleClose, selectedSystem }: Copy
     const dispatch = useDispatch();
 
     const [selectedParts, setSelectedParts] = useState<{ [key in keyof ISystems]: (keyof ISystemData)[] }>({
-        asrs: [],
-        lrkprk: [],
-        agv: [],
-        autovna: [],
-
+        mpb: [],
+        shelf: [],
+        upc: [],
+        flow: [],
+        mobile: [],
+        driveIn: [],
     });
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>, system: keyof ISystems) {

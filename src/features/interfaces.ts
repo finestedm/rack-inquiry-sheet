@@ -134,10 +134,12 @@ export interface ISystemData {
 }
 
 export interface ISystems {
-    asrs: ISystemData;
-    lrkprk: ISystemData;
-    agv: ISystemData;
-    autovna: ISystemData;
+    mpb: ISystemData;
+    shelf: ISystemData;
+    flow: ISystemData;
+    mobile: ISystemData;
+    upc: ISystemData;
+    driveIn: ISystemData;
 }
 
 export interface IFormData {
