@@ -66,45 +66,45 @@ export default function Form(): JSX.Element {
       });
     }
 
-    if (formData.system.shelf.selected) {
-      newSteps.push({
-        label: t("steps.systems.shelf"),
-        untranslated: "shelf",
-        component: <FormASRSStep key="shelf" selectedSystem='shelf' />,
-      });
-    }
+    // if (formData.system.shelf.selected) {
+    //   newSteps.push({
+    //     label: t("steps.systems.shelf"),
+    //     untranslated: "shelf",
+    //     component: <FormASRSStep key="shelf" selectedSystem='shelf' />,
+    //   });
+    // }
 
-    if (formData.system.upc.selected) {
-      newSteps.push({
-        label: t("steps.systems.upc"),
-        untranslated: "upc",
-        component: <FormASRSStep key="upc" selectedSystem='upc' />,
-      });
-    }
+    // if (formData.system.upc.selected) {
+    //   newSteps.push({
+    //     label: t("steps.systems.upc"),
+    //     untranslated: "upc",
+    //     component: <FormASRSStep key="upc" selectedSystem='upc' />,
+    //   });
+    // }
 
-    if (formData.system.flow.selected) {
-      newSteps.push({
-        label: t("steps.systems.flow"),
-        untranslated: "flow",
-        component: <FormASRSStep key="flow" selectedSystem='flow' />,
-      });
-    }
+    // if (formData.system.flow.selected) {
+    //   newSteps.push({
+    //     label: t("steps.systems.flow"),
+    //     untranslated: "flow",
+    //     component: <FormASRSStep key="flow" selectedSystem='flow' />,
+    //   });
+    // }
 
-    if (formData.system.mobile.selected) {
-      newSteps.push({
-        label: t("steps.systems.mobile"),
-        untranslated: "mobile",
-        component: <FormASRSStep key="mobile" selectedSystem='mobile' />,
-      });
-    }
+    // if (formData.system.mobile.selected) {
+    //   newSteps.push({
+    //     label: t("steps.systems.mobile"),
+    //     untranslated: "mobile",
+    //     component: <FormASRSStep key="mobile" selectedSystem='mobile' />,
+    //   });
+    // }
 
-    if (formData.system.drivein.selected) {
-      newSteps.push({
-        label: t("steps.systems.drivein"),
-        untranslated: "drivein",
-        component: <FormASRSStep key="drivein" selectedSystem='drivein' />,
-      });
-    }
+    // if (formData.system.drivein.selected) {
+    //   newSteps.push({
+    //     label: t("steps.systems.drivein"),
+    //     untranslated: "drivein",
+    //     component: <FormASRSStep key="drivein" selectedSystem='drivein' />,
+    //   });
+    // }
 
     newSteps.push({
       label: t('steps.summary'),

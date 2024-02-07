@@ -1,7 +1,6 @@
 import { Alert, Box, Checkbox, CircularProgress, Container, FormControl, FormControlLabel, Grid, InputAdornment, Slider, Stack, Switch, TextField, Typography, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { ISystems } from "../../../features/interfaces";
-import CopyOtherSystemDataButton from "../CopyOtherSystemDataDropdown";
 import WorkConditions from "./subcomponents/WorkConditions";
 import Building from "./subcomponents/Building";
 import Loads from "./subcomponents/Loads";
@@ -10,6 +9,7 @@ import Flows from "./subcomponents/Flows";
 import AdditionalRemarks from "./subcomponents/AdditionalRemarks";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../features/redux/store";
+import RackConfigs from "./subcomponents/RackConfigs";
 
 export default function FormSystemStep({ selectedSystem }: { selectedSystem: keyof ISystems }): JSX.Element {
     const isStepSummary = useSelector((state: RootState) => state.steps.currentStep) === 'summary'
@@ -20,7 +20,6 @@ export default function FormSystemStep({ selectedSystem }: { selectedSystem: key
             {!isStepSummary &&
                 <Stack direction='row' justifyContent='space-between'>
                     <Typography variant="h4" textAlign='left'>{t(`system.${selectedSystem}.header`)}</Typography>
-                    <CopyOtherSystemDataButton selectedSystem={selectedSystem} />
                 </Stack>
             }
             <WorkConditions selectedSystem={selectedSystem} />
@@ -29,6 +28,7 @@ export default function FormSystemStep({ selectedSystem }: { selectedSystem: key
             <Capacity selectedSystem={selectedSystem} />
             <Flows selectedSystem={selectedSystem} />
             <AdditionalRemarks selectedSystem={selectedSystem} />
+            <RackConfigs selectedSystem={selectedSystem} />
         </Stack >
     )
 }

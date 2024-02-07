@@ -14,41 +14,41 @@ const availableSystems: ISystem[] = [
         labelShort: 'system.mpb.labelshort',
         description: 'system.mpb.description'
     },
-    {
-        url: shelf,
-        alt: 'shelf',
-        label: 'system.shelf.label',
-        labelShort: 'system.shelf.labelshort',
-        description: 'system.shelf.description'
-    },
-    {
-        url: upc,
-        alt: 'upc',
-        label: ('system.upc.label'),
-        labelShort: 'system.upc.labelshort',
-        description: 'system.upc.description'
-    },
-    {
-        url: flow,
-        alt: 'flow',
-        label: ('system.flow.label'),
-        labelShort: 'system.flow.labelshort',
-        description: 'system.flow.description'
-    },
-    {
-        url: mobile,
-        alt: 'mobile',
-        label: ('system.mobile.label'),
-        labelShort: 'system.mobile.labelshort',
-        description: 'system.mobile.description'
-    },
-    {
-        url: driveIn,
-        alt: 'drivein',
-        label: ('system.drivein.label'),
-        labelShort: 'system.drivein.labelshort',
-        description: 'system.drivein.description'
-    }
+    // {
+    //     url: shelf,
+    //     alt: 'shelf',
+    //     label: 'system.shelf.label',
+    //     labelShort: 'system.shelf.labelshort',
+    //     description: 'system.shelf.description'
+    // },
+    // {
+    //     url: upc,
+    //     alt: 'upc',
+    //     label: ('system.upc.label'),
+    //     labelShort: 'system.upc.labelshort',
+    //     description: 'system.upc.description'
+    // },
+    // {
+    //     url: flow,
+    //     alt: 'flow',
+    //     label: ('system.flow.label'),
+    //     labelShort: 'system.flow.labelshort',
+    //     description: 'system.flow.description'
+    // },
+    // {
+    //     url: mobile,
+    //     alt: 'mobile',
+    //     label: ('system.mobile.label'),
+    //     labelShort: 'system.mobile.labelshort',
+    //     description: 'system.mobile.description'
+    // },
+    // {
+    //     url: driveIn,
+    //     alt: 'drivein',
+    //     label: ('system.drivein.label'),
+    //     labelShort: 'system.drivein.labelshort',
+    //     description: 'system.drivein.description'
+    // }
 ]
 
 export default availableSystems

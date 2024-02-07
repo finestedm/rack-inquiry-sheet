@@ -86,123 +86,124 @@ const initialFormDataState: IFormData = {
             },
             loads: [],
             flow: [emptyFlow],
+            rackConfigs: [],
             additionalRemarks: '',
         },
-        shelf: {
-            selected: false,
-            workConditions: {
-                temperature: [20, 30],
-                freezer: false,
-                dangerousMaterials: false,
-                other: '',
-            },
-            building: {
-                new: false,
-                silo: false,
-                existingBuilding: {
-                    height: 0,
-                    width: 0,
-                    length: 0,
-                    equipment: []
-                },
-                incline: 0
-            },
-            loads: [],
-            flow: [emptyFlow],
-            additionalRemarks: '',
-        },
-        upc: {
-            selected: false,
-            workConditions: {
-                temperature: [20, 30],
-                freezer: false,
-                dangerousMaterials: false,
-                other: '',
-            },
-            building: {
-                new: false,
-                silo: false,
-                existingBuilding: {
-                    height: 0,
-                    width: 0,
-                    length: 0,
-                    equipment: []
-                },
-                incline: 0
-            },
-            loads: [],
-            flow: [emptyFlow],
-            additionalRemarks: '',
-        },
-        flow: {
-            selected: false,
-            workConditions: {
-                temperature: [20, 30],
-                freezer: false,
-                dangerousMaterials: false,
-                other: '',
-            },
-            building: {
-                new: false,
-                silo: false,
-                existingBuilding: {
-                    height: 0,
-                    width: 0,
-                    length: 0,
-                    equipment: []
-                },
-                incline: 0
-            },
-            loads: [],
-            flow: [emptyFlow],
-            additionalRemarks: '',
-        },
-        mobile: {
-            selected: false,
-            workConditions: {
-                temperature: [20, 30],
-                freezer: false,
-                dangerousMaterials: false,
-                other: '',
-            },
-            building: {
-                new: false,
-                silo: false,
-                existingBuilding: {
-                    height: 0,
-                    width: 0,
-                    length: 0,
-                    equipment: []
-                },
-                incline: 0
-            },
-            loads: [],
-            flow: [emptyFlow],
-            additionalRemarks: '',
-        },
-        drivein: {
-            selected: false,
-            workConditions: {
-                temperature: [20, 30],
-                freezer: false,
-                dangerousMaterials: false,
-                other: '',
-            },
-            building: {
-                new: false,
-                silo: false,
-                existingBuilding: {
-                    height: 0,
-                    width: 0,
-                    length: 0,
-                    equipment: []
-                },
-                incline: 0
-            },
-            loads: [],
-            flow: [emptyFlow],
-            additionalRemarks: '',
-        }
+        // shelf: {
+        //     selected: false,
+        //     workConditions: {
+        //         temperature: [20, 30],
+        //         freezer: false,
+        //         dangerousMaterials: false,
+        //         other: '',
+        //     },
+        //     building: {
+        //         new: false,
+        //         silo: false,
+        //         existingBuilding: {
+        //             height: 0,
+        //             width: 0,
+        //             length: 0,
+        //             equipment: []
+        //         },
+        //         incline: 0
+        //     },
+        //     loads: [],
+        //     flow: [emptyFlow],
+        //     additionalRemarks: '',
+        // },
+        // upc: {
+        //     selected: false,
+        //     workConditions: {
+        //         temperature: [20, 30],
+        //         freezer: false,
+        //         dangerousMaterials: false,
+        //         other: '',
+        //     },
+        //     building: {
+        //         new: false,
+        //         silo: false,
+        //         existingBuilding: {
+        //             height: 0,
+        //             width: 0,
+        //             length: 0,
+        //             equipment: []
+        //         },
+        //         incline: 0
+        //     },
+        //     loads: [],
+        //     flow: [emptyFlow],
+        //     additionalRemarks: '',
+        // },
+        // flow: {
+        //     selected: false,
+        //     workConditions: {
+        //         temperature: [20, 30],
+        //         freezer: false,
+        //         dangerousMaterials: false,
+        //         other: '',
+        //     },
+        //     building: {
+        //         new: false,
+        //         silo: false,
+        //         existingBuilding: {
+        //             height: 0,
+        //             width: 0,
+        //             length: 0,
+        //             equipment: []
+        //         },
+        //         incline: 0
+        //     },
+        //     loads: [],
+        //     flow: [emptyFlow],
+        //     additionalRemarks: '',
+        // },
+        // mobile: {
+        //     selected: false,
+        //     workConditions: {
+        //         temperature: [20, 30],
+        //         freezer: false,
+        //         dangerousMaterials: false,
+        //         other: '',
+        //     },
+        //     building: {
+        //         new: false,
+        //         silo: false,
+        //         existingBuilding: {
+        //             height: 0,
+        //             width: 0,
+        //             length: 0,
+        //             equipment: []
+        //         },
+        //         incline: 0
+        //     },
+        //     loads: [],
+        //     flow: [emptyFlow],
+        //     additionalRemarks: '',
+        // },
+        // drivein: {
+        //     selected: false,
+        //     workConditions: {
+        //         temperature: [20, 30],
+        //         freezer: false,
+        //         dangerousMaterials: false,
+        //         other: '',
+        //     },
+        //     building: {
+        //         new: false,
+        //         silo: false,
+        //         existingBuilding: {
+        //             height: 0,
+        //             width: 0,
+        //             length: 0,
+        //             equipment: []
+        //         },
+        //         incline: 0
+        //     },
+        //     loads: [],
+        //     flow: [emptyFlow],
+        //     additionalRemarks: '',
+        // }
     },
 }
 
@@ -336,43 +337,6 @@ const formDataSlice = createSlice({
             state.customer.industryName = [...industryName, value];
         },
 
-        handleCopySystemData: (state, action: PayloadAction<CopySystemDataPayload>) => {
-
-
-            const { selectedSystem, selectedParts } = action.payload;
-            // Iterate over selected parts for the selected system
-            Object.keys(state.system).forEach((otherSystemKey) => {
-                const otherSystem = otherSystemKey as keyof ISystems;
-
-                // Check if the current system is not the selected system
-                if (otherSystem !== selectedSystem) {
-                    // Iterate over selected parts in the current system
-                    selectedParts[otherSystem].forEach((part) => {
-                        if (part === 'loads') {
-                            if (Array.isArray(state.system[otherSystem][part])) {
-                                state.system[selectedSystem][part] = state.system[otherSystem][part].map(load => ({ ...load }));
-                            }
-                        } else if (part === 'flow') {
-                            if (Array.isArray(state.system[otherSystem][part])) {
-                                state.system[selectedSystem][part] = state.system[otherSystem][part].map(flow => ({ ...flow }));
-                            }
-                        } else if (part === 'additionalRemarks') {
-                            state.system[selectedSystem][part] = state.system[otherSystem][part];
-                        } else {
-
-                            // Copy data from other systems to the selected system based on the selected part
-                            state.system[selectedSystem][part] = {
-                                //i don't have time for this shit... ignore these    
-                                // @ts-ignore
-                                ...state.system[selectedSystem][part],
-                                // @ts-ignore
-                                ...state.system[otherSystem][part], // Add type assertion here
-                            };
-                        }
-                    });
-                }
-            });
-        },
 
         updateEquipment: (state: IFormData, action: PayloadAction<{ updatedEquipment: IEquipment[]; selectedSystem: keyof ISystems }>) => {
             const { updatedEquipment, selectedSystem } = action.payload;
@@ -386,6 +350,6 @@ const formDataSlice = createSlice({
     },
 });
 
-export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, handleCopySystemData, updateEquipment } = formDataSlice.actions;
+export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment } = formDataSlice.actions;
 export default formDataSlice.reducer;
 export { initialFormDataState }

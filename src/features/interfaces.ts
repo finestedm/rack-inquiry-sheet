@@ -110,17 +110,32 @@ export interface ISystemData {
     },
     loads: ILoad[];
     flow: IFlow[];
+    rackConfigs: TRackConfig[];
     additionalRemarks: string;
     // [key: string]: any;
 }
 
+export type TRackConfig = 
+    {
+        quantity: number;
+        bays: TBay[];
+        load: number;
+        height: number;
+        depth: number;
+    }
+
+export type TBay = {
+    quantity: number;
+    width: number;
+}
+
 export interface ISystems {
     mpb: ISystemData;
-    shelf: ISystemData;
-    flow: ISystemData;
-    mobile: ISystemData;
-    upc: ISystemData;
-    drivein: ISystemData;
+    // shelf: ISystemData;
+    // flow: ISystemData;
+    // mobile: ISystemData;
+    // upc: ISystemData;
+    // drivein: ISystemData;
 }
 
 export interface IFormData {
