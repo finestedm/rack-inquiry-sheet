@@ -1,0 +1,344 @@
+{
+  "customer": {
+    "header": "Dane klienta",
+    "name": "Firma / klient",
+    "sapNumber": "Numer sap",
+    "industry": "Branża",
+    "industryNameOther": "Podaj inną branżę",
+    "contactPerson": "Imię i nazwisko",
+    "contactPersonRole": "Stanowisko osoby kontaktowej",
+    "contactPersonPhone": "Telefon kontaktowy",
+    "contactPersonMail": "Adres email",
+    "address": "Adres",
+    "currency": {
+      "perYear": "/ rok"
+    },
+    "subheader": {
+      "teleaddress": "Dane firmy",
+      "contactperson": "Osoba kontaktowa",
+      "businessdata": "Dane biznesowe"
+    },
+    "relations": {
+      "type": "Poziom współpracy",
+      "salesHistoryValue": "Wartość obrotu z klientem",
+      "creditManagement": "Wartość kredytu kupieckiego",
+      "2": "Klient JH",
+      "1": "Nowy klient",
+      "3": "Klient JH KAM",
+      "4": "Klient konkurencji",
+      "input": {
+        "owned": "Posiadane wyposażenie magazynu: ",
+        "forklifts": "Ilość wózków JH",
+        "other": "inne produkty JH",
+        "racks": "Ilosć regałów JH"
+      }
+    }
+  },
+  "industry": {
+    "production": "Produkcja",
+    "trade": "Handel",
+    "logistics": "Dostawca usług logistycznych",
+    "pharmaceutical": "Branża farmaceutyczna",
+    "beverage": "Branża napojowa",
+    "clothing": "Branża odzieżowa",
+    "chemical": "Branża chemiczna",
+    "food": "Przemysł spożywczy",
+    "automotive": "Automotive",
+    "other": "Inna"
+  },
+  "sales": {
+    "salesUnit": "Jednostka sprzedażowa",
+    "header": "Dane jednostki sprzedażowej",
+    "unit": "Jednostka sprzedażowa",
+    "contactPerson": "Osoba kontaktowa ze strony JH",
+    "contactPersonRole": "Stanowisko osoby kontaktowej JH"
+  },
+  "steps": {
+    "sales": "Jednostka sprzedażowa",
+    "customer": "Klient",
+    "system": "Wybór systemu",
+    "project": "Projekt",
+    "asrs": "ASRS",
+    "lrkprk": "LRK / PRK",
+    "agv": "AGV",
+    "autovna": "AutoVNA",
+    "systems": {
+      "asrs": "ASRS",
+      "lrkprk": "LRK / PRK",
+      "agv": "AGV",
+      "autovna": "AutoVNA",
+      "header": "Wybór systemu:"
+    }
+  },
+  "ui": {
+    "button": {
+      "back": "Wstecz",
+      "next": "Dalej",
+      "inquiry": {
+        "load": "Wczytaj zapytanie",
+        "save": "Zapisz zapytanie",
+        "clear": "Wymaż dane"
+      },
+      "copyDialog": {
+        "accept": "Tak, skopiuj dane",
+        "cancel": "Anuluj"
+      },
+      "dateEditDialog": {
+        "accept": "Tak, zmień daty",
+        "cancel": "Anuluj"
+      },
+      "table": {
+        "newload": "Dodaj nowy ładunek"
+      },
+      "readmore": "Dowiedz się więcej",
+      "addNewLoad": "Dodaj",
+      "deleteSelectedLoads": "Usuń wybrane",
+      "addNewFlow": "Dodaj"
+    },
+    "switch": {
+      "darkMode": {
+        "dark": "Tryb nocny",
+        "light": "Tryb jasny"
+      },
+      "editMode": {
+        "edit": "Tryb edycji",
+        "read": "Tryb podglądu"
+      }
+    },
+    "dialog": {
+      "loadDelete": {
+        "title": "Uwaga",
+        "description1": "Ten ładunek jest użyty w którymś z przepywów w tabeli 'Przepływy'.",
+        "description2": "Czy na pewno chcesz go usunąć?",
+        "cancel": "Anuluj",
+        "confirm": "Tak, usuń"
+      },
+      "copyDialog": {
+        "title": "Wybierz dane do skopiowania z innego systemu",
+        "noChange": "Bez zmian"
+      },
+      "clearForm": {
+        "title": "Wymazywanie danych",
+        "description1": "Wygląda na to, że wprowadziłeś już jakieś dane do kwestionariusza.",
+        "description2": "Czy na pewno chcesz je usunąć?",
+        "cancel": "Anuluj",
+        "confirm": "Tak, wyzeruj dane"
+      },
+      "ganttGraph": {
+        "selectDates": "Zmień daty dla: ",
+        "start": "początkowa",
+        "end": "końcowa"
+      }
+    },
+    "snackBar": {
+      "message": {
+        "fileLoaded": "Wczytano plik",
+        "fileLoadError": {
+          "other": "Błąd wczytywania pliku",
+          "version": "Wersja pliku różni się od wersji aplikacji"
+        },
+        "fileSaved": "Plik zapisano jako: "
+      }
+    },
+    "tooltip": {
+      "copyOtherSystemData": "Skopiuj dane z innego systemu",
+      "darkMode": "Przełączy tryb dzienny / nocny",
+      "editMode": "Przełączy tryb edycji / podglądu"
+    },
+    "table": {
+      "head": {
+        "part": "część"
+      }
+    }
+  },
+  "system": {
+    "condensationWarningTitle": "Uwaga!",
+    "condensationWarning": "Panujące warunki mogą powodowac kondensacje",
+    "manyLoadsWarningTitle": "Uwaga",
+    "manyLoadsWarning": "Duże różnice pomiędzy wymiarami ładunków mogą być problematyczne dla wybranego systemu.",
+    "subheader": {
+      "workTime": "Czas pracy",
+      "workConditions": "Warunki pracy",
+      "building": "Budynek",
+      "loads": "Ładunki",
+      "flow": "Przepływy",
+      "capacity": "Pojemność",
+      "additionalRemarks": "Dodatkowe uwagi"
+    },
+    "workTime": {
+      "workDays": "Dni pracy w tygodniu",
+      "shiftsPerDay": "Liczba zmian na dzień",
+      "hoursPerShift": "Liczba godzin na zmianę",
+      "hoursPerWeek": "Godziny pracy na tydzień"
+    },
+    "workConditions": {
+      "temperature": "Temperatura",
+      "humidity": "Wilgotność",
+      "freezer": "Strefa chłodnicza",
+      "EX": "Strefa zagrożona wybuchem",
+      "dangerousMaterials": "Materiały niebezpieczne",
+      "other": "Inne uwagi"
+    },
+    "building": {
+      "new": "Nowy budynek",
+      "existing": "Istniejący",
+      "silo": "Magazyn silosowy",
+      "existingBuilding": {
+        "height": "Wysokość",
+        "width": "Szerokość",
+        "length": "Długość"
+      }
+    },
+    "asrs": {
+      "header": "Dane systemu ASRS",
+      "label": "Automatyczne systemy magazynowe",
+      "labelshort": "ASRS",
+      "description": "Automatyczne magazyny paletowe integrują regały, oprogramowanie i układnice w kompaktowy system. Tu liczy się maksymalna dynamika i precyzja, przy optymalnej energooszczędności. Jeśli wszystkie elementy idealnie współgrają, inwestycja w zautomatyzowane rozwiązanie szybko się zwraca."
+    },
+    "lrkprk": {
+      "header": "Dane regałów automatycznych",
+      "label": "Regały windowe i karuzelowe",
+      "labelshort": "LRK & PRK",
+      "description": "Z uwagi na modułową konstrukcję, zarówno przed jak i po montażu można dostosowywać wysokość regału LRK do bieżących potrzeb. Ponadto integracja regału w dowolny system zarządzania magazynem pozwala na uzyskanie jeszcze lepszej wydajności.",
+      "temperatureWarning": "Regały automatyczne nie mogą pracować w temperaturze poniżej 5C",
+      "temperatureWarningTitle": "Uwaga!"
+    },
+    "agv": {
+      "header": "Dane wózków automatycznych",
+      "label": "Wózki automatyczne AGV",
+      "labelshort": "AGV",
+      "description": "Wózki automatyczne AGV (z ang. Automated Guided Vehicles) to systemy transportowe pozwalające na zdalną obsługę. Wyposażono je w rozbudowany system czujników, który wykrywa wszelkie przeszkody wokół pojazdu. Modele AVG potrafią samodzielnie zwalniać, przyspieszać i reagować na niespodziewane czynniki pojawiające się podczas jazdy. W razie konieczności mogą całkowicie się zatrzymać.",
+      "temperatureWarning": "Wózki automatyczne AGV nie mogą pracować w temperaturze poniżej 5C",
+      "temperatureWarningTitle": "Uwaga!"
+    },
+    "autovna": {
+      "header": "Dane systemu AutoVNA",
+      "label": "Automatyczne wózki do wąskich korytarzy roboczych",
+      "labelshort": "AutoVNA",
+      "description": "Automatyczne wózki wysokiego składowania doskonale sprawdzają się w zautomatyzowanym magazynie z wąskimi korytarzami roboczymi, w którym znajdują się także regały, oprogramowanie i urządzenia transportowe. Idealnie zintegrowane, efektywnie i bezpiecznie wykonują pracę przez 24 godziny na dobę.",
+      "temperatureWarning": "Wózki automatyczne AutoVNA nie mogą pracować w temperaturze poniżej 5C",
+      "temperatureWarningTitle": "Uwaga!"
+    }
+  },
+  "project": {
+    "header": "Informacje o projekcie",
+    "goals": "Cele projektu",
+    "supplyChainParts": {
+      "header": "Automatyzacja obejmuje:",
+      "production": "Produkcja",
+      "storage": "Magazynowanie",
+      "distribution": "Dystrybucja",
+      "finishedGoods": "Wyroby gotowe",
+      "components": "Surowce"
+    },
+    "milestones": {
+      "concept": "Przygotowanie koncepcji",
+      "officialOffer": "Data oferty",
+      "order": "Data zamówienia",
+      "implementation": "Data wdrożenia",
+      "launch": "Data uruchomienia 🎉"
+    },
+    "it": {
+      "processesDescription": "Opis procesów",
+      "existingSystem": {
+        "present": "Czy występuje system WMS?",
+        "name": "Istniejący system WMS",
+        "existingOther": "Inny",
+        "label": {
+          "SAP-WM": "SAP-WM",
+          "SAP-EWM": "SAP-EWM",
+          "other": "Inny"
+        }
+      },
+      "wmsNeeded": "Czy wymagany jest WMS?",
+      "wmsNeededAlt": "WMS wymagany",
+      "additionalInformation": "Inne informacje"
+    },
+    "investmentLocation": "Lokalizacja inwestycji",
+    "tender": "Inwestycja w formie przetargu",
+    "consultingCompany": "Prowadzona przez firmę konsultingową",
+    "competitor": "Inni oferenci",
+    "investmentType": {
+      "new": "Nowy projekt",
+      "expansionJH": "Rozbudowa JH",
+      "expansionOther": "Rozbudowa inny producent",
+      "modification": "Modyfikacja",
+      "exchange": "Zamiana",
+      "retrofit": "Retrofit"
+    },
+    "subheader": {
+      "investmentType": "Typ inwestycji",
+      "milestones": "Ramy czasowe",
+      "various": "Dane ogólne",
+      "it": "IT oraz informacje o procesie"
+    }
+  },
+  "loadTable": {
+    "header": {},
+    "loadContainerMaterial": {
+      "wood": "Drewniana",
+      "metal": "Metalowa",
+      "plastic": "Plastikowa"
+    },
+    "loadsToAdd": {
+      "placeholder": "Wybierz ładunek",
+      "empty": "bez danych",
+      "euro": "EuroPaleta",
+      "klt_600x400": "Pojemnik KLT 600x400",
+      "us_standard": "Paleta US",
+      "half_euro": "Półpaleta EUR",
+      "industial_1200x1000": "Przemysłowa 1200x1000",
+      "industial_1200x1200": "Przemysłowa 1200x1200",
+      "gitterbox_1235x835": "Gitterbox"
+    }
+  },
+  "flowTable": {
+    "flowStationTypes": {
+      "floor": "podłoga",
+      "conveyor": "przenośnik",
+      "pallet wrapper": "owijarka palet",
+      "rack": "regał"
+    }
+  },
+  "helperText": {
+    "sales": {
+      "contactPerson": {
+        "required": "Podaj osobę wprowadzającą dane"
+      }
+    },
+    "customer": {
+      "name": {
+        "required": "Nazwa firmy wymagana"
+      },
+      "address": {
+        "required": "Adres wymagany"
+      },
+      "sapNumber": {
+        "format": "Numer SAP musi zaczynać się od 4 i mieć 8 cyfr"
+      },
+      "contactPersonMail": {
+        "format": "Zły format"
+      },
+      "industryName": {
+        "number": "Wybierz co najmniej jedną branżę"
+      },
+      "industryNameOther": {
+        "required": "Wpisz nazwę innej brażny, jeśli została wybrana z listy powyżej"
+      },
+      "relations": {
+        "number": "Wybierz typ relacji"
+      }
+    },
+    "project": {
+      "supplyChainParts": {
+        "number": "Wybierz co najmniej jedną część łańcucha dostaw"
+      },
+      "investmentLocation": {
+        "required": "Podaj gdzie realizowana będzie inwestycja"
+      },
+      "investmentType": {
+        "required": "Pole wymagane"
+      }
+    }
+  }
+}
