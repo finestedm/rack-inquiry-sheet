@@ -2,26 +2,24 @@ import { useSelector } from "react-redux";
 import { ISystems, TLevelConfig } from "../../../../features/interfaces";
 import { RootState } from "../../../../features/redux/store";
 import { useDispatch } from "react-redux";
-import { Box, Grid, OutlinedInput, Stack, TextField, Typography, useTheme } from "@mui/material";
+import { Box, Button, Grid, OutlinedInput, Stack, TextField, Typography, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import InputGroup from "../../InputGroup";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { handleLevelConfigsChange } from "../../../../features/redux/reducers/formDataSlice";
+import { handleAddNewConfig, handleLevelConfigsChange } from "../../../../features/redux/reducers/formDataSlice";
 
 export default function LevelConfigs({ selectedSystem }: { selectedSystem: keyof ISystems }) {
 
     const currentStep = useSelector((state: RootState) => state.steps.currentStep);
     const editMode = useSelector((state: RootState) => state.editMode) && currentStep !== 'summary';
     const formData = useSelector((state: RootState) => state.formData)
-
-    const [levelConfigs, setLevelConfigs] = useState(formData.system[selectedSystem].levelConfigs)
-
     const dispatch = useDispatch();
+    const levelConfigs = formData.system[selectedSystem].levelConfigs
 
-    useEffect(() => {
-        dispatch(handleLevelConfigsChange({ selectedSystem, levelConfigs }));
-    }, [levelConfigs])
-    
+    function addNewConfig() {
+        dispatch(handleAddNewConfig(selectedSystem));
+    };
+   
     const { t } = useTranslation();
 
     return (
@@ -30,26 +28,36 @@ export default function LevelConfigs({ selectedSystem }: { selectedSystem: keyof
             content={
                 <Box>
                     {levelConfigs.map(config => (
-                        <LevelConfig config={config} levelConfigs={levelConfigs} setLevelConfigs={setLevelConfigs}/>
+                        <LevelConfig config={config} levelConfigs={levelConfigs} selectedSystem={selectedSystem} />
                     ))}
+                    <Button onClick={addNewConfig}>Add configuration</Button>
                 </Box>
             }
         />
     )
 }
 
-function LevelConfig({ config, levelConfigs, setLevelConfigs }: { config: TLevelConfig, levelConfigs: TLevelConfig[], setLevelConfigs: Dispatch<SetStateAction<TLevelConfig[]>>}) {
+function LevelConfig({ selectedSystem, config, levelConfigs }: {selectedSystem: keyof ISystems, config: TLevelConfig, levelConfigs: TLevelConfig[]}) {
+    const dispatch = useDispatch();
+
     const handleLevelChange = (index: number, value: number) => {
         const updatedConfig = [...config]; 
         updatedConfig[index] = value; 
         const updatedLevelConfigs = [...levelConfigs]; 
         updatedLevelConfigs[levelConfigs.indexOf(config)] = updatedConfig; 
-        setLevelConfigs(updatedLevelConfigs); 
+        dispatch(handleLevelConfigsChange({ selectedSystem, levelConfigs: updatedLevelConfigs }));
+    };
+
+    const handleLastLevelChange = (value: number) => {
+        const updatedConfig = [...config, value]; 
+        const updatedLevelConfigs = [...levelConfigs]; 
+        updatedLevelConfigs[levelConfigs.indexOf(config)] = updatedConfig; 
+        dispatch(handleLevelConfigsChange({ selectedSystem, levelConfigs: updatedLevelConfigs }));
     };
 
     return (
         <Stack spacing={2}>
-            {config.map((level, index) => (
+            {config.sort().map((level, index) => (
                 <CustomLevelTextField
                     key={index}
                     level={level}
@@ -57,6 +65,12 @@ function LevelConfig({ config, levelConfigs, setLevelConfigs }: { config: TLevel
                     onChange={handleLevelChange}
                 />
             ))}
+            <CustomLevelTextField
+                key={config.length}
+                level={0} // Assuming the default value is 0 for the new input
+                index={config.length}
+                onChange={handleLastLevelChange}
+            />
         </Stack>
     )
 }

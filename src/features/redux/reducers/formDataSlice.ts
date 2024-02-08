@@ -355,10 +355,16 @@ const formDataSlice = createSlice({
             state.system[selectedSystem].levelConfigs = levelConfigs;
         },
 
+        handleAddNewConfig: (state, action: PayloadAction<keyof ISystems>) => {
+            const selectedSystem = action.payload;
+            // Add a new, empty configuration to the specified system
+            state.system[selectedSystem].levelConfigs.push([]);
+          },
+
         // ... add other reducers here if needed
     },
 });
 
-export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment, handleLevelConfigsChange } = formDataSlice.actions;
+export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment, handleLevelConfigsChange, handleAddNewConfig } = formDataSlice.actions;
 export default formDataSlice.reducer;
 export { initialFormDataState }
