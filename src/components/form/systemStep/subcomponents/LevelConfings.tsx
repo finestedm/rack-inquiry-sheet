@@ -2,9 +2,8 @@ import { useSelector } from "react-redux";
 import { ISystems, TLevelConfig } from "../../../../features/interfaces";
 import { RootState } from "../../../../features/redux/store";
 import { useDispatch } from "react-redux";
-import { Box, Grid, OutlinedInput, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Grid, OutlinedInput, Stack, TextField, Typography, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import CustomTextField from "../../CustomTextField";
 import InputGroup from "../../InputGroup";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { handleLevelConfigsChange } from "../../../../features/redux/reducers/formDataSlice";
@@ -40,9 +39,9 @@ export default function LevelConfigs({ selectedSystem }: { selectedSystem: keyof
 }
 
 function LevelConfig({ config, levelConfigs, setLevelConfigs }: { config: TLevelConfig, levelConfigs: TLevelConfig[], setLevelConfigs: Dispatch<SetStateAction<TLevelConfig[]>>}) {
-    const handleLevelChange = (index: number, value: string) => {
+    const handleLevelChange = (index: number, value: number) => {
         const updatedConfig = [...config]; 
-        updatedConfig[index] = +value; 
+        updatedConfig[index] = value; 
         const updatedLevelConfigs = [...levelConfigs]; 
         updatedLevelConfigs[levelConfigs.indexOf(config)] = updatedConfig; 
         setLevelConfigs(updatedLevelConfigs); 
@@ -51,12 +50,34 @@ function LevelConfig({ config, levelConfigs, setLevelConfigs }: { config: TLevel
     return (
         <Stack spacing={2}>
             {config.map((level, index) => (
-                <OutlinedInput 
+                <CustomLevelTextField
                     key={index}
-                    value={level}
-                    onChange={(e) => handleLevelChange(index, e.target.value)}
+                    level={level}
+                    index={index}
+                    onChange={handleLevelChange}
                 />
             ))}
         </Stack>
+    )
+}
+
+
+function CustomLevelTextField({index, level, onChange}: {index: number, level: number, onChange: (index: number, value: number) => void}) {
+    const [currentValue, setCurrentValue] = useState(level)
+
+    return (
+        <TextField
+            variant="outlined" 
+            inputProps={{min: 50, max: 16000}}
+            InputProps={{endAdornment: 'mm'}}
+            key={index}
+            value={currentValue}
+            onChange={(e) => setCurrentValue(+e.target.value)}
+            onBlur={() => {
+                const newValue = Math.floor(+currentValue / 50) * 50;
+                setCurrentValue(newValue);
+                onChange(index, newValue);
+            }}
+        />
     )
 }
