@@ -41,13 +41,14 @@ function LevelConfig({ selectedSystem, config, levelConfigs }: {selectedSystem: 
     const dispatch = useDispatch();
 
     const handleLevelChange = (index: number, value: number) => {
-        const updatedConfig = [...config]; 
-        updatedConfig[index] = value; 
-        const updatedLevelConfigs = [...levelConfigs]; 
-        updatedLevelConfigs[levelConfigs.indexOf(config)] = updatedConfig; 
+        const updatedConfig = [...config];
+        updatedConfig[index] = value;
+        const sortedConfig = updatedConfig.sort((a, b) => a - b);
+        const updatedLevelConfigs = [...levelConfigs];
+        updatedLevelConfigs[levelConfigs.indexOf(config)] = sortedConfig;
         dispatch(handleLevelConfigsChange({ selectedSystem, levelConfigs: updatedLevelConfigs }));
     };
-
+    
     const handleLastLevelChange = (value: number) => {
         const updatedConfig = [...config, value]; 
         const updatedLevelConfigs = [...levelConfigs]; 
@@ -55,7 +56,8 @@ function LevelConfig({ selectedSystem, config, levelConfigs }: {selectedSystem: 
         dispatch(handleLevelConfigsChange({ selectedSystem, levelConfigs: updatedLevelConfigs }));
     };
 
-    const renderNextInput = Math.max(...config) > 0
+
+    const renderNextInput = Math.max(...config);
 
     return (
         <Accordion>
@@ -94,9 +96,9 @@ function CustomLevelTextField({index, level, onChange}: {index: number, level: n
         <TextField
             variant="outlined" 
             inputProps={{min: 50, max: 16000}}
-            InputProps={{endAdornment: 'mm'}}
+            InputProps={{startAdornment: index, endAdornment: 'mm'}}
             key={index}
-            value={currentValue}
+            value={currentValue !== index ? currentValue : 0}
             onChange={(e) => setCurrentValue(+e.target.value)}
             onBlur={() => {
                 const newValue = Math.floor(+currentValue / 50) * 50;
