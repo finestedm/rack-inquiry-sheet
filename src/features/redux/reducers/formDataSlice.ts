@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IFormData, ILoad, ILoadsTypes, IFlow, LoadFieldValue, ISystems, IMilestones, ISystemData, CopySystemDataPayload, IEquipment } from '../../interfaces';
+import { IFormData, ILoad, ILoadsTypes, IFlow, LoadFieldValue, ISystems, IMilestones, ISystemData, CopySystemDataPayload, IEquipment, TLevelConfig } from '../../interfaces';
 import { loadsToAdd } from '../../../data/typicalLoadSizes';
 import { emptyFlow } from '../../../data/flowStations';
 import generateRandomId from '../../variousMethods/generateRandomId';
@@ -87,6 +87,7 @@ const initialFormDataState: IFormData = {
             loads: [],
             flow: [emptyFlow],
             rackConfigs: [],
+            levelConfigs: [],
             additionalRemarks: '',
         },
         // shelf: {
@@ -345,11 +346,19 @@ const formDataSlice = createSlice({
             state.system[selectedSystem].building.existingBuilding.equipment = updatedEquipment;
         },
 
+        handleLevelConfigsChange: (
+            state: IFormData,
+            action: PayloadAction<{ selectedSystem: keyof ISystems; levelConfigs: TLevelConfig[] }>
+        ) => {
+            const { selectedSystem, levelConfigs } = action.payload;
+            // Assuming that 'selectedSystem' corresponds to the system in the form data
+            state.system[selectedSystem].levelConfigs = levelConfigs;
+        },
 
         // ... add other reducers here if needed
     },
 });
 
-export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment } = formDataSlice.actions;
+export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment, handleLevelConfigsChange } = formDataSlice.actions;
 export default formDataSlice.reducer;
 export { initialFormDataState }
