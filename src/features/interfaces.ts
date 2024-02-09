@@ -111,7 +111,7 @@ export interface ISystemData {
     loads: ILoad[];
     flow: IFlow[];
     rackConfigs: TRackConfig[];
-    levelConfigs: TLevelConfig[]
+    levelConfigs: TLevelsConfig[]
     additionalRemarks: string;
     // [key: string]: any;
 }
@@ -121,7 +121,7 @@ export type TRackConfig =
         quantity: number;
         bays: TBay[];
         load: number;
-        levels: TLevelConfig;
+        levels: TLevelsConfig;
         depth: number;
     }
 
@@ -130,7 +130,7 @@ export type TBay = {
     width: number;
 }
 
-export type TLevelConfig = number[]
+export type TLevelsConfig = { id: number; levels: number[] };
 
 export interface ISystems {
     mpb: ISystemData;

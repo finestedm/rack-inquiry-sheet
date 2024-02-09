@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IFormData, ILoad, ILoadsTypes, IFlow, LoadFieldValue, ISystems, IMilestones, ISystemData, CopySystemDataPayload, IEquipment, TLevelConfig } from '../../interfaces';
+import { IFormData, ILoad, ILoadsTypes, IFlow, LoadFieldValue, ISystems, IMilestones, ISystemData, CopySystemDataPayload, IEquipment, TLevelsConfig } from '../../interfaces';
 import { loadsToAdd } from '../../../data/typicalLoadSizes';
 import { emptyFlow } from '../../../data/flowStations';
 import generateRandomId from '../../variousMethods/generateRandomId';
@@ -348,7 +348,7 @@ const formDataSlice = createSlice({
 
         handleLevelConfigsChange: (
             state: IFormData,
-            action: PayloadAction<{ selectedSystem: keyof ISystems; levelConfigs: TLevelConfig[] }>
+            action: PayloadAction<{ selectedSystem: keyof ISystems; levelConfigs: TLevelsConfig[] }>
         ) => {
             const { selectedSystem, levelConfigs } = action.payload;
             // Assuming that 'selectedSystem' corresponds to the system in the form data
@@ -357,14 +357,29 @@ const formDataSlice = createSlice({
 
         handleAddNewConfig: (state, action: PayloadAction<keyof ISystems>) => {
             const selectedSystem = action.payload;
-            // Add a new, empty configuration to the specified system
-            state.system[selectedSystem].levelConfigs.push([]);
-          },
+            // Create a new configuration object with an id and an empty levels array
+            const newConfig: TLevelsConfig = { id: generateRandomId(), levels: [] };
+            // Add the new configuration to the specified system
+            state.system[selectedSystem].levelConfigs.push(newConfig);
+        },
+
+        handleAddNewLevel: (state, action: PayloadAction<{ selectedSystem: keyof ISystems, configId: number }>) => {
+            const { selectedSystem, configId } = action.payload;
+            const configIndex = state.system[selectedSystem].levelConfigs.findIndex(config => config.id === configId);
+            if (configIndex !== -1) {
+                const heightDifference = state.system[selectedSystem].levelConfigs[configIndex].levels.slice(-1)[0] + 1000 || 1000
+                const newLevel: number = heightDifference; // add new level 1000mm higher than previous level
+                state.system[selectedSystem].levelConfigs[configIndex].levels.push(newLevel);
+            } else {
+                console.error(`Configuration with id ${configId} not found in system ${selectedSystem}`);
+            }
+        },
+
 
         // ... add other reducers here if needed
     },
 });
 
-export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment, handleLevelConfigsChange, handleAddNewConfig } = formDataSlice.actions;
+export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment, handleLevelConfigsChange, handleAddNewConfig, handleAddNewLevel } = formDataSlice.actions;
 export default formDataSlice.reducer;
 export { initialFormDataState }
