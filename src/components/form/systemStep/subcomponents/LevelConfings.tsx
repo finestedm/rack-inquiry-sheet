@@ -2,13 +2,14 @@ import { useSelector } from "react-redux";
 import { ISystems, TLevelsConfig } from "../../../../features/interfaces";
 import { RootState } from "../../../../features/redux/store";
 import { useDispatch } from "react-redux";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Grid, Input, OutlinedInput, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, useTheme } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Grid, Input, OutlinedInput, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, useTheme, useThemeProps } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import InputGroup from "../../InputGroup";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { handleAddNewConfig, handleAddNewLevel, handleLevelConfigsChange } from "../../../../features/redux/reducers/formDataSlice";
 import { DataGrid, GridEditCellProps, GridRenderCellParams, GridRowSelectionModel, GridToolbarContainer, GridTreeNodeWithRender } from "@mui/x-data-grid";
 import { openSnackbar } from "../../../../features/redux/reducers/snackBarSlice";
+import { customGreyPalette, customGreyPaletteDark } from "../../../../theme";
 
 export default function LevelConfigs({ selectedSystem }: { selectedSystem: keyof ISystems }) {
 
@@ -48,6 +49,7 @@ function LevelConfig({ selectedSystem, config }: LevelConfigProps) {
     const beamHeight = 150
     const formData = useSelector((state: RootState) => state.formData)
     const levelConfigs = formData.system[selectedSystem].levelConfigs
+    const theme = useTheme();
     const dispatch = useDispatch();
 
     type ExtendedLevelsConfig = TLevelsConfig & {
@@ -59,8 +61,11 @@ function LevelConfig({ selectedSystem, config }: LevelConfigProps) {
 
     const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
-    function handleDeleteLevel(params: GridRenderCellParams<{ id: number; value: number; } | { isNew: boolean; id: number; value: number; }, any, any, GridTreeNodeWithRender>) {
-
+    function handleDeleteLevel(id: number) {
+        const newLevels = [...config.levels.slice(0, id), ...config.levels.slice(id + 1)];
+        const updatedConfig = { ...config, levels: newLevels }
+        const updatedConfigs = levelConfigs.map(levelConfig => levelConfig.id === config.id ? updatedConfig : levelConfig);
+        dispatch(handleLevelConfigsChange({ selectedSystem, levelConfigs: updatedConfigs }));
     }
 
     return (
@@ -68,6 +73,26 @@ function LevelConfig({ selectedSystem, config }: LevelConfigProps) {
             <AccordionSummary>Config index</AccordionSummary>
             <AccordionDetails>
                 <DataGrid
+                    sx={{
+                        borderColor: 'divider',
+                        boxShadow: theme.palette.mode === 'light' ? theme.shadows[1] : 'none',
+                        backgroundColor: 'background.paper',
+                        '& .MuiDataGrid-row': {
+                            '& .MuiDataGrid-cell': {
+                                borderTop: `1px solid ${theme.palette.divider}`,
+                            }
+                        },
+                        '& .MuiDataGrid-row:hover': {
+                            backgroundColor: 'divider',
+                        },
+                        '& .MuiDataGrid-columnHeader': {
+                            color: theme.palette.mode === 'light' ? customGreyPalette[500] : customGreyPaletteDark[400],
+                            fontSize: 12,
+                        },
+                        '& .MuiDataGrid-footerContainer': {
+                            borderTop: `1px solid ${theme.palette.divider}`,
+                        },
+                    }}
                     rows={rows}
                     columns={[
                         { field: 'id', headerName: 'Beam Level', width: 120, valueGetter: (params) => params.row.id + 1 },
@@ -103,7 +128,7 @@ function LevelConfig({ selectedSystem, config }: LevelConfigProps) {
                         {
                             field: 'actions', headerName: 'Actions', width: 120,
                             renderCell: (params) => (
-                                <Button onClick={() => handleDeleteLevel(params)}>Delete level</Button>
+                                <Button onClick={() => handleDeleteLevel(params.row.id)}>Delete level</Button>
                             )
                         },
 
