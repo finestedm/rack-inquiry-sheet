@@ -2,16 +2,17 @@ import { useSelector } from "react-redux";
 import { ISystems, TLevelsConfig } from "../../../../features/interfaces";
 import { RootState } from "../../../../features/redux/store";
 import { useDispatch } from "react-redux";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Grid, IconButton, Input, OutlinedInput, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, useTheme, useThemeProps } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Grid, IconButton, Input, Menu, MenuItem, OutlinedInput, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, useTheme, useThemeProps } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import InputGroup from "../../InputGroup";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, MouseEvent, SetStateAction, useEffect, useState } from "react";
 import { handleAddNewConfig, handleAddNewLevel, handleLevelConfigsChange } from "../../../../features/redux/reducers/formDataSlice";
 import { DataGrid, GridEditCellProps, GridRenderCellParams, GridRowSelectionModel, GridToolbarContainer, GridTreeNodeWithRender } from "@mui/x-data-grid";
 import { openSnackbar } from "../../../../features/redux/reducers/snackBarSlice";
 import { customGreyPalette, customGreyPaletteDark } from "../../../../theme";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 export default function LevelConfigs({ selectedSystem }: { selectedSystem: keyof ISystems }) {
 
@@ -72,6 +73,7 @@ function LevelConfig({ selectedSystem, config }: { selectedSystem: keyof ISystem
             >
                 <Typography variant='h6' align='left' >Konfiguracja {levelConfigs.findIndex(conf => conf.id === config.id) + 1}</Typography>
                 <Typography variant='h6' ml={1} align='left' color='text.secondary'> (0 + {config.levels.length})</Typography>
+                <ConfigurationMenu />
             </AccordionSummary>
             <AccordionDetails>
                 <Button variant="outlined" startIcon={<DeleteIcon />}>Delete configuration</Button>
@@ -194,5 +196,41 @@ function LevelConfig({ selectedSystem, config }: { selectedSystem: keyof ISystem
                 />
             </AccordionDetails>
         </Accordion>
+    );
+}
+function ConfigurationMenu() {
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+    const handleClick = (event: MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const handleDelete = () => {
+        handleClose();
+    };
+
+    return (
+        <div>
+            <IconButton
+                aria-label="more"
+                aria-controls="configuration-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+            >
+                <MoreVertIcon />
+            </IconButton>
+            <Menu
+                id="configuration-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+            >
+                <MenuItem onClick={handleDelete}>Delete Configuration</MenuItem>
+            </Menu>
+        </div>
     );
 }
