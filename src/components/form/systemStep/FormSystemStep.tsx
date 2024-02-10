@@ -29,7 +29,6 @@ export default function FormSystemStep({ selectedSystem }: { selectedSystem: key
             <Capacity selectedSystem={selectedSystem} />
             <Flows selectedSystem={selectedSystem} />
             <AdditionalRemarks selectedSystem={selectedSystem} />
-            <LevelsConfigs selectedSystem={selectedSystem} />
             <RackConfigs selectedSystem={selectedSystem} />
         </Stack >
     )
