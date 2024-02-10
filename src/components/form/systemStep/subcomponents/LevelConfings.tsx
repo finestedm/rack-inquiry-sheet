@@ -7,7 +7,8 @@ import { useTranslation } from "react-i18next";
 import InputGroup from "../../InputGroup";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { handleAddNewConfig, handleAddNewLevel, handleLevelConfigsChange } from "../../../../features/redux/reducers/formDataSlice";
-import { DataGrid, GridEditCellProps, GridRowSelectionModel, GridToolbarContainer } from "@mui/x-data-grid";
+import { DataGrid, GridEditCellProps, GridRenderCellParams, GridRowSelectionModel, GridToolbarContainer, GridTreeNodeWithRender } from "@mui/x-data-grid";
+import { openSnackbar } from "../../../../features/redux/reducers/snackBarSlice";
 
 export default function LevelConfigs({ selectedSystem }: { selectedSystem: keyof ISystems }) {
 
@@ -58,6 +59,9 @@ function LevelConfig({ selectedSystem, config }: LevelConfigProps) {
 
     const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
+    function handleDeleteLevel(params: GridRenderCellParams<{ id: number; value: number; } | { isNew: boolean; id: number; value: number; }, any, any, GridTreeNodeWithRender>) {
+
+    }
 
     return (
         <Accordion>
@@ -98,8 +102,8 @@ function LevelConfig({ selectedSystem, config }: LevelConfigProps) {
                         },
                         {
                             field: 'actions', headerName: 'Actions', width: 120,
-                            renderCell: () => (
-                                <Button>Delete level</Button>
+                            renderCell: (params) => (
+                                <Button onClick={() => handleDeleteLevel(params)}>Delete level</Button>
                             )
                         },
 
@@ -115,14 +119,25 @@ function LevelConfig({ selectedSystem, config }: LevelConfigProps) {
                     onRowSelectionModelChange={(newRowSelectionModel) => { setRowSelectionModel(newRowSelectionModel) }}
                     rowSelectionModel={rowSelectionModel}
                     processRowUpdate={(newRow: { id: number, value: number }, oldRow: { id: number, value: number }) => {
+                        if (newRow.value < config.levels[newRow.id - 1]) {
+                            // Dispatch an action to open a snackbar with an error message
+                            dispatch(openSnackbar({ message: 'Level cannot be set lover than previous level', severity: 'error' }));
+                            return oldRow
+                        }
+                        if (newRow.value - config.levels[newRow.id - 1] < (beamHeight + 100)) {
+                            // Dispatch an action to open a snackbar with an error message
+                            dispatch(openSnackbar({ message: 'Level have to be set at least 250mm above the previous level', severity: 'error' }));
+                            return oldRow
+                        }
                         const newLevels = [...config.levels];
-                        newLevels[oldRow.id] = Number(newRow.value); 
+                        newLevels[oldRow.id] = Number(newRow.value);
                         const updatedConfig = { ...config, levels: newLevels }
                         const updatedConfigs = levelConfigs.map(levelConfig => levelConfig.id === config.id ? updatedConfig : levelConfig);
                         dispatch(handleLevelConfigsChange({ selectedSystem, levelConfigs: updatedConfigs }));
 
-                        return {...newRow, isNew: false};
+                        return { ...newRow, isNew: false };
                     }}
+
                     onProcessRowUpdateError={(error) => console.log(error)}
                 />
             </AccordionDetails>
