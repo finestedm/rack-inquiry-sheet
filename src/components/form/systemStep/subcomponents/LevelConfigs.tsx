@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Grid, IconButton, Input, Menu, MenuItem, OutlinedInput, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, useTheme, useThemeProps } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import InputGroup from "../../InputGroup";
-import { Dispatch, MouseEvent, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, MouseEvent, SetStateAction, useEffect, useRef, useState } from "react";
 import { handleAddNewConfig, handleAddNewLevel, handleLevelConfigsChange } from "../../../../features/redux/reducers/formDataSlice";
 import { DataGrid, GridEditCellProps, GridRenderCellParams, GridRowSelectionModel, GridToolbarContainer, GridTreeNodeWithRender } from "@mui/x-data-grid";
 import { openSnackbar } from "../../../../features/redux/reducers/snackBarSlice";
@@ -13,6 +13,8 @@ import { customGreyPalette, customGreyPaletteDark } from "../../../../theme";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import AddIcon from '@mui/icons-material/Add';
+import { Layer, Rect, Stage, Text } from "react-konva";
 
 export default function LevelConfigs({ selectedSystem }: { selectedSystem: keyof ISystems }) {
 
@@ -57,6 +59,7 @@ function LevelConfig({ selectedSystem, config }: { selectedSystem: keyof ISystem
 
     const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
+    console.log(levelConfigs[0])
 
     function handleDeleteLevel() {
         const newLevels = config.levels.filter((level, index) => !rowSelectionModel.includes(index));
@@ -71,13 +74,13 @@ function LevelConfig({ selectedSystem, config }: { selectedSystem: keyof ISystem
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
             >
-                <Typography variant='h6' align='left' >Konfiguracja {levelConfigs.findIndex(conf => conf.id === config.id) + 1}</Typography>
-                <Typography variant='h6' ml={1} align='left' color='text.secondary'> (0 + {config.levels.length})</Typography>
-                <ConfigurationMenu />
+                <Stack direction='row' spacing={2} width='100%'>
+                    <Typography variant='h6' align='left' >Konfiguracja {levelConfigs.findIndex(conf => conf.id === config.id) + 1}</Typography>
+                    <Typography variant='h6' ml={1} align='left' color='text.secondary'> (0 + {config.levels.length})</Typography>
+                    <ConfigurationMenu />
+                </Stack>
             </AccordionSummary>
             <AccordionDetails>
-                <Button variant="outlined" startIcon={<DeleteIcon />}>Delete configuration</Button>
-
                 <DataGrid
                     sx={{
                         borderColor: 'divider',
@@ -163,7 +166,7 @@ function LevelConfig({ selectedSystem, config }: { selectedSystem: keyof ISystem
 
                                     : ''
                                 }
-                                <Button onClick={() => dispatch(handleAddNewLevel({ selectedSystem, configId: config.id }))}>Add Level</Button>
+                                <Button variant='outlined' startIcon={<AddIcon />} onClick={() => dispatch(handleAddNewLevel({ selectedSystem, configId: config.id }))}>Add Level</Button>
                             </GridToolbarContainer>
                         ),
                     }}
@@ -194,6 +197,7 @@ function LevelConfig({ selectedSystem, config }: { selectedSystem: keyof ISystem
 
                     onProcessRowUpdateError={(error) => console.log(error)}
                 />
+                <PalletRack levels={config.levels} />
             </AccordionDetails>
         </Accordion>
     );
@@ -214,12 +218,21 @@ function ConfigurationMenu() {
     };
 
     return (
-        <div>
+        <Box
+            onClick={(event) => {
+                event.stopPropagation();
+            }}
+            ml='auto !important'
+
+        >
             <IconButton
                 aria-label="more"
                 aria-controls="configuration-menu"
                 aria-haspopup="true"
-                onClick={handleClick}
+                onClick={(event) => {
+                    event.stopPropagation(); // Stop event propagation here as well
+                    handleClick(event);
+                }}
             >
                 <MoreVertIcon />
             </IconButton>
@@ -231,6 +244,46 @@ function ConfigurationMenu() {
             >
                 <MenuItem onClick={handleDelete}>Delete Configuration</MenuItem>
             </Menu>
-        </div>
+        </Box>
     );
 }
+
+const PalletRack = ({ levels }: { levels: number[] }) => {
+    const stageRef = useRef(null);
+
+    useEffect(() => {
+        if (stageRef.current) {
+            //@ts-ignore
+            stageRef.current.batchDraw();
+        }
+    }, [levels]);
+
+    const uprightWidth = 30;
+    const uprightHeight = 200;
+    const beamWidth = 200;
+
+    const renderUpright = (x: number | undefined, y: number | undefined) => (
+        <Rect x={x ? x : 0} y={y ? y : 0} width={uprightWidth} height={uprightHeight} fill="blue" />
+    );
+
+    const renderBeam = (x: number | undefined, y: number | undefined, height: number, index: number) => (
+        <>
+            <Rect x={x} y={y} width={beamWidth} height={20} fill="orange" />
+            <Text x={x ? x + beamWidth / 2 : 0} y={y ? y - 5 : 0} text={`${height}`} fontSize={14} fill="black" align="center" />
+        </>
+    );
+
+    return (
+        <Stage width={400} height={400} ref={stageRef}>
+            <Layer>
+                {levels.map((levelHeight, index) => (
+                    <React.Fragment key={index}>
+                        {renderUpright(50, index * uprightHeight)}
+                        {renderBeam(100, index * uprightHeight + 50, levelHeight, index)}
+                        {renderUpright(250, index * uprightHeight)}
+                    </React.Fragment>
+                ))}
+            </Layer>
+        </Stage>
+    );
+};
