@@ -18,7 +18,7 @@ import { useDispatch } from 'react-redux';
 import { loadFormDataFromLocalStorage, saveFormDataToLocalStorage } from './features/localStorage/handleLocalStorage';
 import { setFormData } from './features/redux/reducers/formDataSlice';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom'
-import LevelConfigs from './components/form/systemStep/subcomponents/LevelConfigs'
+import LevelsConfigs from './components/form/systemStep/subcomponents/RackConfings/LevelsConfigs';
 
 // Configure i18next
 i18n
@@ -86,7 +86,7 @@ function App() {
             <DeleteLoadWarningDialog />
             <TopBar />
             {/* <Form /> */}
-            <LevelConfigs selectedSystem='mpb' />
+            <LevelsConfigs selectedSystem='mpb' />
             <MobileScrollButton />
           </div>
         </Router>
