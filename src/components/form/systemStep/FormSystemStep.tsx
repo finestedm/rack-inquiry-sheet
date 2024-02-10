@@ -10,7 +10,7 @@ import AdditionalRemarks from "./subcomponents/AdditionalRemarks";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../features/redux/store";
 import RackConfigs from "./subcomponents/RackConfigs";
-import LevelConfigs from "./subcomponents/LevelConfings";
+import LevelConfigs from "./subcomponents/LevelConfigs";
 
 export default function FormSystemStep({ selectedSystem }: { selectedSystem: keyof ISystems }): JSX.Element {
     const isStepSummary = useSelector((state: RootState) => state.steps.currentStep) === 'summary'

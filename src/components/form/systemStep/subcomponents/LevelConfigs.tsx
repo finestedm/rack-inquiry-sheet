@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { ISystems, TLevelsConfig } from "../../../../features/interfaces";
 import { RootState } from "../../../../features/redux/store";
 import { useDispatch } from "react-redux";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Grid, Input, OutlinedInput, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, useTheme, useThemeProps } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Grid, IconButton, Input, OutlinedInput, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, useTheme, useThemeProps } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import InputGroup from "../../InputGroup";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -11,7 +11,7 @@ import { DataGrid, GridEditCellProps, GridRenderCellParams, GridRowSelectionMode
 import { openSnackbar } from "../../../../features/redux/reducers/snackBarSlice";
 import { customGreyPalette, customGreyPaletteDark } from "../../../../theme";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function LevelConfigs({ selectedSystem }: { selectedSystem: keyof ISystems }) {
 
@@ -46,6 +46,9 @@ function LevelConfig({ selectedSystem, config }: { selectedSystem: keyof ISystem
     const beamHeight = 150
     const formData = useSelector((state: RootState) => state.formData)
     const levelConfigs = formData.system[selectedSystem].levelConfigs
+    const currentStep = useSelector((state: RootState) => state.steps.currentStep);
+    const editMode = useSelector((state: RootState) => state.editMode) && currentStep !== 'summary';
+    const { t } = useTranslation();
     const theme = useTheme();
     const dispatch = useDispatch();
 
@@ -53,12 +56,14 @@ function LevelConfig({ selectedSystem, config }: { selectedSystem: keyof ISystem
 
     const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
-    function handleDeleteLevel(id: number) {
-        const newLevels = [...config.levels.slice(0, id), ...config.levels.slice(id + 1)];
-        const updatedConfig = { ...config, levels: newLevels }
+
+    function handleDeleteLevel() {
+        const newLevels = config.levels.filter((level, index) => !rowSelectionModel.includes(index));
+        const updatedConfig = { ...config, levels: newLevels };
         const updatedConfigs = levelConfigs.map(levelConfig => levelConfig.id === config.id ? updatedConfig : levelConfig);
         dispatch(handleLevelConfigsChange({ selectedSystem, levelConfigs: updatedConfigs }));
     }
+
 
     return (
         <Accordion>
@@ -69,6 +74,8 @@ function LevelConfig({ selectedSystem, config }: { selectedSystem: keyof ISystem
                 <Typography variant='h6' ml={1} align='left' color='text.secondary'> (0 + {config.levels.length})</Typography>
             </AccordionSummary>
             <AccordionDetails>
+                <Button variant="outlined" startIcon={<DeleteIcon />}>Delete configuration</Button>
+
                 <DataGrid
                     sx={{
                         borderColor: 'divider',
@@ -122,17 +129,38 @@ function LevelConfig({ selectedSystem, config }: { selectedSystem: keyof ISystem
                             }
 
                         },
-                        {
-                            field: 'actions', headerName: 'Actions', width: 120,
-                            renderCell: (params) => (
-                                <Button onClick={() => handleDeleteLevel(params.row.id)}>Delete level</Button>
-                            )
-                        },
-
                     ]}
                     slots={{
                         pagination: () => (
                             <GridToolbarContainer>
+                                {(editMode && rowSelectionModel.length > 0) ?
+                                    <Box>
+                                        <Box display={{ xs: 'none', md: 'block' }}>
+                                            <Button
+                                                size="small"
+                                                variant="contained"
+                                                color="error"
+                                                disabled={!editMode}
+                                                onClick={handleDeleteLevel}
+                                                endIcon={<DeleteIcon />}
+                                            >
+                                                {t('ui.button.deleteSelectedLevels')}
+                                            </Button>
+                                        </Box>
+                                        <Box display={{ xs: 'inline-block', md: 'none' }}>
+                                            <IconButton
+                                                size="small"
+                                                color="error"
+                                                disabled={!editMode}
+                                                onClick={handleDeleteLevel}
+                                            >
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Box>
+                                    </Box>
+
+                                    : ''
+                                }
                                 <Button onClick={() => dispatch(handleAddNewLevel({ selectedSystem, configId: config.id }))}>Add Level</Button>
                             </GridToolbarContainer>
                         ),
@@ -159,6 +187,8 @@ function LevelConfig({ selectedSystem, config }: { selectedSystem: keyof ISystem
 
                         return { ...newRow, isNew: false };
                     }}
+                    disableRowSelectionOnClick
+                    checkboxSelection
 
                     onProcessRowUpdateError={(error) => console.log(error)}
                 />
