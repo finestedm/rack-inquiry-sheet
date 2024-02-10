@@ -2,7 +2,7 @@ import { Alert, Box, Checkbox, Collapse, FormControlLabel, Grid, InputAdornment,
 import { useTranslation } from "react-i18next";
 import { ISystems } from "../../../../../features/interfaces";
 import InputGroup from "../../../InputGroup";
-import LevelConfigs from "./LevelsConfigs";
+import LevelsConfigs from "./LevelsConfigs";
 
 export default function RackConfigs({ selectedSystem }: { selectedSystem: keyof ISystems }) {
 
@@ -13,7 +13,7 @@ export default function RackConfigs({ selectedSystem }: { selectedSystem: keyof 
             title={t(`system.subheader.rackConfigs`)}
             content={
                 <Stack spacing={2}>
-                    <LevelConfigs selectedSystem={selectedSystem} />
+                    <LevelsConfigs selectedSystem={selectedSystem} />
                 </Stack >
             }
         />

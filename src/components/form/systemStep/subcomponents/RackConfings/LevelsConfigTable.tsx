@@ -144,12 +144,10 @@ export default function LevelsConfigTable({ selectedSystem, configId }: { select
                     rowSelectionModel={rowSelectionModel}
                     processRowUpdate={(newRow: { id: number, value: number }, oldRow: { id: number, value: number }) => {
                         if (newRow.value < config.levels[newRow.id - 1]) {
-                            // Dispatch an action to open a snackbar with an error message
                             dispatch(openSnackbar({ message: 'Level cannot be set lover than previous level', severity: 'error' }));
                             return oldRow
                         }
                         if (newRow.value - config.levels[newRow.id - 1] < (beamHeight + 100)) {
-                            // Dispatch an action to open a snackbar with an error message
                             dispatch(openSnackbar({ message: 'Level have to be set at least 250mm above the previous level', severity: 'error' }));
                             return oldRow
                         }
