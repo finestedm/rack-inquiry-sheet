@@ -10,6 +10,8 @@ import { handleAddNewConfig, handleAddNewLevel, handleLevelConfigsChange } from 
 import { DataGrid, GridEditCellProps, GridRenderCellParams, GridRowSelectionModel, GridToolbarContainer, GridTreeNodeWithRender } from "@mui/x-data-grid";
 import { openSnackbar } from "../../../../features/redux/reducers/snackBarSlice";
 import { customGreyPalette, customGreyPaletteDark } from "../../../../theme";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 export default function LevelConfigs({ selectedSystem }: { selectedSystem: keyof ISystems }) {
 
@@ -26,7 +28,7 @@ export default function LevelConfigs({ selectedSystem }: { selectedSystem: keyof
 
     return (
         <InputGroup
-            title={t(`system.subheader.additionalRemarks`)}
+            title={t(`system.subheader.configs`)}
             content={
                 <Box>
                     {levelConfigs.map(config => (
@@ -39,12 +41,7 @@ export default function LevelConfigs({ selectedSystem }: { selectedSystem: keyof
     )
 }
 
-interface LevelConfigProps {
-    selectedSystem: keyof ISystems;
-    config: TLevelsConfig;
-}
-
-function LevelConfig({ selectedSystem, config }: LevelConfigProps) {
+function LevelConfig({ selectedSystem, config }: { selectedSystem: keyof ISystems; config: TLevelsConfig; }) {
 
     const beamHeight = 150
     const formData = useSelector((state: RootState) => state.formData)
@@ -52,12 +49,7 @@ function LevelConfig({ selectedSystem, config }: LevelConfigProps) {
     const theme = useTheme();
     const dispatch = useDispatch();
 
-    type ExtendedLevelsConfig = TLevelsConfig & {
-        levelsWithId: { id: number; value: number; }[];
-    };
-
     const rows = config.levels.slice().sort((a, b) => a - b).map((level, index) => ({ id: index, value: level }));
-    // console.log(rows)
 
     const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
 
@@ -70,7 +62,12 @@ function LevelConfig({ selectedSystem, config }: LevelConfigProps) {
 
     return (
         <Accordion>
-            <AccordionSummary>Config index</AccordionSummary>
+            <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+            >
+                <Typography variant='h6' align='left' >Konfiguracja {levelConfigs.findIndex(conf => conf.id === config.id) + 1}</Typography>
+                <Typography variant='h6' ml={1} align='left' color='text.secondary'> (0 + {config.levels.length})</Typography>
+            </AccordionSummary>
             <AccordionDetails>
                 <DataGrid
                     sx={{
