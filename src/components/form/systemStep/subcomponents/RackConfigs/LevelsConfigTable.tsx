@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { ISystems, TLevelsConfig } from "../../../../../features/interfaces";
 import { RootState } from "../../../../../features/redux/store";
 import { useTranslation } from "react-i18next";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, IconButton, Menu, MenuItem, Typography, useTheme } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, IconButton, Menu, MenuItem, Stack, Typography, useTheme } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { MouseEvent, useState } from "react";
 import { DataGrid, GridRowSelectionModel, GridToolbarContainer } from "@mui/x-data-grid";
@@ -12,6 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { customGreyPalette, customGreyPaletteDark } from "../../../../../theme";
 import { openSnackbar } from "../../../../../features/redux/reducers/snackBarSlice";
+import AddIcon from '@mui/icons-material/Add';
 
 export default function LevelsConfigTable({ selectedSystem, configId }: { selectedSystem: keyof ISystems; configId: TLevelsConfig['id']; }) {
 
@@ -35,21 +36,23 @@ export default function LevelsConfigTable({ selectedSystem, configId }: { select
         const updatedConfig = { ...config, levels: newLevels };
         const updatedConfigs = levelConfigs.map(levelConfig => levelConfig.id === config.id ? updatedConfig : levelConfig);
         dispatch(handleLevelConfigsChange({ selectedSystem, levelConfigs: updatedConfigs }));
+        setRowSelectionModel([])
     }
 
 
     return (
         <Accordion>
             <AccordionSummary
+                onClick={e => e.stopPropagation()}
                 expandIcon={<ExpandMoreIcon />}
             >
-                <Typography variant='h6' align='left' >Konfiguracja {levelConfigs.findIndex(conf => conf.id === config.id) + 1}</Typography>
-                <Typography variant='h6' ml={1} align='left' color='text.secondary'> (0 + {config.levels.length})</Typography>
-                <ConfigurationOptionsMenu />
+                <Stack direction='row' spacing={1} alignItems='center' justifyContent='space-between'>
+                    <Typography variant='h6' align='left' >Konfiguracja {levelConfigs.findIndex(conf => conf.id === config.id) + 1}</Typography>
+                    <Typography variant='h6' ml={1} align='left' color='text.secondary'> (0 + {config.levels.length})</Typography>
+                    <ConfigurationOptionsMenu />
+                </Stack>
             </AccordionSummary>
             <AccordionDetails>
-                <Button variant="outlined" startIcon={<DeleteIcon />}>Delete configuration</Button>
-
                 <DataGrid
                     sx={{
                         borderColor: 'divider',
@@ -135,7 +138,7 @@ export default function LevelsConfigTable({ selectedSystem, configId }: { select
 
                                     : ''
                                 }
-                                <Button onClick={() => dispatch(handleAddNewLevel({ selectedSystem, configId: config.id }))}>Add Level</Button>
+                                <Button variant='outlined' startIcon={<AddIcon />} onClick={() => dispatch(handleAddNewLevel({ selectedSystem, configId: config.id }))}>Add Level</Button>
                             </GridToolbarContainer>
                         ),
                     }}
@@ -144,10 +147,12 @@ export default function LevelsConfigTable({ selectedSystem, configId }: { select
                     rowSelectionModel={rowSelectionModel}
                     processRowUpdate={(newRow: { id: number, value: number }, oldRow: { id: number, value: number }) => {
                         if (newRow.value < config.levels[newRow.id - 1]) {
+                            // Dispatch an action to open a snackbar with an error message
                             dispatch(openSnackbar({ message: 'Level cannot be set lover than previous level', severity: 'error' }));
                             return oldRow
                         }
                         if (newRow.value - config.levels[newRow.id - 1] < (beamHeight + 100)) {
+                            // Dispatch an action to open a snackbar with an error message
                             dispatch(openSnackbar({ message: 'Level have to be set at least 250mm above the previous level', severity: 'error' }));
                             return oldRow
                         }
@@ -161,7 +166,11 @@ export default function LevelsConfigTable({ selectedSystem, configId }: { select
                     }}
                     disableRowSelectionOnClick
                     checkboxSelection
-
+                    initialState={{
+                        sorting: {
+                          sortModel: [{ field: 'id', sort: 'desc' }],
+                        },
+                      }}
                     onProcessRowUpdateError={(error) => console.log(error)}
                 />
             </AccordionDetails>
@@ -190,7 +199,10 @@ function ConfigurationOptionsMenu() {
                 aria-label="more"
                 aria-controls="configuration-menu"
                 aria-haspopup="true"
-                onClick={handleClick}
+                onClick={(e) => {
+                    e.stopPropagation()
+                    handleClick(e)
+                }}
             >
                 <MoreVertIcon />
             </IconButton>
