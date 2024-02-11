@@ -85,7 +85,7 @@ function App() {
             <SimpleSnackbar />
             <DeleteLoadWarningDialog />
             <TopBar />
-            {/* <Form /> */}
+            <Form />
             <LevelsConfigs selectedSystem='mpb' />
             <MobileScrollButton />
           </div>

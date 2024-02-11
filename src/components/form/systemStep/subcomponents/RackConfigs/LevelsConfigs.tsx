@@ -2,11 +2,11 @@ import { useSelector } from "react-redux";
 import { ISystems, TLevelsConfig } from "../../../../../features/interfaces";
 import { RootState } from "../../../../../features/redux/store";
 import { useDispatch } from "react-redux";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Grid, IconButton, Input, Menu, MenuItem, OutlinedInput, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, useTheme, useThemeProps } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, Grid, IconButton, Input, Menu, MenuItem, OutlinedInput, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography, useTheme, useThemeProps } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import InputGroup from "../../../InputGroup";
 import { handleAddNewConfig, handleAddNewLevel, handleLevelConfigsChange } from "../../../../../features/redux/reducers/formDataSlice";
 import LevelsConfigTable from "./LevelsConfigTable";
+import AddIcon from '@mui/icons-material/Add';
 
 
 export default function LevelsConfigs({ selectedSystem }: { selectedSystem: keyof ISystems }) {
@@ -23,16 +23,15 @@ export default function LevelsConfigs({ selectedSystem }: { selectedSystem: keyo
     };
 
     return (
-        <InputGroup
-            title={t(`system.subheader.configs`)}
-            content={
-                <Box>
-                    {levelConfigs.map(config => (
-                        <LevelsConfigTable configId={config.id} selectedSystem={selectedSystem} />
-                    ))}
-                    <Button onClick={addNewConfig}>Add configuration</Button>
-                </Box>
-            }
-        />
+
+        <Card>
+            {levelConfigs.map(config => (
+                <LevelsConfigTable configId={config.id} selectedSystem={selectedSystem} />
+            ))}
+            <Box m={1} textAlign='right' justifyContent='end'>
+                <Button startIcon={<AddIcon />} variant="contained" onClick={addNewConfig}>Add configuration</Button>
+            </Box>
+        </Card >
+
     )
 }
