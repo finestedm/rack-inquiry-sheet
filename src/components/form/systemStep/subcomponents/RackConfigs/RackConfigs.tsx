@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ISystems } from "../../../../../features/interfaces";
 import InputGroup from "../../../InputGroup";
 import LevelsConfigs from "./LevelsConfigs";
+import RowsConfigsTable from "./RowsConfigsTable";
 
 export default function RackConfigs({ selectedSystem }: { selectedSystem: keyof ISystems }) {
 
@@ -14,6 +15,7 @@ export default function RackConfigs({ selectedSystem }: { selectedSystem: keyof 
             content={
                 <Stack spacing={2}>
                     <LevelsConfigs selectedSystem={selectedSystem} />
+                    <RowsConfigsTable selectedSystem={selectedSystem} />
                 </Stack >
             }
         />

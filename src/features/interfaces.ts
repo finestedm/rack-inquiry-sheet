@@ -118,16 +118,18 @@ export interface ISystemData {
 
 export type TRackConfig = 
     {
+        id: number;
         quantity: number;
-        bays: TBay[];
-        load: number;
-        levels: TLevelsConfig;
         depth: number;
+        load: number;
+        bays: (TBay['id'])[];
     }
 
 export type TBay = {
+    id: number;
     quantity: number;
     width: number;
+    config: TLevelsConfig['id'];
 }
 
 export type TLevelsConfig = { id: number; levels: number[] };

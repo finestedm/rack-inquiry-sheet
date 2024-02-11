@@ -19,6 +19,7 @@ import { loadFormDataFromLocalStorage, saveFormDataToLocalStorage } from './feat
 import { setFormData } from './features/redux/reducers/formDataSlice';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom'
 import LevelsConfigs from './components/form/systemStep/subcomponents/RackConfigs/LevelsConfigs';
+import RackConfigs from './components/form/systemStep/subcomponents/RackConfigs/RackConfigs';
 
 // Configure i18next
 i18n
@@ -86,7 +87,7 @@ function App() {
             <DeleteLoadWarningDialog />
             <TopBar />
             <Form />
-            <LevelsConfigs selectedSystem='mpb' />
+            <RackConfigs selectedSystem='mpb' />
             <MobileScrollButton />
           </div>
         </Router>
