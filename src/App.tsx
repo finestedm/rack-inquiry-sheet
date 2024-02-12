@@ -87,7 +87,7 @@ function App() {
             <DeleteLoadWarningDialog />
             <TopBar />
             <Form />
-            <RackConfigs selectedSystem='mpb' />
+            {/* <RackConfigs selectedSystem='mpb' /> */}
             <MobileScrollButton />
           </div>
         </Router>
