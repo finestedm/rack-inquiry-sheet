@@ -7,8 +7,12 @@ import { useTranslation } from "react-i18next";
 import { handleAddNewConfig, handleAddNewLevel, handleLevelConfigsChange } from "../../../../../features/redux/reducers/formDataSlice";
 import LevelsConfigTable from "./LevelsConfigTable";
 import AddIcon from '@mui/icons-material/Add';
-import { DataGrid } from "@mui/x-data-grid";
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { DataGrid, GridRowSelectionModel, GridToolbarContainer } from "@mui/x-data-grid";
 import { customGreyPalette, customGreyPaletteDark } from "../../../../../theme";
+import { useState } from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
+import LevelConfigDialog from "./LevelConfigDialog";
 
 
 export default function LevelsConfigs({ selectedSystem }: { selectedSystem: keyof ISystems }) {
@@ -21,6 +25,27 @@ export default function LevelsConfigs({ selectedSystem }: { selectedSystem: keyo
     const { t } = useTranslation();
     const theme = useTheme();
 
+    const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
+    const [levelConfigToEdit, setLevelConfigToEdit] = useState<TLevelsConfig['id']>();
+    const [levelConfigDialogOpen, setLevelConfigDialogOpen] = useState<boolean>(false);
+
+    function handleLevelConfigDialogOpen(configId: TLevelsConfig['id']) {
+        console.log(configId)
+        setLevelConfigToEdit(configId);
+        setLevelConfigDialogOpen(true);
+    }
+
+    function handleLevelConfigDialogClose() {
+        setLevelConfigToEdit(undefined);
+        setLevelConfigDialogOpen(false);
+    }
+
+    function handleDeleteConfig() {
+        const filteredConfigs = levelConfigs.filter(config => !rowSelectionModel.includes(config.id));
+        dispatch(handleLevelConfigsChange({ selectedSystem, levelConfigs: filteredConfigs }));
+        setRowSelectionModel([])
+    }
+
     function addNewConfig() {
         dispatch(handleAddNewConfig(selectedSystem));
     };
@@ -30,14 +55,7 @@ export default function LevelsConfigs({ selectedSystem }: { selectedSystem: keyo
     console.log(levelConfigs)
 
     return (
-
-        <Card>
-            {levelConfigs.map(config => (
-                <LevelsConfigTable configId={config.id} selectedSystem={selectedSystem} />
-            ))}
-            <Box m={1} textAlign='right' justifyContent='end'>
-                <Button startIcon={<AddIcon />} variant="contained" onClick={addNewConfig}>Add configuration</Button>
-            </Box>
+        <Box>
             <DataGrid
                 sx={{
                     borderColor: 'divider',
@@ -63,17 +81,58 @@ export default function LevelsConfigs({ selectedSystem }: { selectedSystem: keyo
                 columns={
                     [
                         { field: 'id', headerName: 'Configuration', width: 120, valueGetter: (params) => rows.findIndex(row => params.row.id === row.id) + 1 },
-                        { field: 'beamLevels', headerName: 'Beam levels', width: 120, valueGetter: (params) => ` (0+${rows.filter(row => row.id === params.row.id)[0].levels.length})` },
-                        { field: 'highestLevel', headerName: 'Highest level', width: 120,  valueGetter: (params) => {
-                            const levels = rows.find(row => row.id === params.row.id)?.levels || [];
-                            return Math.max(...levels);
-                        }},
-
+                        { field: 'beamLevels', headerName: 'Beam levels', width: 120, valueGetter: (params) => ` (0+${rows.find(row => row.id === params.row.id)?.levels.length})` },
+                        {
+                            field: 'highestLevel', headerName: 'Highest level', width: 120, valueGetter: (params) => {
+                                const levels = rows.find(row => row.id === params.row.id)?.levels || [];
+                                return Math.max(...levels);
+                            }
+                        },
+                        { field: 'actions', headerName: 'Edit', width: 80, renderCell: (params) => <IconButton onClick={() => handleLevelConfigDialogOpen(params.row.id)}><OpenInNewIcon fontSize="small" /></IconButton> },
                     ]
                 }
+                slots={{
+                    pagination: () => (
+                        <GridToolbarContainer>
+                            {(editMode && rowSelectionModel.length > 0) ?
+                                <Box>
+                                    <Box display={{ xs: 'none', md: 'block' }}>
+                                        <Button
+                                            size="small"
+                                            variant="contained"
+                                            color="error"
+                                            disabled={!editMode}
+                                            onClick={handleDeleteConfig}
+                                            endIcon={<DeleteIcon />}
+                                        >
+                                            {t('ui.button.deleteSelectedLevels')}
+                                        </Button>
+                                    </Box>
+                                    <Box display={{ xs: 'inline-block', md: 'none' }}>
+                                        <IconButton
+                                            size="small"
+                                            color="error"
+                                            disabled={!editMode}
+                                            onClick={handleDeleteConfig}
+                                        >
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </Box>
+                                </Box>
+
+                                : ''
+                            }
+                            <Button startIcon={<AddIcon />} variant="contained" onClick={addNewConfig}>Add configuration</Button>
+                        </GridToolbarContainer>
+                    ),
+                }}
+                autoHeight
+                onRowSelectionModelChange={(newRowSelectionModel) => { setRowSelectionModel(newRowSelectionModel) }}
+                rowSelectionModel={rowSelectionModel}
+                disableRowSelectionOnClick
+                checkboxSelection
             />
-
-        </Card >
-
+            <LevelConfigDialog levelConfigDialogOpen={levelConfigDialogOpen} handleLevelConfigDialogClose={handleLevelConfigDialogClose} selectedSystem={selectedSystem} configId={levelConfigToEdit} />
+        </Box>
     )
 }
