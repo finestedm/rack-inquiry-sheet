@@ -18,7 +18,7 @@ import { useDispatch } from 'react-redux';
 import { loadFormDataFromLocalStorage, saveFormDataToLocalStorage } from './features/localStorage/handleLocalStorage';
 import { setFormData } from './features/redux/reducers/formDataSlice';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom'
-import LevelsConfigs from './components/form/systemStep/subcomponents/RackConfigs/LevelsConfigs';
+import LevelsConfigs from './components/form/systemStep/subcomponents/RackConfigs/LevelsConfigsTable';
 import RackConfigs from './components/form/systemStep/subcomponents/RackConfigs/RackConfigs';
 
 // Configure i18next
