@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/rack-inquiry-sheet/static/css/main.e8252b13.css",
-    "main.js": "/rack-inquiry-sheet/static/js/main.6b81a0a0.js",
+    "main.js": "/rack-inquiry-sheet/static/js/main.239b95a7.js",
     "static/media/loadDimensionsPicture.png": "/rack-inquiry-sheet/static/media/loadDimensionsPicture.cfa0d91392f12dca884e.png",
     "static/media/JH_logo.png": "/rack-inquiry-sheet/static/media/JH_logo.7ecf36beead9d3783c6b.png",
     "static/media/webp": "/rack-inquiry-sheet/static/media/302BAE8A3789B20FFBECF7F6B7E2EFDD.661df68589459ae19ec5.webp",
@@ -14,6 +14,6 @@
   },
   "entrypoints": [
     "static/css/main.e8252b13.css",
-    "static/js/main.6b81a0a0.js"
+    "static/js/main.239b95a7.js"
   ]
 }
