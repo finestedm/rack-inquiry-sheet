@@ -30,7 +30,6 @@ export default function LevelsConfigs({ selectedSystem }: { selectedSystem: keyo
     const [levelConfigDialogOpen, setLevelConfigDialogOpen] = useState<boolean>(false);
 
     function handleLevelConfigDialogOpen(configId: TLevelsConfig['id']) {
-        console.log(configId)
         setLevelConfigToEdit(configId);
         setLevelConfigDialogOpen(true);
     }
@@ -51,8 +50,6 @@ export default function LevelsConfigs({ selectedSystem }: { selectedSystem: keyo
     };
 
     const rows = levelConfigs
-
-    console.log(levelConfigs)
 
     return (
         <Box>

@@ -25,6 +25,23 @@ export default function RowsConfigsTable({ selectedSystem }: { selectedSystem: k
 
     const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
     const rows = rackConfigs
+    const fieldSets = [
+        ['numberOfBays', 'levelsConfig', 'bayLength'],
+    ];
+    const numberOfBayTypesInRow = 1
+    const columnGroupingModel = Array.from({ length: numberOfBayTypesInRow }, (_, index) => {
+        const groupId = `Bay group${index + 1}`; 
+        const children = fieldSets.map(fields => fields.map(field => ({ field }))).flat();
+        return { groupId, children };
+      });
+      
+    function handleDeleteLevel() {
+        const updatedRackConfigs = rackConfigs.filter(config => !rowSelectionModel.includes(config.id));
+        console.log(updatedRackConfigs)
+        // dispatch(handleLevelConfigsChange({ selectedSystem, levelConfigs: updatedConfigs }));
+        setRowSelectionModel([])
+    }  
+
     const columns = [
         {
             field: 'id',
@@ -34,6 +51,13 @@ export default function RowsConfigsTable({ selectedSystem }: { selectedSystem: k
         {
             field: 'quantity',
             headerName: 'Quantity',
+            width: 150,
+            editable: true,
+            type: 'number'
+        },
+        {
+            field: 'depth',
+            headerName: 'Depth',
             width: 150,
             editable: true,
             type: 'number'
@@ -83,6 +107,8 @@ export default function RowsConfigsTable({ selectedSystem }: { selectedSystem: k
         <DataGrid
             rows={rows}
             columns={columns}
+            experimentalFeatures={{ columnGrouping: true }}
+            columnGroupingModel={columnGroupingModel}
             sx={{
                 borderColor: 'divider',
                 boxShadow: theme.palette.mode === 'light' ? theme.shadows[1] : 'none',
@@ -102,9 +128,10 @@ export default function RowsConfigsTable({ selectedSystem }: { selectedSystem: k
                 '& .MuiDataGrid-footerContainer': {
                     borderTop: `1px solid ${theme.palette.divider}`,
                 },
+                '&.MuiDataGrid-columnHeader--filledGroup': {
+                    borderBottom: `1px solid ${theme.palette.divider}`,
+                }
             }}
-            onRowSelectionModelChange={(newRowSelectionModel) => { setRowSelectionModel(newRowSelectionModel) }}
-            rowSelectionModel={rowSelectionModel}
             slots={{
                 pagination: () => (
                     <GridToolbarContainer>
@@ -117,6 +144,7 @@ export default function RowsConfigsTable({ selectedSystem }: { selectedSystem: k
                                         color="error"
                                         disabled={!editMode}
                                         endIcon={<DeleteIcon />}
+                                        onClick={handleDeleteLevel}
                                     >
                                         {t('ui.button.deleteSelectedLevels')}
                                     </Button>
@@ -126,6 +154,7 @@ export default function RowsConfigsTable({ selectedSystem }: { selectedSystem: k
                                         size="small"
                                         color="error"
                                         disabled={!editMode}
+                                        onClick={handleDeleteLevel}
                                     >
                                         <DeleteIcon />
                                     </IconButton>
@@ -138,6 +167,11 @@ export default function RowsConfigsTable({ selectedSystem }: { selectedSystem: k
                     </GridToolbarContainer>
                 ),
             }}
+            autoHeight
+            onRowSelectionModelChange={(newRowSelectionModel) => { setRowSelectionModel(newRowSelectionModel) }}
+            rowSelectionModel={rowSelectionModel}
+            disableRowSelectionOnClick
+            checkboxSelection
         />
         // <></>
     )
