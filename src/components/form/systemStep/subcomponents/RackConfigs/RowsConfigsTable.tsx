@@ -8,7 +8,7 @@ import { RootState } from "../../../../../features/redux/store";
 import { useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
-import { handleAddNewRack } from "../../../../../features/redux/reducers/formDataSlice";
+import { handleAddNewRack, handleRackConfigsChange } from "../../../../../features/redux/reducers/formDataSlice";
 import { useDispatch } from "react-redux";
 import bays, { TBayTypes } from "../../../../../data/availableBays";
 import uprightSizes from "../../../../../data/uprightsSizes";
@@ -37,8 +37,7 @@ export default function RowsConfigsTable({ selectedSystem }: { selectedSystem: k
       
     function handleDeleteLevel() {
         const updatedRackConfigs = rackConfigs.filter(config => !rowSelectionModel.includes(config.id));
-        console.log(updatedRackConfigs)
-        // dispatch(handleLevelConfigsChange({ selectedSystem, levelConfigs: updatedConfigs }));
+        dispatch(handleRackConfigsChange({ selectedSystem, rackConfigs: updatedRackConfigs }));
         setRowSelectionModel([])
     }  
 

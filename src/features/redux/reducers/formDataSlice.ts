@@ -355,6 +355,14 @@ const formDataSlice = createSlice({
             state.system[selectedSystem].levelConfigs = levelConfigs;
         },
 
+        handleRackConfigsChange: (
+            state: IFormData,
+            action: PayloadAction<{ selectedSystem: keyof ISystems; rackConfigs: TRackConfig[] }>
+        ) => {
+            const { selectedSystem, rackConfigs } = action.payload;
+            state.system[selectedSystem].rackConfigs = rackConfigs;
+        },
+
         handleAddNewConfig: (state, action: PayloadAction<keyof ISystems>) => {
             const selectedSystem = action.payload;
             // Create a new configuration object with an id and an empty levels array
@@ -392,6 +400,6 @@ const formDataSlice = createSlice({
     },
 });
 
-export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment, handleLevelConfigsChange, handleAddNewConfig, handleAddNewLevel, handleAddNewRack } = formDataSlice.actions;
+export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment, handleLevelConfigsChange, handleAddNewConfig, handleAddNewLevel, handleAddNewRack, handleRackConfigsChange } = formDataSlice.actions;
 export default formDataSlice.reducer;
 export { initialFormDataState }
