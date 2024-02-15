@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import LevelsConfigTable from "./LevelsConfigTable";
@@ -6,15 +6,20 @@ import { ISystems, TLevelsConfig } from "../../../../../features/interfaces";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../features/redux/store";
 import CloseIcon from '@mui/icons-material/Close';
+import LevelConfigDrawing from "./LevelConfigDrawing";
 
 export default function LevelConfigDialog({ levelConfigDialogOpen, handleLevelConfigDialogClose, selectedSystem, configId }: { levelConfigDialogOpen: boolean, handleLevelConfigDialogClose: () => void, selectedSystem: keyof ISystems; configId?: TLevelsConfig['id'] }) {
     const formData = useSelector((state: RootState) => state.formData)
     const levelConfigs = formData.system[selectedSystem].levelConfigs
+    const selectedLevelConfig = levelConfigs.find(level => level.id === configId)
     const { t } = useTranslation();
     const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
 
     return (
         <Dialog
+            maxWidth='lg'
+            fullScreen={fullScreen}
             open={levelConfigDialogOpen}
             onClose={() => handleLevelConfigDialogClose()}
             aria-labelledby="alert-dialog-title"
@@ -32,7 +37,11 @@ export default function LevelConfigDialog({ levelConfigDialogOpen, handleLevelCo
                 </Stack>
             </DialogTitle>
             <DialogContent>
-                {configId && <LevelsConfigTable selectedSystem={selectedSystem} configId={configId} />}
+                <Stack spacing={2} alignItems='center'>
+
+                    {configId && <LevelsConfigTable selectedSystem={selectedSystem} configId={configId} />}
+                    {selectedLevelConfig && <LevelConfigDrawing levels={selectedLevelConfig.levels} />}
+                </Stack>
             </DialogContent>
             {/* <DialogActions>
                 <Stack direction='row' flex={1} justifyContent='end' spacing={2}>
@@ -60,3 +69,4 @@ export default function LevelConfigDialog({ levelConfigDialogOpen, handleLevelCo
         </Dialog >
     )
 }
+
