@@ -27,8 +27,10 @@ export default function LevelConfigDialog({ levelConfigDialogOpen, handleLevelCo
         >
             <DialogTitle id="alert-dialog-title">
                 <Stack direction='row' justifyContent='space-between' alignItems='baseline'>
-                    Konfiguracja {levelConfigs.findIndex(conf => conf.id === configId) + 1}
-                    <Typography color='text.secondary'> (0 + {levelConfigs.find(conf => conf.id === configId)?.levels.length})</Typography>
+                    <Stack spacing={1} direction='row'>
+                        <Box>Konfiguracja {levelConfigs.findIndex(conf => conf.id === configId) + 1}</Box>
+                        <Box color={theme.palette.text.secondary}>(0 + {levelConfigs.find(conf => conf.id === configId)?.levels.length})</Box>
+                    </Stack>
                     <Box>
                         <IconButton onClick={handleLevelConfigDialogClose}>
                             <CloseIcon />
@@ -36,11 +38,10 @@ export default function LevelConfigDialog({ levelConfigDialogOpen, handleLevelCo
                     </Box>
                 </Stack>
             </DialogTitle>
-            <DialogContent>
-                <Stack spacing={2} alignItems='center'>
-
-                    {configId && <LevelsConfigTable selectedSystem={selectedSystem} configId={configId} />}
-                    {selectedLevelConfig && <LevelConfigDrawing levels={selectedLevelConfig.levels} />}
+            <DialogContent sx={{ px: 0 }}>
+                <Stack spacing={2}>
+                    <Box>{configId && <LevelsConfigTable selectedSystem={selectedSystem} configId={configId} />}</Box>
+                    <Box>{selectedLevelConfig && <LevelConfigDrawing levels={selectedLevelConfig.levels} />}</Box>
                 </Stack>
             </DialogContent>
             {/* <DialogActions>

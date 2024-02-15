@@ -82,7 +82,7 @@ export default function LevelsConfigs({ selectedSystem }: { selectedSystem: keyo
                         {
                             field: 'highestLevel', headerName: 'Highest level', width: 120, valueGetter: (params) => {
                                 const levels = rows.find(row => row.id === params.row.id)?.levels || [];
-                                return Math.max(...levels);
+                                return Math.max(...levels.map(level => level.height));
                             }
                         },
                         { field: 'actions', headerName: 'Edit', width: 80, renderCell: (params) => <IconButton onClick={() => handleLevelConfigDialogOpen(params.row.id)}><OpenInNewIcon fontSize="small" /></IconButton> },

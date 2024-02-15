@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IFormData, ILoad, ILoadsTypes, IFlow, LoadFieldValue, ISystems, IMilestones, ISystemData, CopySystemDataPayload, IEquipment, TLevelsConfig, TRackConfig } from '../../interfaces';
+import { IFormData, ILoad, ILoadsTypes, IFlow, LoadFieldValue, ISystems, IMilestones, ISystemData, CopySystemDataPayload, IEquipment, TLevelsConfig, TRackConfig, TLevelsDetails } from '../../interfaces';
 import { loadsToAdd } from '../../../data/typicalLoadSizes';
 import { emptyFlow } from '../../../data/flowStations';
 import generateRandomId from '../../variousMethods/generateRandomId';
@@ -375,13 +375,15 @@ const formDataSlice = createSlice({
             const { selectedSystem, configId } = action.payload;
             const configIndex = state.system[selectedSystem].levelConfigs.findIndex(config => config.id === configId);
             if (configIndex !== -1) {
-                const heightDifference = state.system[selectedSystem].levelConfigs[configIndex].levels.slice(-1)[0] + 1000 || 1000
-                const newLevel: number = heightDifference; // add new level 1000mm higher than previous level
-                state.system[selectedSystem].levelConfigs[configIndex].levels.push(newLevel);
+                const levels = state.system[selectedSystem].levelConfigs[configIndex].levels;
+                const lastLevel = levels.length > 0 ? levels[levels.length - 1].height : 0;
+                const newHeight = lastLevel + 1000;
+                const newLevelDetails: TLevelsDetails = { id: levels.length + 1, height: newHeight, accessory: '' };
+                state.system[selectedSystem].levelConfigs[configIndex].levels.push(newLevelDetails);
             } else {
                 console.error(`Configuration with id ${configId} not found in system ${selectedSystem}`);
             }
-        },
+        },        
 
         handleAddNewRack(state, action: PayloadAction<keyof ISystems>) {
             const selectedSystem = action.payload

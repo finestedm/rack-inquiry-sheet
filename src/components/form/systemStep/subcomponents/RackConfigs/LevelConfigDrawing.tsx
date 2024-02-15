@@ -1,7 +1,7 @@
 import { Box, useTheme } from "@mui/material";
 import { useEffect, useRef } from "react";
 import { Layer, Line, Rect, Stage, Text } from "react-konva";
-import { TLevelsConfig } from "../../../../../features/interfaces";
+import { TLevelsConfig, TLevelsDetails } from "../../../../../features/interfaces";
 
 export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['levels'] }) {
     const stageRef = useRef(null);
@@ -16,7 +16,7 @@ export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['
     }, [levels]);
 
     const uprightWidth = 85 * drawingScale;
-    const uprightHeight = (levels.slice(levels.length - 1)[0] * drawingScale) + 25;
+    const uprightHeight = (levels.map(level => level.height).slice(levels.length - 1)[0] * drawingScale) + 25;
     const beamWidth = 2700 * drawingScale;
     const beamHeight = 130 * drawingScale
     const stageWidth = beamWidth + uprightWidth * 2
@@ -30,18 +30,19 @@ export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['
         <Rect x={uprightWidth + beamWidth} y={0} width={uprightWidth} height={uprightHeight} fill="#004f7c" />
     );
 
-    const renderBeam = (index: number, levelHeight: number) => {
-        const scaledLevelHeight = levelHeight * drawingScale
+    const renderBeam = (index: number, level: TLevelsDetails) => {
+        const {height, accessory} = level
+        const scaledLevelHeight = height * drawingScale
         return (
             <>
                 <Rect x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight} width={beamWidth} height={beamHeight} fill="#e88c00" />
-                <Text x={uprightWidth + beamWidth / 2} y={uprightHeight - scaledLevelHeight - beamHeight - 15} text={`${index + 1}: ${levelHeight.toString()}`} fontSize={14} fill={theme.palette.text.primary} align="center" />
+                <Text x={uprightWidth + beamWidth / 2} y={uprightHeight - scaledLevelHeight - beamHeight - 15} text={`${index + 1}: ${height.toString()}`} fontSize={14} fill={theme.palette.text.primary} align="center" />
             </>
         );
     }
 
     return (
-        <Stage width={stageWidth} height={stageHeight} ref={stageRef}>
+        <Stage width={stageWidth} height={stageHeight} ref={stageRef} >
             <Layer class='dimensions'>
                 <Line
                     points={[uprightWidth, uprightHeight + 30, uprightWidth + beamWidth, uprightHeight + 30]}
@@ -70,9 +71,9 @@ export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['
             <Layer>
                 {renderUpright1()}
                 {renderUpright2()}
-                {levels.map((levelHeight, index) => (
+                {levels.map((level, index) => (
                     <Box key={index}>
-                        {renderBeam(index, levelHeight)}
+                        {renderBeam(index, level)}
                     </Box>
                 ))}
             </Layer>

@@ -132,7 +132,9 @@ export type TBay = {
     config: TLevelsConfig['id'];
 }
 
-export type TLevelsConfig = { id: number; levels: number[] };
+export type TLevelsConfig = { id: number; levels: TLevelsDetails[] };
+
+export type TLevelsDetails = {id: number, height: number, accessory: string}
 
 export interface ISystems {
     mpb: ISystemData;
