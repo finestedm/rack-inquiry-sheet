@@ -28,18 +28,19 @@ export default function RowsConfigsTable({ selectedSystem }: { selectedSystem: k
     const fieldSets = [
         ['numberOfBays', 'levelsConfig', 'bayLength'],
     ];
-    const numberOfBayTypesInRow = 1
+    const numberOfBayTypesInRow = 2
     const columnGroupingModel = Array.from({ length: numberOfBayTypesInRow }, (_, index) => {
-        const groupId = `Bay group${index + 1}`; 
-        const children = fieldSets.map(fields => fields.map(field => ({ field }))).flat();
+        const groupId = `Bay group${index + 1}`;
+        const children = fieldSets.map(fields => fields.map(field => ({ field: `${field}${index}` }))).flat();
         return { groupId, children };
-      });
-      
+    });
+    console.log(columnGroupingModel)
+
     function handleDeleteLevel() {
         const updatedRackConfigs = rackConfigs.filter(config => !rowSelectionModel.includes(config.id));
         dispatch(handleRackConfigsChange({ selectedSystem, rackConfigs: updatedRackConfigs }));
         setRowSelectionModel([])
-    }  
+    }
 
     const columns = [
         {
@@ -62,14 +63,14 @@ export default function RowsConfigsTable({ selectedSystem }: { selectedSystem: k
             type: 'number'
         },
         {
-            field: 'numberOfBays',
+            field: 'numberOfBays0',
             headerName: 'Number of Bays',
             width: 200,
             editable: true,
             type: 'number'
         },
         {
-            field: 'levelsConfig',
+            field: 'levelsConfig0',
             headerName: 'Levels Config',
             width: 200,
             editable: true,
@@ -81,7 +82,34 @@ export default function RowsConfigsTable({ selectedSystem }: { selectedSystem: k
             valueGetter: (params: { value: any; }) => params.value
         },
         {
-            field: 'bayLength',
+            field: 'bayLength0',
+            headerName: 'Bay Length',
+            width: 200,
+            editable: true,
+            type: 'singleSelect',
+            valueOptions: [...bays.euro].concat([...bays.indu])
+        },
+        {
+            field: 'numberOfBays1',
+            headerName: 'Number of Bays',
+            width: 200,
+            editable: true,
+            type: 'number'
+        },
+        {
+            field: 'levelsConfig1',
+            headerName: 'Levels Config',
+            width: 200,
+            editable: true,
+            type: 'singleSelect',
+            valueOptions: levelConfigs.map(config => ({
+                value: config.id,
+                label: `Config ${levelConfigs.indexOf(config)} (0 + ${config.levels.length})`
+            })),
+            valueGetter: (params: { value: any; }) => params.value
+        },
+        {
+            field: 'bayLength1',
             headerName: 'Bay Length',
             width: 200,
             editable: true,

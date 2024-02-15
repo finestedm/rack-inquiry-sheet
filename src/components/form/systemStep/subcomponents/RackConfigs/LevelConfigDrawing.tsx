@@ -31,12 +31,13 @@ export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['
     );
 
     const renderBeam = (index: number, level: TLevelsDetails) => {
-        const {height, accessory} = level
+        const { height, accessory } = level
         const scaledLevelHeight = height * drawingScale
         return (
             <>
                 <Rect x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight} width={beamWidth} height={beamHeight} fill="#e88c00" />
-                <Text x={uprightWidth + beamWidth / 2} y={uprightHeight - scaledLevelHeight - beamHeight - 15} text={`${index + 1}: ${height.toString()}`} fontSize={14} fill={theme.palette.text.primary} align="center" />
+                <Text x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight - 15} text={`${index + 1}: ${height.toString()} (${accessory})`} fontSize={14} fill={theme.palette.text.primary} align="center" />
+
             </>
         );
     }
@@ -60,7 +61,7 @@ export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['
                     strokeWidth={2}
                 />
                 <Text
-                    x={uprightWidth + (beamWidth / 2)}
+                    x={uprightWidth + 10}
                     y={uprightHeight + 10}
                     text={`Beam Width: ${(beamWidth * 10)}`}
                     fontSize={14}

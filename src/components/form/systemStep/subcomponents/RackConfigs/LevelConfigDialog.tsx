@@ -41,7 +41,10 @@ export default function LevelConfigDialog({ levelConfigDialogOpen, handleLevelCo
             <DialogContent sx={{ px: 0 }}>
                 <Stack spacing={2}>
                     <Box>{configId && <LevelsConfigTable selectedSystem={selectedSystem} configId={configId} />}</Box>
-                    <Box>{selectedLevelConfig && <LevelConfigDrawing levels={selectedLevelConfig.levels} />}</Box>
+                    <Box sx={{ px: 2 }}>
+                        <Typography gutterBottom variant="h6" color="textPrimary">Podgląd</Typography>
+                        {selectedLevelConfig && <LevelConfigDrawing levels={selectedLevelConfig.levels} />}
+                    </Box>
                 </Stack>
             </DialogContent>
             {/* <DialogActions>
