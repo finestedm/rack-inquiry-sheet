@@ -121,6 +121,7 @@ export default function RowsConfigsTable({ selectedSystem }: { selectedSystem: k
             headerName: 'Total Rack Length',
             width: 200,
             valueGetter: (params: any) => {
+                console.log(params)
                 const quantity = params.row.numberOfBays;
                 const bayLength = params.row.bayLength;
                 const bays = params.row.bays;
