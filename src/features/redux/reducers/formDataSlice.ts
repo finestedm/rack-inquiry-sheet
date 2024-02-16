@@ -88,6 +88,7 @@ const initialFormDataState: IFormData = {
             flow: [emptyFlow],
             rackConfigs: [],
             levelConfigs: [],
+            accessories:  {decking: '', protection: ''},
             additionalRemarks: '',
         },
         // shelf: {

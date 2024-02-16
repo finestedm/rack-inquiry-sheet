@@ -10,7 +10,7 @@ export default function AccessoriesSelectors({ selectedSystem }: { selectedSyste
     return (
         <Stack spacing={4}>
             {Object.keys(rackAccessories).map(group => (
-                <AccessoriesGroup group={group} />
+                <AccessoriesGroup group={group} key={group} /> 
             ))}
         </Stack>
     );
@@ -24,23 +24,28 @@ export function AccessoriesGroup({group}: {group: keyof TRackAccessory}) {
         <Box>
             <Grid container spacing={2}>
                 {Object.keys(accessories).map(accessory => (
-                    <AccessoryCard key={accessory} group={group} accessory={accessory} />
+                    <AccessoryCard key={accessory} group={group} accessory={accessory} /> 
                 ))}
             </Grid>
         </Box>
     )
 }
 
-export function AccessoryCard({group, accessory}: {group: keyof TRackAccessory, accessory: keyof TRackAccessory[keyof TRackAccessory]}) {
+export function AccessoryCard({group, accessory}: {group: keyof  TRackAccessory, accessory: keyof TRackAccessory[keyof TRackAccessory]}) {
     const editMode = useSelector((state: RootState) => state.editMode);
     const accessories = rackAccessories[group];
     const accessoryItem = accessories[accessory]
     const {t} = useTranslation();
     const theme = useTheme();
+    const accessoriesState = useSelector((state: RootState) => state.formData.system.mpb.accessories)
+
+    function handleAccessorySelection() {
+        accessoriesState[group]
+    }
 
     return (
         // <></>
-    <Grid item xs={12} md={6} sx={{ position: 'relative' }}>
+    <Grid item xs={6} md={3} sx={{ position: 'relative' }}>
             <div
                 style={{
                     position: 'absolute',
@@ -57,16 +62,16 @@ export function AccessoryCard({group, accessory}: {group: keyof TRackAccessory, 
             >
                 {/* {systemSelected && <CheckCircleIcon fontSize='large' sx={{ color: theme.palette.primary.main,  }} />} */}
             </div>
-            <Card className={true ? 'selected-card system-card' : 'system-card'}>
+            <Card className={false ? 'selected-card system-card' : 'system-card'}>
                 <CardActionArea
                     disabled={!editMode}
-                    // onClick={e => dispatch(handleSystemChange(system.alt))}
+                    onClick={() => handleAccessorySelection()}
                 >
                     <CardMedia
                         component="img"
                         height="200"
-                        // image={system.url}
-                        alt={accessoryItem.type}
+                        image={accessoryItem.image}
+                        alt={accessoryItem.fullName}
                         sx={{ position: 'relative' }}
                     >
                     </CardMedia>
@@ -78,7 +83,7 @@ export function AccessoryCard({group, accessory}: {group: keyof TRackAccessory, 
                             aria-controls="panel2a-content"
                             id="panel2a-header"
                         >
-                            <Typography variant='h6' align='left' >{t(``)}</Typography>
+                            <Typography variant='h6' align='left' >{t(`${accessoryItem.fullName}`)}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Divider sx={{ mb: 3, borderColor: theme.palette.text.secondary, opacity: .8 }} />

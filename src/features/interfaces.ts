@@ -1,6 +1,7 @@
 import { TextFieldProps } from "@mui/material";
 import { Task } from "gantt-task-react";
 import availableEquipment from "../data/availableEquipment";
+import rackAccessories, { TRackAccessory } from "../data/rackAccessories";
 
 export interface ISales {
     contactPerson: string;
@@ -112,6 +113,9 @@ export interface ISystemData {
     flow: IFlow[];
     rackConfigs: TRackConfig[];
     levelConfigs: TLevelsConfig[]
+    accessories: {
+        [Category in keyof TRackAccessory]: keyof TRackAccessory[Category];
+    };
     additionalRemarks: string;
     // [key: string]: any;
 }
