@@ -40,7 +40,7 @@ export function AccessoryCard({group, accessory}: {group: keyof  TRackAccessory,
     const accessoriesState = useSelector((state: RootState) => state.formData.system.mpb.accessories)
 
     function handleAccessorySelection() {
-        accessoriesState[group]
+        console.log(accessoriesState[group])
     }
 
     return (

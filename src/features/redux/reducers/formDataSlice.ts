@@ -3,6 +3,7 @@ import { IFormData, ILoad, ILoadsTypes, IFlow, LoadFieldValue, ISystems, IMilest
 import { loadsToAdd } from '../../../data/typicalLoadSizes';
 import { emptyFlow } from '../../../data/flowStations';
 import generateRandomId from '../../variousMethods/generateRandomId';
+import { TRackAccessory } from '../../../data/rackAccessories';
 
 const initialFormDataState: IFormData = {
 
@@ -384,7 +385,7 @@ const formDataSlice = createSlice({
             } else {
                 console.error(`Configuration with id ${configId} not found in system ${selectedSystem}`);
             }
-        },        
+        },
 
         handleAddNewRack(state, action: PayloadAction<keyof ISystems>) {
             const selectedSystem = action.payload
@@ -398,6 +399,11 @@ const formDataSlice = createSlice({
             state.system[selectedSystem].rackConfigs.push(newRack);
         },
 
+        handleEditAccessories(state: IFormData, action: PayloadAction<{ selectedSystem: keyof ISystems; group: keyof TRackAccessory, accessory: keyof TRackAccessory[keyof TRackAccessory] }>) {
+            const { selectedSystem, group, accessory } = action.payload;
+            console.log(state.system[selectedSystem].accessories[group])
+        }
+    
 
         // ... add other reducers here if needed
     },
