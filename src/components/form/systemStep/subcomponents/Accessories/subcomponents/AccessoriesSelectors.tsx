@@ -49,7 +49,7 @@ export function AccessoryCard({group, accessory, selectedSystem}: {group: keyof 
     return (
         // <></>
     <Grid item xs={6} md={3} sx={{ position: 'relative' }}>
-            <div
+            {/* <div
                 style={{
                     position: 'absolute',
                     top: '.75rem',
@@ -63,9 +63,9 @@ export function AccessoryCard({group, accessory, selectedSystem}: {group: keyof 
                     justifyContent: 'center',
                 }}
             >
-                {accessorySelected && <CheckCircleIcon fontSize='large' sx={{ color: theme.palette.primary.main,  }} />}
-            </div>
-            <Card className={false ? 'selected-card system-card' : 'system-card'}>
+                {accessorySelected && <CheckCircleIcon  fontSize='large' sx={{ color: theme.palette.primary.main, zIndex: 50 }} />}
+            </div> */}
+            <Card className={accessorySelected ? 'selected-card system-card' : 'system-card'}>
                 <CardActionArea
                     disabled={!editMode}
                     onClick={() => handleAccessorySelection()}
