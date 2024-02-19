@@ -2,45 +2,48 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardActionAre
 import { ISystems } from "../../../../../../features/interfaces";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../../features/redux/store";
-import rackAccessories, { TRackAccessory } from "../../../../../../data/rackAccessories";
+import rackAccessories, { TRackAccessories, TRackAccessory } from "../../../../../../data/rackAccessories";
 import { useTranslation } from "react-i18next";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useDispatch } from "react-redux";
+import { handleEditAccessories } from "../../../../../../features/redux/reducers/formDataSlice";
 
 export default function AccessoriesSelectors({ selectedSystem }: { selectedSystem: keyof ISystems }) {
     return (
         <Stack spacing={4}>
             {Object.keys(rackAccessories).map(group => (
-                <AccessoriesGroup group={group} key={group} /> 
+                <AccessoriesGroup group={group as keyof TRackAccessories} key={group} selectedSystem={selectedSystem} /> 
             ))}
         </Stack>
     );
 
 }
 
-export function AccessoriesGroup({group}: {group: keyof TRackAccessory}) {
+export function AccessoriesGroup({group, selectedSystem}: {group: keyof TRackAccessories, selectedSystem: keyof ISystems}) {
     const accessories = rackAccessories[group];
 
     return (
         <Box>
             <Grid container spacing={2}>
-                {Object.keys(accessories).map(accessory => (
-                    <AccessoryCard key={accessory} group={group} accessory={accessory} /> 
+                {accessories.map(accessory => (
+                    <AccessoryCard key={accessory.shortName} group={group} accessory={accessory} selectedSystem={selectedSystem} /> 
                 ))}
             </Grid>
         </Box>
     )
 }
 
-export function AccessoryCard({group, accessory}: {group: keyof  TRackAccessory, accessory: keyof TRackAccessory[keyof TRackAccessory]}) {
+export function AccessoryCard({group, accessory, selectedSystem}: {group: keyof  TRackAccessories, accessory: TRackAccessory, selectedSystem: keyof ISystems}) {
+    const dispatch = useDispatch();
     const editMode = useSelector((state: RootState) => state.editMode);
-    const accessories = rackAccessories[group];
-    const accessoryItem = accessories[accessory]
     const {t} = useTranslation();
     const theme = useTheme();
     const accessoriesState = useSelector((state: RootState) => state.formData.system.mpb.accessories)
+    const accessorySelected = accessoriesState[group] === accessory.shortName
 
     function handleAccessorySelection() {
-        console.log(accessoriesState[group])
+        dispatch(handleEditAccessories({selectedSystem, group, accessoryName: accessory.shortName}))
     }
 
     return (
@@ -54,13 +57,13 @@ export function AccessoryCard({group, accessory}: {group: keyof  TRackAccessory,
                     borderRadius: '5rem',
                     height: 28,
                     width: 28,
-                    // backgroundColor: systemSelected ? '#000' : 'transparent',
+                    backgroundColor: accessorySelected ? '#000' : 'transparent',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}
             >
-                {/* {systemSelected && <CheckCircleIcon fontSize='large' sx={{ color: theme.palette.primary.main,  }} />} */}
+                {accessorySelected && <CheckCircleIcon fontSize='large' sx={{ color: theme.palette.primary.main,  }} />}
             </div>
             <Card className={false ? 'selected-card system-card' : 'system-card'}>
                 <CardActionArea
@@ -70,8 +73,8 @@ export function AccessoryCard({group, accessory}: {group: keyof  TRackAccessory,
                     <CardMedia
                         component="img"
                         height="200"
-                        image={accessoryItem.image}
-                        alt={accessoryItem.fullName}
+                        image={accessory.image}
+                        alt={accessory.fullName}
                         sx={{ position: 'relative' }}
                     >
                     </CardMedia>
@@ -83,7 +86,7 @@ export function AccessoryCard({group, accessory}: {group: keyof  TRackAccessory,
                             aria-controls="panel2a-content"
                             id="panel2a-header"
                         >
-                            <Typography variant='h6' align='left' >{t(`${accessoryItem.fullName}`)}</Typography>
+                            <Typography variant='h6' align='left' >{t(`${accessory.fullName}`)}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Divider sx={{ mb: 3, borderColor: theme.palette.text.secondary, opacity: .8 }} />

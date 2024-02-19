@@ -3,7 +3,7 @@ import { IFormData, ILoad, ILoadsTypes, IFlow, LoadFieldValue, ISystems, IMilest
 import { loadsToAdd } from '../../../data/typicalLoadSizes';
 import { emptyFlow } from '../../../data/flowStations';
 import generateRandomId from '../../variousMethods/generateRandomId';
-import { TRackAccessory } from '../../../data/rackAccessories';
+import { TRackAccessories, TRackAccessory } from '../../../data/rackAccessories';
 
 const initialFormDataState: IFormData = {
 
@@ -89,7 +89,7 @@ const initialFormDataState: IFormData = {
             flow: [emptyFlow],
             rackConfigs: [],
             levelConfigs: [],
-            accessories:  {decking: '', protection: ''},
+            accessories:  {decking: undefined, protection: undefined},
             additionalRemarks: '',
         },
         // shelf: {
@@ -399,9 +399,11 @@ const formDataSlice = createSlice({
             state.system[selectedSystem].rackConfigs.push(newRack);
         },
 
-        handleEditAccessories(state: IFormData, action: PayloadAction<{ selectedSystem: keyof ISystems; group: keyof TRackAccessory, accessory: keyof TRackAccessory[keyof TRackAccessory] }>) {
-            const { selectedSystem, group, accessory } = action.payload;
-            console.log(state.system[selectedSystem].accessories[group])
+        handleEditAccessories(state: IFormData, action: PayloadAction<{ selectedSystem: keyof ISystems; group: keyof TRackAccessories, accessoryName: TRackAccessory['shortName'] }>) {
+            const { selectedSystem, group, accessoryName } = action.payload;
+        
+            // Update the state with the selected accessoryName
+            state.system[selectedSystem].accessories[group] = accessoryName;
         }
     
 
@@ -409,6 +411,6 @@ const formDataSlice = createSlice({
     },
 });
 
-export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment, handleLevelConfigsChange, handleAddNewConfig, handleAddNewLevel, handleAddNewRack, handleRackConfigsChange } = formDataSlice.actions;
+export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment, handleLevelConfigsChange, handleAddNewConfig, handleAddNewLevel, handleAddNewRack, handleRackConfigsChange, handleEditAccessories } = formDataSlice.actions;
 export default formDataSlice.reducer;
 export { initialFormDataState }

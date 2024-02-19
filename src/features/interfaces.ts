@@ -1,7 +1,7 @@
 import { TextFieldProps } from "@mui/material";
 import { Task } from "gantt-task-react";
 import availableEquipment from "../data/availableEquipment";
-import rackAccessories, { TRackAccessory } from "../data/rackAccessories";
+import rackAccessories, { TRackAccessories, TRackAccessory } from "../data/rackAccessories";
 
 export interface ISales {
     contactPerson: string;
@@ -112,10 +112,8 @@ export interface ISystemData {
     loads: ILoad[];
     flow: IFlow[];
     rackConfigs: TRackConfig[];
-    levelConfigs: TLevelsConfig[]
-    accessories: {
-        [Category in keyof TRackAccessory]: keyof TRackAccessory[Category];
-    };
+    levelConfigs: TLevelsConfig[];
+    accessories: {[key in keyof typeof rackAccessories]: (TRackAccessory['shortName'] | undefined)};
     additionalRemarks: string;
     // [key: string]: any;
 }
