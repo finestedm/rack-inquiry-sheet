@@ -16,7 +16,7 @@ const rackAccessories = {
     'decking': [
         {shortName: 'gratingInserted', fullName: 'Grating inserted', image: gratingInserted },
         {shortName: 'gratingIssued', fullName: 'Grating issued', image: gratingIssued },
-        {shortName: 'gratingIssued', fullName: 'Mesh panels', image: meshPanels },
+        {shortName: 'meshPanel', fullName: 'Mesh panels', image: meshPanels },
 ],
     'protection': [
         {shortName: 'corner', fullName: 'Corner protection', image: cornerProtection },
