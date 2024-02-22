@@ -380,7 +380,7 @@ const formDataSlice = createSlice({
             if (configIndex !== -1) {
                 const levels = state.system[selectedSystem].levelConfigs[configIndex].levels;
                 const lastLevel = levels.length > 0 ? levels[levels.length - 1].height : 0;
-                const newHeight = lastLevel + 1000;
+                const newHeight = +lastLevel + 1000;
                 const newLevelDetails: TLevelsDetails = { id: levels.length + 1, height: newHeight, accessory: '' };
                 state.system[selectedSystem].levelConfigs[configIndex].levels.push(newLevelDetails);
             } else {

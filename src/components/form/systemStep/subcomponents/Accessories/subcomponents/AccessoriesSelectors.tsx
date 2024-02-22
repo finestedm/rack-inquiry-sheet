@@ -72,7 +72,7 @@ export function AccessoryCard({group, accessory, selectedSystem}: {group: keyof 
                 >
                     <CardMedia
                         component="img"
-                        height="200"
+                        height="150"
                         image={accessory.image}
                         alt={accessory.fullName}
                         sx={{ position: 'relative' }}

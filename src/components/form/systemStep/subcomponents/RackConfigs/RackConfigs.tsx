@@ -15,7 +15,7 @@ export default function RackConfigs({ selectedSystem }: { selectedSystem: keyof 
             content={
                 <Stack spacing={2}>
                     <LevelsConfigs selectedSystem={selectedSystem} />
-                    <RowsConfigsTable selectedSystem={selectedSystem} />
+                    {/* <RowsConfigsTable selectedSystem={selectedSystem} /> */}
                 </Stack >
             }
         />

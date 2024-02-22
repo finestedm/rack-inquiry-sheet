@@ -16,7 +16,8 @@ export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['
     }, [levels]);
 
     const uprightWidth = 85 * drawingScale;
-    const uprightHeight = (levels.map(level => level.height).slice(levels.length - 1)[0] * drawingScale) + 25;
+    const highestLevel = (levels.map(level => level.height).slice(levels.length - 1)[0] * drawingScale);
+    const uprightHeight = highestLevel + 25;
     const beamWidth = 2700 * drawingScale;
     const beamHeight = 130 * drawingScale
     const stageWidth = beamWidth + uprightWidth * 2
@@ -30,12 +31,22 @@ export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['
         <Rect x={uprightWidth + beamWidth} y={0} width={uprightWidth} height={uprightHeight} fill="#004f7c" />
     );
 
+    const renderPallet = (x: number, startHeight: number, palletHeight: number) => {
+        console.log(highestLevel-(startHeight-25))
+        return (
+            <Rect x={x - 50} y={highestLevel-(startHeight-beamHeight-23.5)} width={100} height={palletHeight} fill="#ffd700" />
+        );
+    };
+
     const renderBeam = (index: number, level: TLevelsDetails) => {
         const { height, accessory } = level
         const scaledLevelHeight = height * drawingScale
+        const prevLevelHeight = index > 0 ? levels[index - 1].height : 0;
+        const palletHeight = (height - prevLevelHeight)*drawingScale - 25
         return (
             <>
                 <Rect x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight} width={beamWidth} height={beamHeight} fill="#e88c00" />
+                {renderPallet(uprightWidth + beamWidth / 2, scaledLevelHeight, palletHeight)}
                 <Text x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight - 15} text={`${index + 1}: ${height.toString()} (${accessory})`} fontSize={14} fill={theme.palette.text.primary} align="center" />
 
             </>

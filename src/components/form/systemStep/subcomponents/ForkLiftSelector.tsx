@@ -42,30 +42,14 @@ export function ForkliftCard({forklift, selectedSystem}: {forklift: TForklift, s
     return (
         // <></>
     <Grid item xs={6} md={3} sx={{ position: 'relative' }}>
-            <div
-                style={{
-                    position: 'absolute',
-                    top: '.75rem',
-                    right: '-14px',
-                    borderRadius: '5rem',
-                    height: 28,
-                    width: 28,
-                    backgroundColor: forkliftSelected ? '#000' : 'transparent',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-                {forkliftSelected && <CheckCircleIcon fontSize='large' sx={{ color: theme.palette.primary.main,  }} />}
-            </div>
-            <Card className={false ? 'selected-card system-card' : 'system-card'}>
+            <Card className={forkliftSelected ? 'selected-card system-card' : 'system-card'}>
                 <CardActionArea
                     disabled={!editMode}
                     onClick={() => handleForkliftSelection()}
                 >
                     <CardMedia
                         component="img"
-                        height="200"
+                        height="150"
                         image={forklift.image}
                         alt={forklift.fullName}
                         sx={{ position: 'relative' }}

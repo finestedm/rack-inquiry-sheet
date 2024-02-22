@@ -36,7 +36,7 @@ export default function LevelsConfigTable({ selectedSystem, configId }: { select
             valueGetter: (params: { row: { height: number; id: number; }; }) => {
                 const currentLevel = params.row.height;
                 const previousLevel = rows.find((level) => level.id === params.row.id - 1)?.height ?? 0;
-                return currentLevel - previousLevel;
+                return currentLevel - +previousLevel;
             }
         },
         {
@@ -44,7 +44,7 @@ export default function LevelsConfigTable({ selectedSystem, configId }: { select
             valueGetter: (params: { row: { height: number; id: number; }; }) => {
                 const currentLevel = params.row.height;
                 const previousLevel = rows.find((level) => level.id === params.row.id - 1)?.height ?? 0;
-                return currentLevel - previousLevel - beamHeight;
+                return currentLevel - +previousLevel - beamHeight;
             }
         },
         {
