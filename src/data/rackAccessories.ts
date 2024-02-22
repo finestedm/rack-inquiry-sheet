@@ -5,7 +5,7 @@ import cornerProtection from '../images/accessories/Untitled.png'
 import uprightProtection from '../images/accessories/1.jpg'
 import plasticProtection from '../images/accessories/IMG_20170105_102643.jpg'
 
-export type TRackAccessory = {shortName: string,fullName: string,image: string}
+export type TRackAccessory = { shortName: string, fullName: string, image: string }
 
 export type TRackAccessories = {
     [key in keyof typeof rackAccessories]: TRackAccessory[];
@@ -14,14 +14,21 @@ export type TRackAccessories = {
 
 const rackAccessories = {
     'decking': [
-        {shortName: 'gratingInserted', fullName: 'Grating inserted', image: gratingInserted },
-        {shortName: 'gratingIssued', fullName: 'Grating issued', image: gratingIssued },
-        {shortName: 'meshPanel', fullName: 'Mesh panels', image: meshPanels },
-],
+        { shortName: 'none', fullName: 'No decking', image: 'X' },
+        { shortName: 'gratingInserted', fullName: 'Grating inserted', image: gratingInserted },
+        { shortName: 'gratingIssued', fullName: 'Grating issued', image: gratingIssued },
+        { shortName: 'meshPanel', fullName: 'Mesh panels', image: meshPanels },
+    ],
     'protection': [
-        {shortName: 'corner', fullName: 'Corner protection', image: cornerProtection },
-        {shortName: 'upright', fullName: 'Upright protection', image: uprightProtection },
-        {shortName: 'plastic', fullName: 'Plastic protection', image: plasticProtection },
+        { shortName: 'corner', fullName: 'Corner protection', image: cornerProtection },
+        { shortName: 'upright', fullName: 'Upright protection', image: uprightProtection },
+        { shortName: 'plastic', fullName: 'Plastic protection', image: plasticProtection },
+    ],
+    'endProtection': [
+        { shortName: 'wood', fullName: 'Wooden Beam', image: 'wooden beam' },
+        { shortName: 'metal', fullName: 'Sigma Beam', image: 'sigma beam' },
+        { shortName: 'none', fullName: 'No end frame protection', image: 'X' },
+
     ]
 }
 
