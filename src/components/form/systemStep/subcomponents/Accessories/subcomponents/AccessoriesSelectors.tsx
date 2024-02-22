@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useDispatch } from "react-redux";
-import { handleEditAccessories } from "../../../../../../features/redux/reducers/formDataSlice";
+import { handleEditAccessories, handleInputMethod } from "../../../../../../features/redux/reducers/formDataSlice";
 
 export default function AccessoriesSelectors({ selectedSystem }: { selectedSystem: keyof ISystems }) {
     return (
@@ -43,7 +43,7 @@ export function AccessoryCard({group, accessory, selectedSystem}: {group: keyof 
     const accessorySelected = accessoriesState[group] === accessory.shortName
 
     function handleAccessorySelection() {
-        dispatch(handleEditAccessories({selectedSystem, group, accessoryName: accessory.shortName}))
+        dispatch(handleInputMethod({path: `system.${selectedSystem}.accessories.${group}`, value: accessory.shortName}))
     }
 
     return (

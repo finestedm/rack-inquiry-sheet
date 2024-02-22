@@ -399,15 +399,7 @@ const formDataSlice = createSlice({
                 bays: [],
             }
             state.system[selectedSystem].rackConfigs.push(newRack);
-        },
-
-        handleEditAccessories(state: IFormData, action: PayloadAction<{ selectedSystem: keyof ISystems; group: keyof TRackAccessories, accessoryName: TRackAccessory['shortName'] }>) {
-            const { selectedSystem, group, accessoryName } = action.payload;
-        
-            // Update the state with the selected accessoryName
-            state.system[selectedSystem].accessories[group] = accessoryName;
-        }
-    
+        },  
 
         // ... add other reducers here if needed
     },
