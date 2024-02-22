@@ -405,6 +405,6 @@ const formDataSlice = createSlice({
     },
 });
 
-export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment, handleLevelConfigsChange, handleAddNewConfig, handleAddNewLevel, handleAddNewRack, handleRackConfigsChange, handleEditAccessories } = formDataSlice.actions;
+export const { setFormData, handleInputMethod, handleAddLoad, handleSystemChange, handleLoadChange, handleIndustryChange, handleDeleteLoad, handleAddFlow, handleDeleteFlow, handleFlowChange, resetFormData, handleDateChanges, updateEquipment, handleLevelConfigsChange, handleAddNewConfig, handleAddNewLevel, handleAddNewRack, handleRackConfigsChange } = formDataSlice.actions;
 export default formDataSlice.reducer;
 export { initialFormDataState }
