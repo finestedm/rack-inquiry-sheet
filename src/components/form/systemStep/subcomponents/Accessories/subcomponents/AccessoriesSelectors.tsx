@@ -6,48 +6,53 @@ import rackAccessories, { TRackAccessories, TRackAccessory } from "../../../../.
 import { useTranslation } from "react-i18next";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useDispatch } from "react-redux";
-import {  handleInputMethod } from "../../../../../../features/redux/reducers/formDataSlice";
+import { handleInputMethod } from "../../../../../../features/redux/reducers/formDataSlice";
 
 export default function AccessoriesSelectors({ selectedSystem }: { selectedSystem: keyof ISystems }) {
     return (
         <Stack spacing={4}>
             {Object.keys(rackAccessories).map(group => (
-                <AccessoriesGroup group={group as keyof TRackAccessories} key={group} selectedSystem={selectedSystem} /> 
+                <AccessoriesGroup group={group as keyof TRackAccessories} key={group} selectedSystem={selectedSystem} />
             ))}
         </Stack>
     );
 
 }
 
-export function AccessoriesGroup({group, selectedSystem}: {group: keyof TRackAccessories, selectedSystem: keyof ISystems}) {
+export function AccessoriesGroup({ group, selectedSystem }: { group: keyof TRackAccessories, selectedSystem: keyof ISystems }) {
     const accessories = rackAccessories[group];
-
+    const { t } = useTranslation();
     return (
         <Box>
-            <Grid container spacing={2}>
-                {accessories.map(accessory => (
-                    <AccessoryCard key={accessory.shortName} group={group} accessory={accessory} selectedSystem={selectedSystem} /> 
-                ))}
-            </Grid>
+            <Stack spacing={1}>
+                <Typography variant='h6' fontSize='110%' color='text.secondary' textAlign='left'>{t(`accessories.${group}`)}</Typography>
+                <Box>
+                    <Grid container spacing={2}>
+                        {accessories.map(accessory => (
+                            <AccessoryCard key={accessory.shortName} group={group} accessory={accessory} selectedSystem={selectedSystem} />
+                        ))}
+                    </Grid>
+                </Box>
+            </Stack>
         </Box>
     )
 }
 
-export function AccessoryCard({group, accessory, selectedSystem}: {group: keyof  TRackAccessories, accessory: TRackAccessory, selectedSystem: keyof ISystems}) {
+export function AccessoryCard({ group, accessory, selectedSystem }: { group: keyof TRackAccessories, accessory: TRackAccessory, selectedSystem: keyof ISystems }) {
     const dispatch = useDispatch();
     const editMode = useSelector((state: RootState) => state.editMode);
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const theme = useTheme();
     const accessoriesState = useSelector((state: RootState) => state.formData.system.mpb.accessories)
     const accessorySelected = accessoriesState[group] === accessory.shortName
 
     function handleAccessorySelection() {
-        dispatch(handleInputMethod({path: `system.${selectedSystem}.accessories.${group}`, value: accessory.shortName}))
+        dispatch(handleInputMethod({ path: `system.${selectedSystem}.accessories.${group}`, value: accessory.shortName }))
     }
 
     return (
         // <></>
-    <Grid item xs={6} md={3} sx={{ position: 'relative' }}>
+        <Grid item xs={6} md={3} sx={{ position: 'relative' }}>
             {/* <div
                 style={{
                     position: 'absolute',
@@ -96,6 +101,6 @@ export function AccessoryCard({group, accessory, selectedSystem}: {group: keyof 
                     </Accordion>
                 </CardActions>
             </Card>
-    </Grid >
+        </Grid >
     )
 }
