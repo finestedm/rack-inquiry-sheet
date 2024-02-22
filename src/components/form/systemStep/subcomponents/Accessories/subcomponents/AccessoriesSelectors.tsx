@@ -5,9 +5,8 @@ import { RootState } from "../../../../../../features/redux/store";
 import rackAccessories, { TRackAccessories, TRackAccessory } from "../../../../../../data/rackAccessories";
 import { useTranslation } from "react-i18next";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useDispatch } from "react-redux";
-import { handleEditAccessories, handleInputMethod } from "../../../../../../features/redux/reducers/formDataSlice";
+import {  handleInputMethod } from "../../../../../../features/redux/reducers/formDataSlice";
 
 export default function AccessoriesSelectors({ selectedSystem }: { selectedSystem: keyof ISystems }) {
     return (
