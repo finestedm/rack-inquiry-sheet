@@ -90,6 +90,7 @@ const initialFormDataState: IFormData = {
             rackConfigs: [],
             levelConfigs: [],
             accessories:  {decking: undefined, protection: undefined},
+            forklift: '',
             additionalRemarks: '',
         },
         // shelf: {
