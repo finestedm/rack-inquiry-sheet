@@ -3,6 +3,7 @@ import { Task } from "gantt-task-react";
 import availableEquipment from "../data/availableEquipment";
 import rackAccessories, { TRackAccessories, TRackAccessory } from "../data/rackAccessories";
 import { TForklift } from "../data/forklifts";
+import floorTypes from "../data/floorTypes";
 
 export interface ISales {
     contactPerson: string;
@@ -116,6 +117,7 @@ export interface ISystemData {
     levelConfigs: TLevelsConfig[];
     accessories: {[key in keyof typeof rackAccessories]: (TRackAccessory['shortName'] | undefined)};
     forklift: TForklift['shortName'],
+    floor: typeof floorTypes | '',
     additionalRemarks: string;
     // [key: string]: any;
 }
