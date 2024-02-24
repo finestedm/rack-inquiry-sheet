@@ -1,16 +1,16 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../features/redux/store";
-import { Box, Checkbox, Dialog, DialogActions, DialogContent, FormControlLabel, Grid, InputAdornment, InputLabel, Slider, Stack, Switch, TextField, Typography, useTheme, IconButton } from "@mui/material";
+import { Box, Checkbox, Dialog, DialogActions, DialogContent, FormControlLabel, Grid, InputAdornment, InputLabel, Slider, Stack, Switch, TextField, Typography, useTheme, IconButton, Collapse } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { handleInputMethod } from "../../../../features/redux/reducers/formDataSlice";
 import trimLeadingZeros from "../../../../features/variousMethods/trimLeadingZero";
 import { ISystems } from "../../../../features/interfaces";
 import WarehouseLayout from "./WarehouseLayout";
-import Incline from "./Incline";
 import { useState } from "react";
 import InputGroup from "../../InputGroup";
 import CloseIcon from '@mui/icons-material/Close';
+import CustomAlert from "../../../CustomAlert";
 
 export default function Building({ selectedSystem }: { selectedSystem: keyof ISystems }) {
 
@@ -72,6 +72,7 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
                         />
                         <Typography color={!editMode ? 'text.disabled' : 'text.primary'} variant='body1'>{t(`system.building.new`)}</Typography>
                     </Stack>
+
                     {!formData.system[selectedSystem].building.silo &&
                         <Stack spacing={2}>
                             <Box>
@@ -156,7 +157,33 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
                                     </Grid>
                                 </Grid>
                             </Box>
-                            <WarehouseLayout selectedSystem={selectedSystem} />
+                            {+formData.system[selectedSystem].building.existingBuilding.length + +formData.system[selectedSystem].building.existingBuilding.width > 0 &&
+                                <WarehouseLayout selectedSystem={selectedSystem} />
+                            }
+                            <Box>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} md={6}>
+                                        <Stack direction='row' alignItems='center' justifyContent='start'>
+                                            <Typography color={!editMode ? 'text.disabled' : 'text.primary'} variant='body1'> {t(`system.building.layout.false`)}</Typography>
+                                            <Switch
+                                                disabled={!editMode}
+                                                checked={formData.system[selectedSystem].building.layout}
+                                                onChange={(e) => dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.layout`, value: e.target.checked }))}
+                                                inputProps={{ 'aria-label': 'controlled' }}
+                                            />
+                                            <Typography color={!editMode ? 'text.disabled' : 'text.primary'} variant='body1'>{t(`system.building.layout.true`)}</Typography>
+                                        </Stack>
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+
+                                        {formData.system[selectedSystem].building.layout ?
+                                            <CustomAlert severity="info" collapseTrigger={formData.system[selectedSystem].building.layout} text={`${t('system.building.layout.trueText')}`} title={`${t('system.building.layout.trueTitle')}`} />
+                                            :
+                                            <CustomAlert severity="warning" collapseTrigger={!formData.system[selectedSystem].building.layout} text={`${t('system.building.layout.falseText')}`} title={`${t('system.building.layout.falseTitle')}`} />
+                                        }
+                                    </Grid>
+                                </Grid>
+                            </Box>
                         </Stack>
                     }
                     <Dialog

@@ -5,7 +5,7 @@ export default function CustomAlert({ severity, title, text, collapseTrigger }: 
         <Collapse in={collapseTrigger} collapsedSize={0}>
             <Box textAlign='left'>
                 <Alert severity={severity}>
-                    <AlertTitle>{title}</AlertTitle>
+                    <AlertTitle sx={{ fontWeight: 700 }}>{title}</AlertTitle>
                     {text}
                 </Alert>
             </Box>

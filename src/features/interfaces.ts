@@ -110,6 +110,7 @@ export interface ISystemData {
             equipment: IEquipment[];
         },
         incline: number;
+        layout: boolean;
     },
     loads: ILoad[];
     flow: IFlow[];
@@ -117,7 +118,7 @@ export interface ISystemData {
     levelConfigs: TLevelsConfig[];
     accessories: {[key in keyof typeof rackAccessories]: (TRackAccessory['shortName'] | undefined)};
     forklift: TForklift['shortName'],
-    floor: typeof floorTypes | '',
+    floor: typeof floorTypes[number] | '',
     additionalRemarks: string;
     // [key: string]: any;
 }

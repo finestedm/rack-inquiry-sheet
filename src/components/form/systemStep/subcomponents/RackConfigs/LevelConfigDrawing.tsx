@@ -32,9 +32,9 @@ export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['
     );
 
     const renderPallet = (x: number, startHeight: number, palletHeight: number) => {
-        console.log(highestLevel-(startHeight-25))
+        console.log(highestLevel - (startHeight - 25))
         return (
-            <Rect x={x - 50} y={highestLevel-(startHeight-beamHeight-23.5)} width={100} height={palletHeight} fill="#ffd700" />
+            <Rect x={x - 50} y={highestLevel - (startHeight - beamHeight - 23.5)} width={100} height={palletHeight} fill="#ffd700" />
         );
     };
 
@@ -42,12 +42,12 @@ export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['
         const { height, accessory } = level
         const scaledLevelHeight = height * drawingScale
         const prevLevelHeight = index > 0 ? levels[index - 1].height : 0;
-        const palletHeight = (height - prevLevelHeight)*drawingScale - 25
+        const palletHeight = (height - prevLevelHeight) * drawingScale - 25
         return (
             <>
                 <Rect x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight} width={beamWidth} height={beamHeight} fill="#e88c00" />
                 {renderPallet(uprightWidth + beamWidth / 2, scaledLevelHeight, palletHeight)}
-                <Text x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight - 15} text={`${index + 1}: ${height.toString()} (${accessory})`} fontSize={14} fill={theme.palette.text.primary} align="center" />
+                <Text x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight - 10} text={`${index + 1}: ${height.toString()} (${accessory})`} fontSize={12} fill={theme.palette.text.primary} align="center" />
 
             </>
         );
@@ -75,7 +75,7 @@ export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['
                     x={uprightWidth + 10}
                     y={uprightHeight + 10}
                     text={`Beam Width: ${(beamWidth * 10)}`}
-                    fontSize={14}
+                    fontSize={12}
                     fill={theme.palette.text.primary}
                     align="center"
                 />

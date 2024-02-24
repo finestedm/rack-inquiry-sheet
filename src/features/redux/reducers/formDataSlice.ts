@@ -83,13 +83,14 @@ const initialFormDataState: IFormData = {
                     length: 0,
                     equipment: []
                 },
-                incline: 0
+                incline: 0,
+                layout: false
             },
             loads: [],
             flow: [emptyFlow],
             rackConfigs: [],
             levelConfigs: [],
-            accessories:  {decking: 'none', protection: undefined, endProtection: undefined},
+            accessories: { decking: 'none', protection: undefined, endProtection: undefined },
             floor: '',
             forklift: '',
             additionalRemarks: '',
@@ -355,8 +356,15 @@ const formDataSlice = createSlice({
             action: PayloadAction<{ selectedSystem: keyof ISystems; levelConfigs: TLevelsConfig[] }>
         ) => {
             const { selectedSystem, levelConfigs } = action.payload;
+            const arrangedLevels = levelConfigs.map(conf => ({ // this code floors the levels heights to round 50mm
+                ...conf,
+                levels: conf.levels.map(level => ({
+                    ...level,
+                    height: Number(Math.floor(level.height / 50) * 50)
+                }))
+            }));
             // Assuming that 'selectedSystem' corresponds to the system in the form data
-            state.system[selectedSystem].levelConfigs = levelConfigs;
+            state.system[selectedSystem].levelConfigs = arrangedLevels;
         },
 
         handleRackConfigsChange: (
@@ -399,7 +407,7 @@ const formDataSlice = createSlice({
                 bays: [],
             }
             state.system[selectedSystem].rackConfigs.push(newRack);
-        },  
+        },
 
         // ... add other reducers here if needed
     },

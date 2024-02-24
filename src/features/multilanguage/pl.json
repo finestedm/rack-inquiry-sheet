@@ -187,6 +187,14 @@
         "height": "Wysokość",
         "width": "Szerokość",
         "length": "Długość"
+      },
+      "layout": {
+        "false": "Brak layoutu magazynu",
+        "true": "layout magazynu dostępny",
+        "trueText": "Akceptowalne formaty to .dwg (autoCad) lub dobrej jakości .pdf. Minimum to rzut przyziemia, najlepiej gdyby znalazł się także przekrój magazynu.",
+        "trueTitle": "Klient posiada i udostępni rysunek hali magazynowej",
+        "falseText": "Konieczne jest wykonanie pomiarów hali / strefy gdzie mają stanąć regały. Należy zmierzyć szerokość, wysokość, zwrócić uwagę na instalacje pod sufitem, na ścianach, jakość posadzki, rozstaw słupów hali magazynowej.",
+        "falseTitle": "Klient nie posiada rysunków magazynu"
       }
     },
     "asrs": {

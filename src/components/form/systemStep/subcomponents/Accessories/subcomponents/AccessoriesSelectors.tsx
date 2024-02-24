@@ -86,15 +86,15 @@ export function AccessoryCard({ group, accessory, selectedSystem }: { group: key
                 <CardActions>
                     <Accordion disableGutters elevation={0} sx={{ backgroundColor: 'transparent' }}>
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
+                            expandIcon={<ExpandMoreIcon htmlColor={accessorySelected ? theme.palette.primary.main : theme.palette.text.primary} />}
                             aria-controls="panel2a-content"
                             id="panel2a-header"
                         >
-                            <Typography variant='h6' align='left' >{t(`${accessory.fullName}`)}</Typography>
+                            <Typography variant='h6' align='left' color={accessorySelected ? theme.palette.primary.main : theme.palette.text.primary}>{t(`${accessory.fullName}`)}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Divider sx={{ mb: 3, borderColor: theme.palette.text.secondary, opacity: .8 }} />
-                            <Typography align='left' variant='body1' color='text.secondary'>
+                            <Divider sx={{ mb: 3, borderColor: accessorySelected ? theme.palette.primary.light : theme.palette.text.secondary, opacity: .8 }} />
+                            <Typography align='left' variant='body1' color={accessorySelected ? theme.palette.primary.light : theme.palette.text.secondary}>
                                 {t(``)}
                             </Typography>
                         </AccordionDetails>
