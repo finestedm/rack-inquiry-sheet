@@ -50,6 +50,8 @@ export function AccessoryCard({ group, accessory, selectedSystem }: { group: key
         dispatch(handleInputMethod({ path: `system.${selectedSystem}.accessories.${group}`, value: accessory.shortName }))
     }
 
+    const redX = 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg'
+
     return (
         // <></>
         <Grid item xs={6} md={3} sx={{ position: 'relative' }}>
@@ -77,7 +79,7 @@ export function AccessoryCard({ group, accessory, selectedSystem }: { group: key
                     <CardMedia
                         component="img"
                         height="150"
-                        image={accessory.image}
+                        image={accessory.image ? accessory.image : redX}
                         alt={accessory.fullName}
                         sx={{ position: 'relative' }}
                     >
