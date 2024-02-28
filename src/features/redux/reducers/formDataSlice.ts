@@ -5,6 +5,36 @@ import { emptyFlow } from '../../../data/flowStations';
 import generateRandomId from '../../variousMethods/generateRandomId';
 import { TRackAccessories, TRackAccessory } from '../../../data/rackAccessories';
 
+const initialSystemFormState: ISystemData = {
+    selected: true,
+    workConditions: {
+        temperature: [20, 30],
+        freezer: false,
+        dangerousMaterials: false,
+        other: '',
+    },
+    building: {
+        new: false,
+        silo: false,
+        existingBuilding: {
+            height: 0,
+            width: 0,
+            length: 0,
+            equipment: []
+        },
+        incline: 0,
+        layout: false
+    },
+    loads: [],
+    flow: [emptyFlow],
+    rackConfigs: [],
+    levelConfigs: [],
+    accessories: { decking: 'none', protection: undefined, endProtection: undefined },
+    floor: '',
+    forklift: '',
+    additionalRemarks: '',
+}
+
 const initialFormDataState: IFormData = {
 
     version: 'racks-240207alpha',
@@ -66,35 +96,8 @@ const initialFormDataState: IFormData = {
         }
     },
     system: {
-        mpb: {
-            selected: true,
-            workConditions: {
-                temperature: [20, 30],
-                freezer: false,
-                dangerousMaterials: false,
-                other: '',
-            },
-            building: {
-                new: false,
-                silo: false,
-                existingBuilding: {
-                    height: 0,
-                    width: 0,
-                    length: 0,
-                    equipment: []
-                },
-                incline: 0,
-                layout: false
-            },
-            loads: [],
-            flow: [emptyFlow],
-            rackConfigs: [],
-            levelConfigs: [],
-            accessories: { decking: 'none', protection: undefined, endProtection: undefined },
-            floor: '',
-            forklift: '',
-            additionalRemarks: '',
-        },
+        mpb: initialSystemFormState,
+        mobile: initialSystemFormState,
         // shelf: {
         //     selected: false,
         //     workConditions: {

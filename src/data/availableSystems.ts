@@ -14,6 +14,13 @@ const availableSystems: ISystem[] = [
         labelShort: 'system.mpb.labelshort',
         description: 'system.mpb.description'
     },
+    {
+        url: mobile,
+        alt: 'mobile',
+        label: ('system.mobile.label'),
+        labelShort: 'system.mobile.labelshort',
+        description: 'system.mobile.description'
+    },
     // {
     //     url: shelf,
     //     alt: 'shelf',
@@ -34,13 +41,6 @@ const availableSystems: ISystem[] = [
     //     label: ('system.flow.label'),
     //     labelShort: 'system.flow.labelshort',
     //     description: 'system.flow.description'
-    // },
-    // {
-    //     url: mobile,
-    //     alt: 'mobile',
-    //     label: ('system.mobile.label'),
-    //     labelShort: 'system.mobile.labelshort',
-    //     description: 'system.mobile.description'
     // },
     // {
     //     url: driveIn,
