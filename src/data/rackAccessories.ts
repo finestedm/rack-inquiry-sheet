@@ -1,11 +1,12 @@
 import gratingInserted from '../images/accessories/krata wpuszczana.jpg'
-import gratingIssued from '../images/accessories/krata wpuszczana.jpg'
+import gratingIssued from '../images/accessories/krata nakładana.jpg'
 import meshPanels from '../images/accessories/półka omega.png'
 import cornerProtection from '../images/accessories/Untitled.png'
 import uprightProtection from '../images/accessories/1.jpg'
 import plasticProtection from '../images/accessories/IMG_20170105_102643.jpg'
 import woodenEndProtection from '../images/accessories/20231115_105105.jpg'
 import sigmaEndProtection from '../images/accessories/odbojnica czołowa fabryka.jpg'
+import panelPelny from '../images/accessories/panel-pelny.jpg'
 
 export type TRackAccessory = { shortName: string, fullName: string, image?: string }
 
@@ -20,6 +21,7 @@ const rackAccessories = {
         { shortName: 'gratingInserted', fullName: 'Grating inserted', image: gratingInserted },
         { shortName: 'gratingIssued', fullName: 'Grating issued', image: gratingIssued },
         { shortName: 'meshPanel', fullName: 'Mesh panels', image: meshPanels },
+        { shortName: 'metalSheet', fullName: 'Full metal sheet', image: panelPelny },
     ],
     'protection': [
         { shortName: 'corner', fullName: 'Corner protection', image: cornerProtection },
