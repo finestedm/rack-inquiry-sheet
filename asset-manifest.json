@@ -1,14 +1,18 @@
 {
   "files": {
     "main.css": "/rack-inquiry-sheet/static/css/main.e8252b13.css",
-    "main.js": "/rack-inquiry-sheet/static/js/main.693cd3bb.js",
+    "main.js": "/rack-inquiry-sheet/static/js/main.8c4f5a5e.js",
     "static/media/IMG_20170105_102643.jpg": "/rack-inquiry-sheet/static/media/IMG_20170105_102643.7d46642cdb74a694002e.jpg",
     "static/media/loadDimensionsPicture.png": "/rack-inquiry-sheet/static/media/loadDimensionsPicture.cfa0d91392f12dca884e.png",
     "static/media/krata wpuszczana.jpg": "/rack-inquiry-sheet/static/media/krata wpuszczana.f6afd22d37caff11551e.jpg",
     "static/media/półka omega.png": "/rack-inquiry-sheet/static/media/półka omega.154dafad66fa8f594282.png",
+    "static/media/20231115_105105.jpg": "/rack-inquiry-sheet/static/media/20231115_105105.a1a534a580304f2b7202.jpg",
+    "static/media/krata nakładana.jpg": "/rack-inquiry-sheet/static/media/krata nakładana.53c52dc9edde41e2c1e9.jpg",
     "static/media/JH_logo.png": "/rack-inquiry-sheet/static/media/JH_logo.7ecf36beead9d3783c6b.png",
+    "static/media/stage-mobile-racking.jpg": "/rack-inquiry-sheet/static/media/stage-mobile-racking.671eda47e3457dcd9c06.jpg",
     "static/media/webp": "/rack-inquiry-sheet/static/media/302BAE8A3789B20FFBECF7F6B7E2EFDD.661df68589459ae19ec5.webp",
     "static/media/efg.webp": "/rack-inquiry-sheet/static/media/efg.131198d716c506bb597d.webp",
+    "static/media/panel-pelny.jpg": "/rack-inquiry-sheet/static/media/panel-pelny.b7243f7eb5f4a6d33d0f.jpg",
     "static/media/Untitled.png": "/rack-inquiry-sheet/static/media/Untitled.339c0514a16ecd9cfb7e.png",
     "static/media/ekx.webp": "/rack-inquiry-sheet/static/media/ekx.f0327a1dec720297cbd1.webp",
     "static/media/1.jpg": "/rack-inquiry-sheet/static/media/1.9a056a4a865962227c58.jpg",
@@ -25,6 +29,6 @@
   },
   "entrypoints": [
     "static/css/main.e8252b13.css",
-    "static/js/main.693cd3bb.js"
+    "static/js/main.8c4f5a5e.js"
   ]
 }
