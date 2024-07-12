@@ -7,6 +7,12 @@ import plasticProtection from '../images/accessories/IMG_20170105_102643.jpg'
 import woodenEndProtection from '../images/accessories/20231115_105105.jpg'
 import sigmaEndProtection from '../images/accessories/odbojnica czołowa fabryka.jpg'
 import panelPelny from '../images/accessories/panel-pelny.jpg'
+// import backStop from '../images/accessories/backstop-verstelbaar model 4.JPG'
+import backMesh from '../images/accessories/mesh on back of rack.jpg'
+import rail from '../images/accessories/IMAG0675.jpg'
+import inductive from '../images/accessories/obraz.png'
+
+
 
 export type TRackAccessory = { shortName: string, fullName: string, image?: string }
 
@@ -32,6 +38,15 @@ const rackAccessories = {
         { shortName: 'none', fullName: 'No end frame protection'},
         { shortName: 'wood', fullName: 'Wooden Beam', image: woodenEndProtection },
         { shortName: 'metal', fullName: 'Sigma Beam', image: sigmaEndProtection },
+    ],
+    'backProtection': [
+        { shortName: 'none', fullName: 'No end protection'},
+        { shortName: 'backstop', fullName: 'Backstop', image: backMesh },
+        { shortName: 'backMesh', fullName: 'Back mesh', image: backMesh },
+    ],
+    'guidance': [
+        { shortName: 'rail', fullName: 'Rail', image: rail },
+        { shortName: 'inductive', fullName: 'Indictive guidance', image: inductive },
     ]
 }
 

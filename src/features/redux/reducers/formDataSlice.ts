@@ -29,7 +29,7 @@ const initialSystemFormState: ISystemData = {
     flow: [emptyFlow],
     rackConfigs: [],
     levelConfigs: [],
-    accessories: { decking: 'none', protection: undefined, endProtection: undefined },
+    accessories: { decking: 'none', protection: undefined, endProtection: undefined, backProtection: undefined, guidance: undefined },
     floor: '',
     forklift: '',
     additionalRemarks: '',
