@@ -46,7 +46,7 @@ const rackAccessories = {
     ],
     'guidance': [
         { shortName: 'rail', fullName: 'Rail', image: rail },
-        { shortName: 'inductive', fullName: 'Indictive guidance', image: inductive },
+        { shortName: 'inductive', fullName: 'Inductive guidance', image: inductive },
     ]
 }
 
