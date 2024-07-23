@@ -9,9 +9,6 @@ import sigmaEndProtection from '../images/accessories/odbojnica czołowa fabryka
 import panelPelny from '../images/accessories/panel-pelny.jpg'
 // import backStop from '../images/accessories/backstop-verstelbaar model 4.JPG'
 import backMesh from '../images/accessories/mesh on back of rack.jpg'
-import rail from '../images/accessories/IMAG0675.jpg'
-import inductive from '../images/accessories/obraz.png'
-
 
 
 export type TRackAccessory = { shortName: string, fullName: string, image?: string }
@@ -43,10 +40,6 @@ const rackAccessories = {
         { shortName: 'none', fullName: 'No end protection'},
         { shortName: 'backstop', fullName: 'Backstop', image: backMesh },
         { shortName: 'backMesh', fullName: 'Back mesh', image: backMesh },
-    ],
-    'guidance': [
-        { shortName: 'rail', fullName: 'Rail', image: rail },
-        { shortName: 'inductive', fullName: 'Inductive guidance', image: inductive },
     ]
 }
 
