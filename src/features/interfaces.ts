@@ -4,6 +4,7 @@ import availableEquipment from "../data/availableEquipment";
 import rackAccessories, { TRackAccessories, TRackAccessory } from "../data/rackAccessories";
 import { TForklift } from "../data/forklifts";
 import floorTypes from "../data/floorTypes";
+import { TGuidanceType } from "../data/guidanceType";
 
 export interface ISales {
     contactPerson: string;
@@ -117,6 +118,7 @@ export interface ISystemData {
     rackConfigs: TRackConfig[];
     levelConfigs: TLevelsConfig[];
     accessories: {[key in keyof typeof rackAccessories]: (TRackAccessory['shortName'] | undefined)};
+    guidance: TGuidanceType['shortName'] | undefined;
     forklift: TForklift['shortName'],
     floor: typeof floorTypes[number] | '',
     additionalRemarks: string;

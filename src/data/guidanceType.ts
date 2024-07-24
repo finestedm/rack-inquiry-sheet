@@ -10,6 +10,7 @@ export type TGuidanceTypes = TGuidanceType[];
 
 
 const guidanceTypes = [
+        { shortName: 'none', fullName: 'No guidance' },
         { shortName: 'rail', fullName: 'Rail', image: rail },
         { shortName: 'inductive', fullName: 'Inductive guidance', image: inductive },
 ]

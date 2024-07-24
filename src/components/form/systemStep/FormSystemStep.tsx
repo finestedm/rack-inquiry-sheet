@@ -14,6 +14,7 @@ import LevelsConfigs from "./subcomponents/RackConfigs/LevelsConfigsTable";
 import Accessories from "./subcomponents/Accessories/Accessories";
 import Forklifts from "./subcomponents/Forklifts/Forklifts";
 import Floor from "./subcomponents/Floor";
+import Guidance from "./subcomponents/Guidance/Guidance";
 
 export default function FormSystemStep({ selectedSystem }: { selectedSystem: keyof ISystems }): JSX.Element {
     const isStepSummary = useSelector((state: RootState) => state.steps.currentStep) === 'summary'
@@ -35,6 +36,7 @@ export default function FormSystemStep({ selectedSystem }: { selectedSystem: key
             <AdditionalRemarks selectedSystem={selectedSystem} />
             <RackConfigs selectedSystem={selectedSystem} />
             <Forklifts selectedSystem={selectedSystem} />
+            <Guidance selectedSystem={selectedSystem} />
             <Accessories selectedSystem={selectedSystem} />
         </Stack >
     )
