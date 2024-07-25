@@ -165,6 +165,11 @@
       "capacity": "Pojemność",
       "additionalRemarks": "Dodatkowe uwagi"
     },
+    "guidance": {
+      "none": "Niezalecane",
+      "inductive": "Prowadzenie indukcyjne wymaga wykonania nacięć w środkach korytarzy pracy wózka gdzie zostanie umieszczony przewód pętli indykcyjnej, po czym zostanie on zalany np. żywicą. Przewód zostaje podłączony do generatora, który przesyła przez pętle prąd o odpowiedniej częstotliwości",
+      "rail": "Prowadzenie szynowe wymaga zakotwienia do posadzki, po obu stronach korytarza pracy wózka, profilu stalowego, będącego fizycznym prowadzeniem wózka w alejce. Wymaga kotwienie i na ogół jest rozwiązaniem droższym od indukcyjnego prowadzenia."
+    },
     "workTime": {
       "workDays": "Dni pracy w tygodniu",
       "shiftsPerDay": "Liczba zmian na dzień",

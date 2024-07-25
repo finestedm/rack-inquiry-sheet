@@ -3,7 +3,9 @@ import inductive from '../images/accessories/obraz.png'
 
 
 
-export type TGuidanceType = { shortName: string, fullName: string, image?: string }
+export type TGuidanceType = {
+    shortName: string, fullName: string, image?: string
+}
 
 export type TGuidanceTypes = TGuidanceType[];
 

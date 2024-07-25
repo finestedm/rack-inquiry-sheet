@@ -63,7 +63,7 @@ export function ForkliftCard({ forklift, selectedSystem }: { forklift: TForklift
                         <AccordionDetails>
                             <Divider sx={{ mb: 3, borderColor: forkliftSelected ? theme.palette.primary.light : theme.palette.text.secondary, opacity: .8 }} />
                             <Typography align='left' variant='body1' color={forkliftSelected ? theme.palette.primary.light : theme.palette.text.secondary}>
-                                {t(``)}
+                                {t(`system.forklift.${forklift.shortName}`)}
                             </Typography>
                         </AccordionDetails>
                     </Accordion>

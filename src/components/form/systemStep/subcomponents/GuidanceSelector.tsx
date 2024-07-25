@@ -62,7 +62,7 @@ export function GuidanceCard({ guidance, selectedSystem }: { guidance: TGuidance
                         <AccordionDetails>
                             <Divider sx={{ mb: 3, borderColor: guidanceSelected ? theme.palette.primary.light : theme.palette.text.secondary, opacity: .8 }} />
                             <Typography align='left' variant='body1' color={guidanceSelected ? theme.palette.primary.light : theme.palette.text.secondary}>
-                                {t(``)}
+                                {t(`system.guidance.${guidance.shortName}`)}
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
