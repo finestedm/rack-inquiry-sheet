@@ -25,13 +25,27 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
         length: trimLeadingZeros(formData.system[selectedSystem].building.existingBuilding.length),
     });
 
+    const [tempColumnsDimensions, setTempColumnsDimensions] = useState({
+        columnX: trimLeadingZeros(formData.system[selectedSystem].building.existingBuilding.columnX),
+        columnY: trimLeadingZeros(formData.system[selectedSystem].building.existingBuilding.columnY),
+        columnGridX: trimLeadingZeros(formData.system[selectedSystem].building.existingBuilding.columnGridX),
+        columnGridY: trimLeadingZeros(formData.system[selectedSystem].building.existingBuilding.columnGridY),
+    });
+
     const [warehouseDialogOpen, setWarehouseDialogOpen] = useState(false);
     function extenderHandler() {
         setWarehouseDialogOpen(current => !current)
     }
 
-    const handleInputChange = (field: 'width' | 'length') => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (field: 'width' | 'length' ) => (e: React.ChangeEvent<HTMLInputElement>) => {
         setTempDimensions((prevDimensions) => ({
+            ...prevDimensions,
+            [field]: e.target.value,
+        }));
+    };
+
+    const handleColumnsInputChange = (field:  'columnX' | 'columnY' | 'columnGridX' | 'columnGridY') => (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTempColumnsDimensions((prevDimensions) => ({
             ...prevDimensions,
             [field]: e.target.value,
         }));
@@ -40,7 +54,7 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
     const handleBlur = () => {
         const newWidth = +tempDimensions.width;
         const newLength = +tempDimensions.length;
-
+        console.log(newLength, newWidth)
         try {
             if (newWidth < newLength) {
                 // Swap the values if the condition is met
@@ -50,6 +64,9 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
                 dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.width`, value: newWidth.toString() }));
                 dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.length`, value: newLength.toString() }));
             }
+            dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.columnX`, value: tempColumnsDimensions.columnX.toString() }));
+            dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.columnY`, value: tempColumnsDimensions.columnY.toString() }));
+            console.log(tempColumnsDimensions)
         } catch (e) {
             console.log(e)
         }
@@ -76,7 +93,6 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
                     {!formData.system[selectedSystem].building.silo &&
                         <Stack spacing={2}>
                             <Box>
-
                                 <Grid container direction='row' spacing={2} justifyContent='space-between' alignItems='center'>
                                     <Grid item xs>
                                         <Stack spacing={1} textAlign='left'>
@@ -156,6 +172,115 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
                                         </Stack>
                                     </Grid>
                                 </Grid>
+                            </Box>
+                            <Box>
+                            <Grid container direction='row' spacing={2} justifyContent='space-between' alignItems='center'>
+                                    <Grid item xs={3}>
+                                        <Stack spacing={1} textAlign='left'>
+                                            <InputLabel>{t(`system.building.existingBuilding.columnX`)}</InputLabel>
+                                            <TextField
+                                                disabled={!editMode}
+                                                id={`system${[selectedSystem]}.building.existingBuilding.columnX`}
+                                                size="small"
+                                                fullWidth
+                                                type="number"
+                                                value={trimLeadingZeros(tempColumnsDimensions.columnX)}
+                                                onChange={handleColumnsInputChange('columnX')}
+                                                onBlur={handleBlur}
+                                                inputProps={{
+                                                    min: 5,
+                                                    max: 1000,
+                                                }}
+                                                InputProps={{
+                                                    endAdornment: (
+                                                        <InputAdornment position="end">
+                                                            m
+                                                        </InputAdornment>
+                                                    ),
+                                                }}
+                                            />
+
+                                        </Stack>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Stack spacing={1} textAlign='left'>
+                                            <InputLabel>{t(`system.building.existingBuilding.columnY`)}</InputLabel>
+                                            <TextField
+                                                disabled={!editMode}
+                                                id={`system${[selectedSystem]}.building.existingBuilding.columnY`}
+                                                size="small"
+                                                fullWidth
+                                                type="number"
+                                                value={trimLeadingZeros(tempColumnsDimensions.columnY)}
+                                                onChange={handleColumnsInputChange('columnY')}
+                                                onBlur={handleBlur}
+                                                inputProps={{
+                                                    min: 5,
+                                                    max: 1000,
+                                                }}
+                                                InputProps={{
+                                                    endAdornment: (
+                                                        <InputAdornment position="end">
+                                                            m
+                                                        </InputAdornment>
+                                                    ),
+                                                }}
+                                            />
+                                        </Stack>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Stack spacing={1} textAlign='left'>
+                                            <InputLabel>{t(`system.building.existingBuilding.columnGridX`)}</InputLabel>
+                                            <TextField
+                                                disabled={!editMode}
+                                                id={`system${[selectedSystem]}.building.existingBuilding.columnGridX`}
+                                                size="small"
+                                                fullWidth
+                                                type="number"
+                                                value={trimLeadingZeros(tempColumnsDimensions.columnGridX)}
+                                                onChange={handleColumnsInputChange('columnGridX')}
+                                                onBlur={handleBlur}
+                                                inputProps={{
+                                                    min: 5,
+                                                    max: 1000,
+                                                }}
+                                                InputProps={{
+                                                    endAdornment: (
+                                                        <InputAdornment position="end">
+                                                            m
+                                                        </InputAdornment>
+                                                    ),
+                                                }}
+                                            />
+                                        </Stack>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Stack spacing={1} textAlign='left'>
+                                            <InputLabel>{t(`system.building.existingBuilding.columnGridY`)}</InputLabel>
+                                            <TextField
+                                                disabled={!editMode}
+                                                id={`system${[selectedSystem]}.building.existingBuilding.columnGridY`}
+                                                size="small"
+                                                fullWidth
+                                                type="number"
+                                                value={trimLeadingZeros(tempColumnsDimensions.columnGridY)}
+                                                onChange={handleColumnsInputChange('columnGridY')}
+                                                onBlur={handleBlur}
+                                                inputProps={{
+                                                    min: 5,
+                                                    max: 1000,
+                                                }}
+                                                InputProps={{
+                                                    endAdornment: (
+                                                        <InputAdornment position="end">
+                                                            m
+                                                        </InputAdornment>
+                                                    ),
+                                                }}
+                                            />
+                                        </Stack>
+                                    </Grid>
+                            </Grid>
                             </Box>
                             {+formData.system[selectedSystem].building.existingBuilding.length + +formData.system[selectedSystem].building.existingBuilding.width > 0 &&
                                 <WarehouseLayout selectedSystem={selectedSystem} />

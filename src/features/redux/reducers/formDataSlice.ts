@@ -3,7 +3,6 @@ import { IFormData, ILoad, ILoadsTypes, IFlow, LoadFieldValue, ISystems, IMilest
 import { loadsToAdd } from '../../../data/typicalLoadSizes';
 import { emptyFlow } from '../../../data/flowStations';
 import generateRandomId from '../../variousMethods/generateRandomId';
-import { TRackAccessories, TRackAccessory } from '../../../data/rackAccessories';
 
 const initialSystemFormState: ISystemData = {
     selected: true,
@@ -20,7 +19,11 @@ const initialSystemFormState: ISystemData = {
             height: 0,
             width: 0,
             length: 0,
-            equipment: []
+            equipment: [],
+            columnX: 0,
+            columnY: 0,
+            columnGridX: 0,
+            columnGridY: 0
         },
         incline: 0,
         layout: false

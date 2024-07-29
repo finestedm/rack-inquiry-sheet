@@ -165,6 +165,44 @@ export default function WarehouseLayout({ selectedSystem }: { selectedSystem: ke
         return [...lines, ...labels];
     }
 
+    function generateColumns() {
+        if (warehouseData.columnX !== 0 && warehouseData.columnY !== 0 && warehouseData.columnGridX !== 0 && warehouseData.columnGridY !== 0) {
+            const columns = [];
+            const columnSizeX = warehouseData.columnX * canvaToWarehouseRatio;
+            const columnSizeY = warehouseData.columnY * canvaToWarehouseRatio;
+            const spacingX = warehouseData.columnGridX * canvaToWarehouseRatio;
+            const spacingY = warehouseData.columnGridY * canvaToWarehouseRatio;
+        
+            const numColumnsX = Math.floor(warehouseData.width / warehouseData.columnGridX);
+            const numColumnsY = Math.floor(warehouseData.length / warehouseData.columnGridY);
+        
+            for (let i = 1; i < numColumnsX; i++) {
+                for (let j = 1; j < numColumnsY; j++) {
+                    const xPos = i * spacingX;
+                    const yPos = j * spacingY;
+        
+                    columns.push(
+                        <Rect
+                            key={`column-${i}-${j}`}
+                            x={xPos - columnSizeX / 2}
+                            y={yPos - columnSizeY / 2}
+                            width={columnSizeX}
+                            height={columnSizeY}
+                            fill={theme.palette.grey[600]}
+                        />
+                    );
+                }
+            }
+            console.log(columns)
+            return columns;
+        } else {
+            return null
+        }
+    
+    }
+    
+    
+
 
     const [selectedShapeId, setSelectedShapeId] = useState<number | null>(null);
 
@@ -272,7 +310,9 @@ export default function WarehouseLayout({ selectedSystem }: { selectedSystem: ke
                                 fill={theme.palette.background.default}
                                 opacity={1}
                             />
-
+                        </Layer>
+                        <Layer>
+                            {generateColumns()}
                         </Layer>
                         <Layer>
                             {generateGridLines()}

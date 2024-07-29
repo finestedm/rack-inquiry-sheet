@@ -109,6 +109,10 @@ export interface ISystemData {
             width: number;
             length: number;
             equipment: IEquipment[];
+            columnX: number;
+            columnY: number;
+            columnGridX: number;
+            columnGridY: number;
         },
         incline: number;
         layout: boolean;
