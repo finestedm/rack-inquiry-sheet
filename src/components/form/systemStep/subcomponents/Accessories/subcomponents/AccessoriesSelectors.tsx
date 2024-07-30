@@ -43,7 +43,7 @@ export function AccessoryCard({ group, accessory, selectedSystem }: { group: key
     const editMode = useSelector((state: RootState) => state.editMode);
     const { t } = useTranslation();
     const theme = useTheme();
-    const accessoriesState = useSelector((state: RootState) => state.formData.system.mpb.accessories)
+    const accessoriesState = useSelector((state: RootState) => state.formData.system[selectedSystem].accessories)
     const accessorySelected = accessoriesState[group] === accessory.shortName
 
     function handleAccessorySelection() {
