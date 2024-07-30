@@ -58,15 +58,16 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
         try {
             if (newWidth < newLength) {
                 // Swap the values if the condition is met
-                dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.width`, value: newLength.toString() }));
-                dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.length`, value: newWidth.toString() }));
+                dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.width`, value: newLength }));
+                dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.length`, value: newWidth }));
             } else {
-                dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.width`, value: newWidth.toString() }));
-                dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.length`, value: newLength.toString() }));
+                dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.width`, value: newWidth }));
+                dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.length`, value: newLength }));
             }
-            dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.columnX`, value: tempColumnsDimensions.columnX.toString() }));
-            dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.columnY`, value: tempColumnsDimensions.columnY.toString() }));
-            console.log(tempColumnsDimensions)
+            dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.columnX`, value: tempColumnsDimensions.columnX }));
+            dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.columnY`, value: tempColumnsDimensions.columnY }));
+            dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.columnGridX`, value: tempColumnsDimensions.columnGridX }));
+            dispatch(handleInputMethod({ path: `system.${selectedSystem}.building.existingBuilding.columnGridY`, value: tempColumnsDimensions.columnGridY }));
         } catch (e) {
             console.log(e)
         }
@@ -188,8 +189,8 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
                                                 onChange={handleColumnsInputChange('columnX')}
                                                 onBlur={handleBlur}
                                                 inputProps={{
-                                                    min: 5,
-                                                    max: 1000,
+                                                    min: .1,
+                                                    max: 5,
                                                 }}
                                                 InputProps={{
                                                     endAdornment: (
@@ -215,8 +216,8 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
                                                 onChange={handleColumnsInputChange('columnY')}
                                                 onBlur={handleBlur}
                                                 inputProps={{
-                                                    min: 5,
-                                                    max: 1000,
+                                                    min: .1,
+                                                    max: 5,
                                                 }}
                                                 InputProps={{
                                                     endAdornment: (
@@ -242,7 +243,7 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
                                                 onBlur={handleBlur}
                                                 inputProps={{
                                                     min: 5,
-                                                    max: 1000,
+                                                    max: 100,
                                                 }}
                                                 InputProps={{
                                                     endAdornment: (
@@ -268,7 +269,7 @@ export default function Building({ selectedSystem }: { selectedSystem: keyof ISy
                                                 onBlur={handleBlur}
                                                 inputProps={{
                                                     min: 5,
-                                                    max: 1000,
+                                                    max: 100,
                                                 }}
                                                 InputProps={{
                                                     endAdornment: (

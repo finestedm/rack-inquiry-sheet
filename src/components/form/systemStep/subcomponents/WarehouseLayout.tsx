@@ -166,7 +166,7 @@ export default function WarehouseLayout({ selectedSystem }: { selectedSystem: ke
     }
 
     function generateColumns() {
-        if (warehouseData.columnX !== 0 && warehouseData.columnY !== 0 && warehouseData.columnGridX !== 0 && warehouseData.columnGridY !== 0) {
+        if (+warehouseData.columnX !== 0 && +warehouseData.columnY !== 0 && +warehouseData.columnGridX !== 0 && +warehouseData.columnGridY !== 0) {
             const columns = [];
             const columnSizeX = warehouseData.columnX * canvaToWarehouseRatio;
             const columnSizeY = warehouseData.columnY * canvaToWarehouseRatio;
@@ -193,7 +193,6 @@ export default function WarehouseLayout({ selectedSystem }: { selectedSystem: ke
                     );
                 }
             }
-            console.log(columns)
             return columns;
         } else {
             return null
