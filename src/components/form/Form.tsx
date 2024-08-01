@@ -66,6 +66,14 @@ export default function Form(): JSX.Element {
       });
     }
 
+    if (formData.system.mezzanine.selected) {
+      newSteps.push({
+        label: t("steps.systems.mezzanine"),
+        untranslated: "mezzanine",
+        component: <FormASRSStep key="mezzanine" selectedSystem='mezzanine' />,
+      });
+    }
+
     // if (formData.system.shelf.selected) {
     //   newSteps.push({
     //     label: t("steps.systems.shelf"),

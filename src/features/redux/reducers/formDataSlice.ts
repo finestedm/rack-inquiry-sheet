@@ -102,6 +102,7 @@ const initialFormDataState: IFormData = {
     system: {
         mpb: initialSystemFormState,
         mobile: initialSystemFormState,
+        mezzanine: initialSystemFormState,
         // shelf: {
         //     selected: false,
         //     workConditions: {

@@ -15,10 +15,20 @@ import Accessories from "./subcomponents/Accessories/Accessories";
 import Forklifts from "./subcomponents/Forklifts/Forklifts";
 import Floor from "./subcomponents/Floor";
 import Guidance from "./subcomponents/Guidance/Guidance";
+import { useDispatch } from "react-redux";
+import { handleAddNewConfig } from "../../../features/redux/reducers/formDataSlice";
+import MezzanineConfigs from "./subcomponents/MezzanineConfigs/MezzanineConfigs";
 
 export default function FormSystemStep({ selectedSystem }: { selectedSystem: keyof ISystems }): JSX.Element {
     const isStepSummary = useSelector((state: RootState) => state.steps.currentStep) === 'summary'
+    const isThereAlreadyMezzanineConfig = useSelector((state: RootState) => state.formData.system.mezzanine.levelConfigs).length !== 0
     const { t } = useTranslation();
+    const dispatch = useDispatch();
+
+    function addNewConfig() {
+        dispatch(handleAddNewConfig(selectedSystem));
+    };
+    selectedSystem === 'mezzanine' && !isThereAlreadyMezzanineConfig && addNewConfig()
 
     return (
         <Stack spacing={5}>
@@ -35,6 +45,7 @@ export default function FormSystemStep({ selectedSystem }: { selectedSystem: key
             {/* <Flows selectedSystem={selectedSystem} /> */}
             <AdditionalRemarks selectedSystem={selectedSystem} />
             <RackConfigs selectedSystem={selectedSystem} />
+            <MezzanineConfigs selectedSystem={selectedSystem} />
             <Forklifts selectedSystem={selectedSystem} />
             <Guidance selectedSystem={selectedSystem} />
             <Accessories selectedSystem={selectedSystem} />

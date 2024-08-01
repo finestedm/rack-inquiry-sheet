@@ -152,6 +152,7 @@ export type TLevelsDetails = {id: number, height: number, accessory: string}
 export interface ISystems {
     mpb: ISystemData;
     mobile: ISystemData;
+    mezzanine: ISystemData;
     // shelf: ISystemData;
     // flow: ISystemData;
     // upc: ISystemData;

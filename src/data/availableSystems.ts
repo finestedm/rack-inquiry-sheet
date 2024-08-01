@@ -5,6 +5,7 @@ import upc from "../images/rack-types/stage-shuttle-channel-racking.jpg";
 import flow from "../images/rack-types/E6CB4541182C215F85873AF18CF9A206.webp";
 import mobile from "../images/rack-types/stage-mobile-racking.jpg";
 import driveIn from "../images/rack-types/5DCB89705242D2E7B79E0B2855A43C4A.webp";
+import mezzanine from "../images/rack-types/Steel construction platform_[MAM-41368] — kopia.jpg"
 
 const availableSystems: ISystem[] = [
     {
@@ -20,6 +21,14 @@ const availableSystems: ISystem[] = [
         label: ('system.mobile.label'),
         labelShort: 'system.mobile.labelshort',
         description: 'system.mobile.description'
+    },
+
+    {
+        url: mezzanine,
+        alt: 'mezzanine',
+        label: ('system.mezzanine.label'),
+        labelShort: 'system.mezzanine.labelshort',
+        description: 'system.mezzanine.description'
     },
     // {
     //     url: shelf,
