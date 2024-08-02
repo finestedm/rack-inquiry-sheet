@@ -17,7 +17,7 @@ import Floor from "./subcomponents/Floor";
 import Guidance from "./subcomponents/Guidance/Guidance";
 import { useDispatch } from "react-redux";
 import { handleAddNewConfig } from "../../../features/redux/reducers/formDataSlice";
-import MezzanineConfigs from "./subcomponents/MezzanineConfigs/MezzanineConfigs";
+import MezzanineConfigs from "./subcomponents/MezzanineConfigs/MezzanineLevelsConfigs";
 
 export default function FormSystemStep({ selectedSystem }: { selectedSystem: keyof ISystems }): JSX.Element {
     const isStepSummary = useSelector((state: RootState) => state.steps.currentStep) === 'summary'

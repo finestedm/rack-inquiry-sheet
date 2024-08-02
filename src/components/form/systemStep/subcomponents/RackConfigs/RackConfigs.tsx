@@ -9,15 +9,20 @@ export default function RackConfigs({ selectedSystem }: { selectedSystem: keyof 
 
     const { t } = useTranslation();
 
-    return (
-        <InputGroup
-            title={t(`system.subheader.rackConfigs`)}
-            content={
-                <Stack spacing={2}>
-                    <LevelsConfigs selectedSystem={selectedSystem} />
-                    {/* <RowsConfigsTable selectedSystem={selectedSystem} /> */}
-                </Stack >
-            }
-        />
-    )
+    if (selectedSystem === 'mpb' || selectedSystem === 'mobile') {
+
+        return (
+            <InputGroup
+                title={t(`system.subheader.rackConfigs`)}
+                content={
+                    <Stack spacing={2}>
+                        <LevelsConfigs selectedSystem={selectedSystem} />
+                        <RowsConfigsTable selectedSystem={selectedSystem} />
+                    </Stack >
+                }
+            />
+        )
+    } else {
+        return null
+    }
 }
