@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/rack-inquiry-sheet/static/css/main.e8252b13.css",
-    "main.js": "/rack-inquiry-sheet/static/js/main.f69e8ee5.js",
+    "main.js": "/rack-inquiry-sheet/static/js/main.ae9e90d9.js",
     "static/media/IMG_20170105_102643.jpg": "/rack-inquiry-sheet/static/media/IMG_20170105_102643.7d46642cdb74a694002e.jpg",
     "static/media/loadDimensionsPicture.png": "/rack-inquiry-sheet/static/media/loadDimensionsPicture.cfa0d91392f12dca884e.png",
     "static/media/krata wpuszczana.jpg": "/rack-inquiry-sheet/static/media/krata wpuszczana.f6afd22d37caff11551e.jpg",
@@ -9,6 +9,7 @@
     "static/media/półka omega.png": "/rack-inquiry-sheet/static/media/półka omega.154dafad66fa8f594282.png",
     "static/media/IMAG0675.jpg": "/rack-inquiry-sheet/static/media/IMAG0675.e4801fdb5c0df6c4080a.jpg",
     "static/media/20231115_105105.jpg": "/rack-inquiry-sheet/static/media/20231115_105105.a1a534a580304f2b7202.jpg",
+    "static/media/Steel construction platform_[MAM-41368] — kopia.jpg": "/rack-inquiry-sheet/static/media/Steel construction platform_[MAM-41368] — kopia.9aafb15ba9650b1b8d69.jpg",
     "static/media/krata nakładana.jpg": "/rack-inquiry-sheet/static/media/krata nakładana.53c52dc9edde41e2c1e9.jpg",
     "static/media/JH_logo.png": "/rack-inquiry-sheet/static/media/JH_logo.7ecf36beead9d3783c6b.png",
     "static/media/stage-mobile-racking.jpg": "/rack-inquiry-sheet/static/media/stage-mobile-racking.671eda47e3457dcd9c06.jpg",
@@ -32,6 +33,6 @@
   },
   "entrypoints": [
     "static/css/main.e8252b13.css",
-    "static/js/main.f69e8ee5.js"
+    "static/js/main.ae9e90d9.js"
   ]
 }
