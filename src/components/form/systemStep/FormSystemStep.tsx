@@ -45,7 +45,7 @@ export default function FormSystemStep({ selectedSystem }: { selectedSystem: key
             {/* <Flows selectedSystem={selectedSystem} /> */}
             <AdditionalRemarks selectedSystem={selectedSystem} />
             <RackConfigs selectedSystem={selectedSystem} />
-            <MezzanineConfigs selectedSystem={selectedSystem} />
+            {/* <MezzanineConfigs selectedSystem={selectedSystem} /> */}
             <Forklifts selectedSystem={selectedSystem} />
             <Guidance selectedSystem={selectedSystem} />
             <Accessories selectedSystem={selectedSystem} />
