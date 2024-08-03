@@ -19,7 +19,7 @@ export default function LevelConfigDrawing({ selectedSystem, levels }: { selecte
 
     const uprightWidth = 85 * drawingScale;
     const highestLevel = (levels.map(level => level.height).slice(levels.length - 1)[0] * drawingScale);
-    const uprightHeight = (selectedSystem === 'mpb' || selectedSystem === 'mobile') ? highestLevel + beamUnscaledHeight/10 : highestLevel + beamUnscaledHeight/10;
+    const uprightHeight = highestLevel + beamUnscaledHeight * drawingScale;
     const beamWidth = 2700 * drawingScale;
     const beamHeight = beamUnscaledHeight * drawingScale;
     const stageWidth = beamWidth + uprightWidth * 2

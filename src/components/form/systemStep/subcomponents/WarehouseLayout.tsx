@@ -172,15 +172,15 @@ export default function WarehouseLayout({ selectedSystem }: { selectedSystem: ke
             const columnSizeY = warehouseData.columnY * canvaToWarehouseRatio;
             const spacingX = warehouseData.columnGridX * canvaToWarehouseRatio;
             const spacingY = warehouseData.columnGridY * canvaToWarehouseRatio;
-        
-            const numColumnsX = Math.floor(warehouseData.width / warehouseData.columnGridX);
-            const numColumnsY = Math.floor(warehouseData.length / warehouseData.columnGridY);
-        
-            for (let i = 1; i < numColumnsX; i++) {
-                for (let j = 1; j < numColumnsY; j++) {
+    
+            const numColumnsX = Math.max(1, Math.floor(warehouseData.width / warehouseData.columnGridX));
+            const numColumnsY = Math.max(1, Math.floor(warehouseData.length / warehouseData.columnGridY));
+    
+            for (let i = 1; i <= numColumnsX; i++) {
+                for (let j = 1; j <= numColumnsY; j++) {
                     const xPos = i * spacingX;
                     const yPos = j * spacingY;
-        
+    
                     columns.push(
                         <Rect
                             key={`column-${i}-${j}`}
@@ -195,10 +195,10 @@ export default function WarehouseLayout({ selectedSystem }: { selectedSystem: ke
             }
             return columns;
         } else {
-            return null
+            return null;
         }
-    
     }
+    
     
     
 
