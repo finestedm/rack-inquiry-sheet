@@ -5,6 +5,8 @@ import LevelConfigDrawing from "../RackConfigs/LevelConfigDrawing";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../features/redux/store";
 import { useTranslation } from "react-i18next";
+import InputGroup from "../../../InputGroup";
+import { t } from "i18next";
 
 export default function MezzanineLevelsConfigs({ selectedSystem }: { selectedSystem: keyof ISystems }) {
     const formData = useSelector((state: RootState) => state.formData)
@@ -16,15 +18,20 @@ export default function MezzanineLevelsConfigs({ selectedSystem }: { selectedSys
 
     if (selectedSystem === 'mezzanine') {
         return (
-            <Stack spacing={2}>
-                <Box>
-                    <LevelsConfigTable selectedSystem={selectedSystem} configId={levelConfigs[0].id} />
-                </Box>
-                <Box sx={{ px: 2 }}>
-                    <Typography gutterBottom variant="h6" color="textPrimary">Podgląd</Typography>
-                    {selectedLevelConfig && <LevelConfigDrawing selectedSystem={selectedSystem} levels={selectedLevelConfig.levels} />}
-                </Box>
-            </Stack>
+            <InputGroup
+                title={t(`system.subheader.mezzanineConfigs`)}
+                content={
+                    <Stack spacing={2}>
+                        <Box>
+                            <LevelsConfigTable selectedSystem={selectedSystem} configId={levelConfigs[0].id} />
+                        </Box>
+                        <Box sx={{ px: 2 }}>
+                            <Typography gutterBottom variant="h6" color="textPrimary">Podgląd</Typography>
+                            {selectedLevelConfig && <LevelConfigDrawing selectedSystem={selectedSystem} levels={selectedLevelConfig.levels} />}
+                        </Box>
+                    </Stack>
+                }
+            />
         )
     } else {
         return null
