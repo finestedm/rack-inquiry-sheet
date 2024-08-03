@@ -22,7 +22,7 @@ export default function MezzanineLevelsConfigs({ selectedSystem }: { selectedSys
                 </Box>
                 <Box sx={{ px: 2 }}>
                     <Typography gutterBottom variant="h6" color="textPrimary">Podgląd</Typography>
-                    {selectedLevelConfig && <LevelConfigDrawing levels={selectedLevelConfig.levels} />}
+                    {selectedLevelConfig && <LevelConfigDrawing selectedSystem={selectedSystem} levels={selectedLevelConfig.levels} />}
                 </Box>
             </Stack>
         )

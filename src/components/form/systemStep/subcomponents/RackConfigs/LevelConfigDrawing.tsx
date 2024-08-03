@@ -1,9 +1,9 @@
 import { Box, useTheme } from "@mui/material";
 import { useEffect, useRef } from "react";
 import { Layer, Line, Rect, Stage, Text } from "react-konva";
-import { TLevelsConfig, TLevelsDetails } from "../../../../../features/interfaces";
+import { ISystems, TLevelsConfig, TLevelsDetails } from "../../../../../features/interfaces";
 
-export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['levels'] }) {
+export default function LevelConfigDrawing({ selectedSystem, levels }: { selectedSystem: keyof ISystems, levels: TLevelsConfig['levels'] }) {
     const stageRef = useRef(null);
     const drawingScale = .1
     const theme = useTheme();
@@ -14,27 +14,33 @@ export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['
             stageRef.current.batchDraw();
         }
     }, [levels]);
+    
+    const beamUnscaledHeight = (selectedSystem === 'mpb' || selectedSystem === 'mobile') ? 130 : 300;
 
     const uprightWidth = 85 * drawingScale;
     const highestLevel = (levels.map(level => level.height).slice(levels.length - 1)[0] * drawingScale);
-    const uprightHeight = highestLevel + 25;
+    const uprightHeight = (selectedSystem === 'mpb' || selectedSystem === 'mobile') ? highestLevel + beamUnscaledHeight/10 : highestLevel + beamUnscaledHeight/10;
     const beamWidth = 2700 * drawingScale;
-    const beamHeight = 130 * drawingScale
+    const beamHeight = beamUnscaledHeight * drawingScale;
     const stageWidth = beamWidth + uprightWidth * 2
     const stageHeight = uprightHeight + 50
 
+    const beamColor = (selectedSystem === 'mpb' || selectedSystem === 'mobile') ? "#ffd700" : "#565656"
+    const uprightColor = (selectedSystem === 'mpb' || selectedSystem === 'mobile') ? "#565656" : "#565656"
+
+
     const renderUpright1 = () => (
-        <Rect x={0} y={0} width={uprightWidth} height={uprightHeight} fill="#004f7c" />
+        <Rect x={0} y={0} width={uprightWidth} height={uprightHeight} fill={uprightColor} />
     );
 
     const renderUpright2 = () => (
-        <Rect x={uprightWidth + beamWidth} y={0} width={uprightWidth} height={uprightHeight} fill="#004f7c" />
+        <Rect x={uprightWidth + beamWidth} y={0} width={uprightWidth} height={uprightHeight} fill={uprightColor} />
     );
 
     const renderPallet = (x: number, startHeight: number, palletHeight: number) => {
         console.log(highestLevel - (startHeight - 25))
         return (
-            <Rect x={x - 50} y={highestLevel - (startHeight - beamHeight - 23.5)} width={100} height={palletHeight} fill="#ffd700" />
+            <Rect x={x - 50} y={highestLevel - (startHeight - beamHeight - 23.5)} width={100} height={palletHeight} fill={beamColor} />
         );
     };
 
@@ -45,9 +51,9 @@ export default function LevelConfigDrawing({ levels }: { levels: TLevelsConfig['
         const palletHeight = (height - prevLevelHeight) * drawingScale - 25
         return (
             <>
-                <Rect x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight} width={beamWidth} height={beamHeight} fill="#e88c00" />
-                {renderPallet(uprightWidth + beamWidth / 2, scaledLevelHeight, palletHeight)}
-                <Text x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight - 10} text={`${index + 1}: ${height.toString()} (${accessory})`} fontSize={12} fill={theme.palette.text.primary} align="center" />
+                <Rect x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight} width={beamWidth} height={beamHeight} fill={beamColor} />
+                {(selectedSystem === 'mpb' || selectedSystem === 'mobile') && renderPallet(uprightWidth + beamWidth / 2, scaledLevelHeight, palletHeight)}
+                <Text x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight} text={`${index + 1}: ${height.toString()} (${accessory})`} fontSize={12} fill={theme.palette.text.primary} align="center" />
 
             </>
         );
