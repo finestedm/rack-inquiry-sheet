@@ -15,9 +15,10 @@ export default function LevelConfigDrawing({ selectedSystem, levels }: { selecte
         }
     }, [levels]);
     
-    const beamUnscaledHeight = (selectedSystem === 'mpb' || selectedSystem === 'mobile') ? 130 : 300;
+    const isRack = (selectedSystem === 'mpb' || selectedSystem === 'mobile');
+    const beamUnscaledHeight = isRack ? 130 : 300;
 
-    const uprightWidth = 85 * drawingScale;
+    const uprightWidth = isRack ? 85 * drawingScale : 150 * drawingScale;
     const highestLevel = (levels.map(level => level.height).slice(levels.length - 1)[0] * drawingScale);
     const uprightHeight = highestLevel + beamUnscaledHeight * drawingScale;
     const beamWidth = 2700 * drawingScale;
@@ -25,8 +26,8 @@ export default function LevelConfigDrawing({ selectedSystem, levels }: { selecte
     const stageWidth = beamWidth + uprightWidth * 2
     const stageHeight = uprightHeight + 50
 
-    const beamColor = (selectedSystem === 'mpb' || selectedSystem === 'mobile') ? "#ffd700" : "#565656"
-    const uprightColor = (selectedSystem === 'mpb' || selectedSystem === 'mobile') ? "#565656" : "#565656"
+    const beamColor = isRack ? "#ffd700" : "#565656"
+    const uprightColor = isRack ? "#565656" : "#565656"
 
 
     const renderUpright1 = () => (
@@ -52,7 +53,7 @@ export default function LevelConfigDrawing({ selectedSystem, levels }: { selecte
         return (
             <>
                 <Rect x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight} width={beamWidth} height={beamHeight} fill={beamColor} />
-                {(selectedSystem === 'mpb' || selectedSystem === 'mobile') && renderPallet(uprightWidth + beamWidth / 2, scaledLevelHeight, palletHeight)}
+                {isRack && renderPallet(uprightWidth + beamWidth / 2, scaledLevelHeight, palletHeight)}
                 <Text x={uprightWidth} y={uprightHeight - scaledLevelHeight - beamHeight} text={`${index + 1}: ${height.toString()} (${accessory})`} fontSize={12} fill={theme.palette.text.primary} align="center" />
 
             </>
@@ -61,31 +62,33 @@ export default function LevelConfigDrawing({ selectedSystem, levels }: { selecte
 
     return (
         <Stage width={stageWidth} height={stageHeight} ref={stageRef} >
-            <Layer class='dimensions'>
-                <Line
-                    points={[uprightWidth, uprightHeight + 30, uprightWidth + beamWidth, uprightHeight + 30]}
-                    stroke={theme.palette.text.primary}
-                    strokeWidth={2}
-                />
-                <Line
-                    points={[uprightWidth, uprightHeight + 20, uprightWidth, uprightHeight + 40]}
-                    stroke={theme.palette.text.primary}
-                    strokeWidth={2}
-                />
-                <Line
-                    points={[uprightWidth + beamWidth, uprightHeight + 20, uprightWidth + beamWidth, uprightHeight + 40]}
-                    stroke={theme.palette.text.primary}
-                    strokeWidth={2}
-                />
-                <Text
-                    x={uprightWidth + 10}
-                    y={uprightHeight + 10}
-                    text={`Beam Width: ${(beamWidth * 10)}`}
-                    fontSize={12}
-                    fill={theme.palette.text.primary}
-                    align="center"
-                />
-            </Layer>
+            {isRack &&
+                <Layer class='dimensions'>
+                    <Line
+                        points={[uprightWidth, uprightHeight + 30, uprightWidth + beamWidth, uprightHeight + 30]}
+                        stroke={theme.palette.text.primary}
+                        strokeWidth={2}
+                    />
+                    <Line
+                        points={[uprightWidth, uprightHeight + 20, uprightWidth, uprightHeight + 40]}
+                        stroke={theme.palette.text.primary}
+                        strokeWidth={2}
+                    />
+                    <Line
+                        points={[uprightWidth + beamWidth, uprightHeight + 20, uprightWidth + beamWidth, uprightHeight + 40]}
+                        stroke={theme.palette.text.primary}
+                        strokeWidth={2}
+                    />
+                    <Text
+                        x={uprightWidth + 10}
+                        y={uprightHeight + 10}
+                        text={`Beam Width: ${(beamWidth * 10)}`}
+                        fontSize={12}
+                        fill={theme.palette.text.primary}
+                        align="center"
+                    />
+                </Layer>
+            }
             <Layer>
                 {renderUpright1()}
                 {renderUpright2()}
