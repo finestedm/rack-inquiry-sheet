@@ -8,14 +8,19 @@ export default function Accessories({ selectedSystem }: { selectedSystem: keyof 
 
     const { t } = useTranslation();
 
-    return (
-        <InputGroup
-            title={t(`system.subheader.rackConfigs`)}
-            content={
-                <Stack spacing={2}>
-                    <AccessoriesSelectors selectedSystem={selectedSystem} />
-                </Stack >
-            }
-        />
-    )
+    if (selectedSystem === 'mpb' || selectedSystem === 'mobile') {
+
+        return (
+            <InputGroup
+                title={t(`system.subheader.rackConfigs`)}
+                content={
+                    <Stack spacing={2}>
+                        <AccessoriesSelectors selectedSystem={selectedSystem} />
+                    </Stack >
+                }
+            />
+        )
+    } else {
+        return null
+    }
 }
