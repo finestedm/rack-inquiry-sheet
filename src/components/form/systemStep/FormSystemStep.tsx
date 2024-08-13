@@ -38,7 +38,7 @@ export default function FormSystemStep({ selectedSystem }: { selectedSystem: key
                 </Stack>
             }
             <WorkConditions selectedSystem={selectedSystem} />
-            <Building selectedSystem={selectedSystem} />
+            <Building selectedSystem='mpb' />   {/* drawing always on the same system so it stays consistent for all systems */}
             <Floor selectedSystem={selectedSystem} />
             <Loads selectedSystem={selectedSystem} />
             <Capacity selectedSystem={selectedSystem} />
